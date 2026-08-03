@@ -1495,7 +1495,7 @@ html.io .rv.in{opacity:1;transform:none}
   var MENG=['janvāris','februāris','marts','aprīlis','maijs','jūnijs','jūlijs','augusts','septembris','oktobris','novembris','decembris'];
   var DFULL=['Svētdiena','Pirmdiena','Otrdiena','Trešdiena','Ceturtdiena','Piektdiena','Sestdiena'];
   var WD=['Pr','Ot','Tr','Ce','Pk','Se','Sv'];
-  var TIMES=['09:30','11:00','13:30','15:00','16:30'];
+  var TIMES=(function(){var t=[];for(var h=9;h<17;h++){t.push((h<10?'0':'')+h+':00');if(h<16||true){t.push((h<10?'0':'')+h+':30');}}t.pop();return t;})();
   var calGrid=d.getElementById('calGrid'),calTitle=d.getElementById('calTitle'),
       calPrev=d.getElementById('calPrev'),calNext=d.getElementById('calNext'),
       slotTitle=d.getElementById('slotTitle'),bkTimes=d.getElementById('bkTimes'),
@@ -1577,12 +1577,12 @@ html.io .rv.in{opacity:1;transform:none}
     function gcalHref(){
       var hm=selTime.split(':');
       var st=new Date(selDate);st.setHours(+hm[0],+hm[1],0,0);
-      var en=new Date(st.getTime()+15*60000);
+      var en=new Date(st.getTime()+30*60000);
       function f(dt){return ''+dt.getFullYear()+pad2(dt.getMonth()+1)+pad2(dt.getDate())+'T'+pad2(dt.getHours())+pad2(dt.getMinutes())+'00';}
       return 'https://calendar.google.com/calendar/render?action=TEMPLATE'+
         '&text='+encodeURIComponent('ArtefyCraft saruna (gaida apstiprinājumu)')+
         '&dates='+f(st)+'/'+f(en)+
-        '&details='+encodeURIComponent('15 minūšu iepazīšanās saruna ar ArtefyCraft. Laiku vēl apstiprinās atbildē no arturs@artefycraft.com');
+        '&details='+encodeURIComponent('Iepazīšanās saruna ar ArtefyCraft. Laiku vēl apstiprinās atbildē no arturs@artefycraft.com');
     }
     function showOk(){
       var g=d.getElementById('bkGcal');
