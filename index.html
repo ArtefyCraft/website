@@ -656,8 +656,9 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 }
 .bk-ok a{color:inherit;font-weight:660}
 .slot-row{display:flex;gap:.5rem;flex-wrap:wrap}
-.cal-wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1.4rem,3vw,2.6rem);align-items:start}
-@media (max-width:700px){.cal-wrap{grid-template-columns:1fr}}
+.cal-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(1.4rem,3vw,2.6rem);align-items:start}
+@media (max-width:860px){.cal-wrap{grid-template-columns:1fr}}
+.cal,.cal-side{min-width:0}
 .cal{background:var(--paper);border:1px solid var(--hair);border-radius:var(--r);padding:1rem 1.1rem}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem}
 .cal-title{font-family:var(--serif);font-weight:600;font-size:1.12rem;text-transform:capitalize}
@@ -674,7 +675,7 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
   color:var(--muted);padding:.35rem 0;
 }
 .cal-day{
-  width:2.75rem;height:2.75rem;border-radius:50%;border:none;background:none;
+  width:100%;max-width:2.9rem;aspect-ratio:1;height:auto;border-radius:50%;border:none;background:none;
   font-family:var(--sans);font-size:.95rem;font-weight:620;color:var(--ink);
   cursor:pointer;font-variant-numeric:tabular-nums;position:relative;
   transition:background .15s,color .15s;
@@ -688,7 +689,8 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 .cal-date{font-family:var(--serif);font-weight:600;font-size:1.12rem;min-height:1.5em}
 .slots[hidden],.bk-fields[hidden],.bk-sum[hidden]{display:none}
 .slots{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem}
-@media (max-width:700px){.slots{grid-template-columns:1fr}}
+@media (max-width:860px){.slots{grid-template-columns:repeat(2,1fr)}}
+.slot{min-width:0}
 .slot{
   font-family:var(--sans);font-size:1rem;font-weight:640;
   color:var(--ink);background:var(--paper);border:1px solid var(--hair);
