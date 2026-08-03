@@ -679,20 +679,16 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
   cursor:pointer;font-variant-numeric:tabular-nums;position:relative;
   transition:background .15s,color .15s;
 }
-.cal-day::after{
-  content:"";position:absolute;left:50%;bottom:4px;transform:translateX(-50%);
-  width:4px;height:4px;border-radius:50%;background:var(--accent);
-}
+.cal-day{color:var(--accent-text);font-weight:720}
 .cal-day:hover{background:var(--tint)}
 .cal-day[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
-.cal-day[aria-pressed="true"]::after{background:var(--on-accent)}
-.cal-day[disabled]{color:var(--muted);opacity:.35;cursor:default;background:none}
-.cal-day[disabled]::after{display:none}
+.cal-day[disabled]{color:var(--muted);opacity:.4;cursor:default;background:none;font-weight:560}
 .cal-day.empty{visibility:hidden}
 .cal-side{display:grid;gap:1rem}
 .cal-date{font-family:var(--serif);font-weight:600;font-size:1.12rem;min-height:1.5em}
 .slots[hidden],.bk-fields[hidden],.bk-sum[hidden]{display:none}
 .slots{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem}
+@media (max-width:700px){.slots{grid-template-columns:1fr}}
 .slot{
   font-family:var(--sans);font-size:1rem;font-weight:640;
   color:var(--ink);background:var(--paper);border:1px solid var(--hair);
@@ -1052,7 +1048,8 @@ html.io .rv.in{opacity:1;transform:none}
         <b>Paldies! Pieteikums saņemts.</b>
         <span id="bkOkSum"></span>
         <span>Mēs sazināsimies un apstiprināsim laiku. Ja steidzami: <a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a></span>
-        <button class="btn2" type="button" id="bkAgain" style="justify-self:start;min-height:46px;margin-top:.4rem">Pieteikt citu laiku</button>
+        <a class="btn2" id="bkGcal" href="#" target="_blank" rel="noopener" style="justify-self:start;min-height:46px;margin-top:.4rem">Pievienot Google kalendāram</a>
+        <button class="btn2" type="button" id="bkAgain" style="justify-self:start;min-height:46px">Pieteikt citu laiku</button>
       </div>
       <div class="cal-wrap">
         <div class="cal">
@@ -1576,7 +1573,20 @@ html.io .rv.in{opacity:1;transform:none}
       else{bkHint.textContent='Viss gatavs! Poga nosūtīs pieteikumu mums.';}
       bkSend.setAttribute('aria-disabled',String(!ready));
     }
+    function pad2(n){return (n<10?'0':'')+n;}
+    function gcalHref(){
+      var hm=selTime.split(':');
+      var st=new Date(selDate);st.setHours(+hm[0],+hm[1],0,0);
+      var en=new Date(st.getTime()+15*60000);
+      function f(dt){return ''+dt.getFullYear()+pad2(dt.getMonth()+1)+pad2(dt.getDate())+'T'+pad2(dt.getHours())+pad2(dt.getMinutes())+'00';}
+      return 'https://calendar.google.com/calendar/render?action=TEMPLATE'+
+        '&text='+encodeURIComponent('ArtefyCraft saruna (gaida apstiprinājumu)')+
+        '&dates='+f(st)+'/'+f(en)+
+        '&details='+encodeURIComponent('15 minūšu iepazīšanās saruna ar ArtefyCraft. Laiku vēl apstiprinās atbildē no arturs@artefycraft.com');
+    }
     function showOk(){
+      var g=d.getElementById('bkGcal');
+      if(g)g.setAttribute('href',gcalHref());
       bkOk.hidden=false;
       bkOkSum.textContent=fmt(selDate)+' plkst. '+selTime+' · '+bkName.value.trim();
       calWrap.hidden=true;bkSum.hidden=true;bkCta.hidden=true;bkHint.hidden=true;if(bkDisc)bkDisc.hidden=true;
