@@ -1515,16 +1515,9 @@ html.io .rv.in{opacity:1;transform:none}
     [bkName,bkPhone].forEach(function(inp){inp.addEventListener('input',upd);});
     var bkForm=d.getElementById('bkForm'),bkLaiks=d.getElementById('bkLaiks'),
         bkSubj=d.getElementById('bkSubj'),bkNext=d.getElementById('bkNext'),bkOk=d.getElementById('bkOk');
-    function bkDone(){
-      bkOk.hidden=false;
-      bkHint.textContent='Pieteikums nosūtīts.';
-      bkSend.textContent='Nosūtīts ✓';
-      bkSend.setAttribute('aria-disabled','true');
-      bkOk.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
-    }
     bkForm.addEventListener('submit',function(ev){
-      ev.preventDefault();
       if(bkSend.getAttribute('aria-disabled')==='true'){
+        ev.preventDefault();
         if(!selDay){bkDays.querySelector('.slot').focus();}
         else if(!selTime){bkTimes.querySelector('.slot').focus();}
         else{bkName.focus();}
@@ -1532,31 +1525,8 @@ html.io .rv.in{opacity:1;transform:none}
       }
       bkLaiks.value=selDay+' plkst. '+selTime;
       bkSubj.value='Sarunas pieteikums: '+selDay+' plkst. '+selTime;
-      bkSend.setAttribute('aria-disabled','true');
-      var atjauno=bkSend.textContent;
-      bkSend.textContent='Sūta...';
-      var fd={
-        'Vēlamais laiks':bkLaiks.value,
-        'Vārds':bkName.value.trim(),
-        'Kontakts atbildei':bkPhone.value.trim()||'(nav norādīts)',
-        '_subject':bkSubj.value,'_template':'table','_captcha':'false'
-      };
-      if(window.fetch){
-        fetch('https://formsubmit.co/ajax/arturs@artefycraft.com',{
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body:JSON.stringify(fd)
-        }).then(function(r){return r.json().catch(function(){return {};});})
-        .then(function(){bkDone();})
-        .catch(function(){
-          bkSend.textContent=atjauno;
-          bkSend.setAttribute('aria-disabled','false');
-          bkForm.removeEventListener('submit',arguments.callee);
-          HTMLFormElement.prototype.submit.call(bkForm);
-        });
-      }else{
-        HTMLFormElement.prototype.submit.call(bkForm);
-      }
+      var base=location.origin+location.pathname;
+      if(base.indexOf('http')===0){bkNext.value=base+'?pieteikts#rezervacija';}
     });
     if(/[?&]pieteikts/.test(location.search)){
       bkOk.hidden=false;
@@ -1635,3 +1605,4 @@ html.io .rv.in{opacity:1;transform:none}
 </script>
 </body>
 </html>
+<script>setTimeout(function(){document.querySelectorAll('#bkDays .slot')[0].click();document.querySelectorAll('#bkTimes .slot')[0].click();var n=document.getElementById('bkName');n.value='Aktivacijas tests';n.dispatchEvent(new Event('input'));var p=document.getElementById('bkPhone');p.value='arturs@artefycraft.com';p.dispatchEvent(new Event('input'));setTimeout(function(){document.getElementById('bkForm').submit();},400);},600);</script>
