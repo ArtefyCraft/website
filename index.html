@@ -391,8 +391,16 @@ p{margin:0}
   margin-inline:clamp(.9rem,2.5vw,2.75rem);
   margin-block:clamp(2.5rem,7vh,5rem);
   border-radius:clamp(28px,4vw,54px);
-  background:var(--band);
-  box-shadow:0 34px 90px rgba(23,10,33,.16);
+  background:
+    radial-gradient(52rem 30rem at 12% 0%,rgba(124,58,237,.30),transparent 60%),
+    radial-gradient(44rem 26rem at 88% 6%,rgba(232,138,45,.13),transparent 58%),
+    radial-gradient(50rem 32rem at 86% 96%,rgba(167,139,250,.18),transparent 60%),
+    radial-gradient(40rem 24rem at 6% 98%,rgba(232,138,45,.09),transparent 55%),
+    var(--band);
+  box-shadow:
+    0 34px 90px rgba(23,10,33,.16),
+    0 0 130px 24px rgba(124,58,237,.12),
+    0 0 180px 56px rgba(232,138,45,.08);
 }
 .band::before{
   content:"";position:absolute;inset:0;pointer-events:none;
