@@ -386,6 +386,10 @@ p{margin:0}
 .why p{color:var(--muted)}
 .why>div:hover{transform:translateY(-3px);border-color:rgba(167,139,250,.6)}
 .band{
+  --bp:1;
+  transform:translateY(calc((1 - var(--bp))*36px)) scale(calc(.93 + .07*var(--bp)));
+  transform-origin:50% 62%;will-change:transform;
+  border-radius:calc(clamp(28px,4vw,54px) + 30px - 30px*var(--bp)) !important;
   color:var(--band-ink);position:relative;overflow:hidden;
   padding-block:calc(var(--sect) + 2.5rem);
   margin-inline:clamp(.9rem,2.5vw,2.75rem);
@@ -1283,6 +1287,23 @@ html.io .rv.in{opacity:1;transform:none}
       });
       card.addEventListener('pointerleave',function(){card.style.transform='';rct=null;});
     });
+  }
+
+  /* Tumsas plaksnes skrolla animacija */
+  var bandEl=d.querySelector('.band');
+  if(bandEl&&!reduce){
+    var bandTick=false;
+    var bandProg=function(){
+      bandTick=false;
+      var r=bandEl.getBoundingClientRect(),vh=window.innerHeight||1;
+      var p=(vh-r.top)/(vh*.85);
+      p=Math.max(0,Math.min(1,p));
+      p=p*p*(3-2*p);
+      bandEl.style.setProperty('--bp',p.toFixed(3));
+    };
+    addEventListener('scroll',function(){if(!bandTick){bandTick=true;requestAnimationFrame(bandProg);}},{passive:true});
+    addEventListener('resize',function(){if(!bandTick){bandTick=true;requestAnimationFrame(bandProg);}},{passive:true});
+    bandProg();
   }
 
   /* ================= DEMO A ================= */
