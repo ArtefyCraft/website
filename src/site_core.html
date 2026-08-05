@@ -81,8 +81,8 @@ h1,h2,h3{
   font-family:var(--serif);font-weight:600;
   letter-spacing:-.008em;line-height:1.16;margin:0;text-wrap:balance;
 }
-h1{font-size:clamp(2.2rem,4.6vw,3.9rem);line-height:1.12;font-weight:640}
-h2{font-size:clamp(1.9rem,4.4vw,3.1rem)}
+h1{font-size:clamp(2.2rem,4.6vw,3.9rem);line-height:1.12;font-weight:640;letter-spacing:-.015em}
+h2{font-size:clamp(1.9rem,4.4vw,3.1rem);letter-spacing:-.012em}
 h3{font-size:clamp(1.26rem,2vw,1.5rem);line-height:1.24}
 p{margin:0}
 .em{
@@ -106,11 +106,13 @@ p{margin:0}
 /* ---------- Navigācija ---------- */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  border-bottom:1px solid var(--hair);
+  border-bottom:1px solid transparent;
+  transition:border-color .25s ease-out;
   background:var(--paper);
   background:color-mix(in srgb,var(--paper) 86%,transparent);
-  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
 }
+.nav.scrolled{border-bottom-color:var(--hair)}
 .nav-in{
   max-width:var(--w);margin:0 auto;padding:.65rem var(--pad);
   display:flex;align-items:center;gap:1.3rem;
@@ -357,7 +359,7 @@ dialog.dlg{
   border:1px solid var(--hair);border-radius:var(--r-lg);
   background:var(--raised);color:var(--ink);padding:0;
   width:min(960px,94vw);
-  box-shadow:var(--shadow);
+  box-shadow:0 8px 24px rgba(23,10,33,.16),0 34px 90px rgba(23,10,33,.3);
 }
 dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 .dlg-head{
@@ -712,6 +714,14 @@ footer{padding:3rem 0 6.5rem}
 html.paged [data-pg]{display:none}
 html.paged [data-pg].pg-on{display:block}
 html.paged section.tech[data-pg].pg-on{display:block}
+
+@media (prefers-reduced-transparency:reduce){
+  .nav,.mbar{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
+  dialog.dlg::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(8,6,12,.78)}
+}
+@media (prefers-contrast:more){
+  .nav{background:var(--paper);border-bottom-color:var(--ink)}
+}
 
 /* ---------- Emil polish: nospiešana + dialogu ienākšana ---------- */
 .btn{transition:filter .18s ease-out,transform .16s var(--ease-strong)}
@@ -1190,6 +1200,15 @@ html.io .rv.in{opacity:1;transform:none}
       });
       card.addEventListener('pointerleave',function(){card.style.transform='';rct=null;});
     });
+  }
+
+  /* Galvenes mala paradas tikai tad, kad saturs slid apaksa */
+  var navEl=d.querySelector('.nav');
+  if(navEl){
+    var navTick=false;
+    var navUpd=function(){navTick=false;navEl.classList.toggle('scrolled',(window.scrollY||0)>8);};
+    addEventListener('scroll',function(){if(!navTick){navTick=true;requestAnimationFrame(navUpd);}},{passive:true});
+    navUpd();
   }
 
   /* ================= DEMO A ================= */
