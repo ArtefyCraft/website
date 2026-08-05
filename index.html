@@ -122,6 +122,7 @@ img,svg{max-width:100%}
 
 /* Gaišā tēma (noklusējums) = artefycraft.com krēms + violets + oranžs */
 :root{
+  interpolate-size:allow-keywords;
   --paper:#FAF6EF;
   --raised:#FFFFFF;
   --recessed:#F2EBE0;
@@ -200,6 +201,11 @@ p{margin:0}
   background:linear-gradient(92deg,var(--accent) 15%,var(--orange) 90%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
+html.io .hero .em{
+  background-size:230% 100%;background-position:115% 0;
+  animation:emSweep 1.5s var(--ease-strong) .85s forwards;
+}
+@keyframes emSweep{to{background-position:0 0}}
 .lead{
   font-size:clamp(1.06rem,1.5vw,1.28rem);line-height:1.58;
   color:var(--muted);max-width:36em;font-weight:430;
@@ -210,6 +216,15 @@ p{margin:0}
 }
 .sect{padding-block:var(--sect)}
 .sect-head{margin-bottom:clamp(2rem,5vh,3.2rem)}
+.sect-head h2{position:relative;padding-bottom:.6rem}
+.sect-head h2::after{
+  content:"";position:absolute;left:0;bottom:0;height:4px;width:3.4rem;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--orange));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .7s var(--ease-strong) .2s;
+}
+html:not(.io) .sect-head h2::after,.sect-head.rv.in h2::after{transform:scaleX(1)}
+.band .sect-head h2::after{left:calc(50% - 1.7rem);transform-origin:center}
 .sect-head h2{max-width:16em}
 .sect-head .lead{margin-top:1.05rem}
 
@@ -725,11 +740,28 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 .faq details[open] summary .plus{transform:rotate(45deg)}
 .faq summary:hover{color:var(--accent-text)}
 .faq .a{padding:0 0 1.2rem;color:var(--muted);max-width:40em}
+.faq details::details-content{
+  opacity:0;block-size:0;overflow:hidden;
+  transition:block-size .32s var(--ease-strong),opacity .3s ease-out,content-visibility .32s allow-discrete;
+}
+.faq details[open]::details-content{opacity:1;block-size:auto}
 
-.about{max-width:46rem}
-.about-main{font-family:var(--serif);font-size:clamp(1.18rem,1.9vw,1.5rem);line-height:1.55;font-weight:500}
-.about-main b{font-weight:700}
-.about-sub{margin-top:1.05rem;color:var(--muted);max-width:40em}
+.about{max-width:48rem}
+.about-card{
+  display:flex;gap:1.5rem;align-items:flex-start;
+  background:var(--raised);border:1px solid var(--hair);border-radius:var(--r-lg);
+  box-shadow:var(--shadow);padding:clamp(1.5rem,3vw,2.2rem);
+}
+.avatar{
+  width:64px;height:64px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,var(--accent),var(--orange));
+  color:#FFF;font-family:var(--serif);font-weight:700;font-size:1.7rem;font-style:italic;
+  display:grid;place-items:center;
+}
+.about-name{display:block;font-family:var(--serif);font-size:1.35rem;font-weight:700}
+.about-role{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+.about-txt p{color:var(--muted);margin:.7rem 0 1.1rem;max-width:34em}
+@media (max-width:560px){.about-card{flex-direction:column}}
 
 /* ---------- Rezervācija ---------- */
 .book-sect{
@@ -895,6 +927,9 @@ html.paged section.tech[data-pg].pg-on{display:block}
     background-color .18s ease-out,color .18s ease-out,box-shadow .18s ease-out;
 }
 .slot:active,.cal-day:not([disabled]):active,.cal-nav:not([disabled]):active,.dlg-x:active,.burger:active{transform:scale(.94)}
+.cal-day[aria-pressed="true"]{animation:selPop .3s var(--ease-strong)}
+.slot[aria-pressed="true"]{animation:selPop .3s var(--ease-strong)}
+@keyframes selPop{50%{transform:scale(1.1)}}
 
 dialog.dlg{opacity:1;transform:scale(1);transition:opacity .22s var(--ease-strong),transform .22s var(--ease-strong)}
 @starting-style{
@@ -1162,8 +1197,15 @@ html.io .rv.in{opacity:1;transform:none}
       <h2 id="h-par">Kas aiz tā stāv</h2>
     </div>
     <div class="about rv dl1">
-      <p class="about-main">ArtefyCraft vada <b>Arturs Timofejevs</b>. Mēs esam maza Latvijas komanda, un sistēmas būvējam paši: sarunā, izpētē un izstrādē piedalās tie paši cilvēki, kas pēc tam atbild par rezultātu.</p>
-      <p class="about-sub">Jums tas nozīmē vienkāršu lietu: solījumu dod tas, kurš to arī pildīs. Ja ērtāk bez formām, rakstiet tieši: <a class="mail-alt" href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a></p>
+      <div class="about-card">
+        <span class="avatar" aria-hidden="true">A</span>
+        <div class="about-txt">
+          <b class="about-name">Arturs</b>
+          <span class="about-role">ArtefyCraft vadītājs</span>
+          <p>Sistēmas būvējam paši: sarunā, izpētē un izstrādē piedalās tie paši cilvēki, kas pēc tam atbild par rezultātu. Solījumu dod tas, kurš to arī pildīs.</p>
+          <a class="btn2 about-mail" href="mailto:arturs@artefycraft.com">Uzrakstīt Arturam tieši</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
