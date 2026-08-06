@@ -521,7 +521,7 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 }
 .dlg-idea b{font-weight:680}
 .dlg-cta{
-  margin:1.3rem 0 0;padding-top:1.2rem;border-top:1px solid var(--hair-soft);
+  margin:1.3rem 0 0;padding:1.2rem 1.4rem 1.35rem;border-top:1px solid var(--hair-soft);
   display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
 }
 .dlg-cta b{font-family:var(--serif);font-weight:600;font-size:1.08rem}
@@ -635,8 +635,8 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 }
 .mailcard:hover{border-color:var(--accent)}
 .mailcard[aria-pressed="true"]{border-color:var(--accent);background:var(--tint)}
-.mailcard .mfrom{font-size:.86rem;font-weight:680}
-.mailcard .msub{font-size:.92rem;margin-top:.15rem;color:var(--muted)}
+.mailcard .mfrom{display:block;font-size:.86rem;font-weight:680}
+.mailcard .msub{display:block;font-size:.92rem;margin-top:.15rem;color:var(--muted)}
 .mail-read{
   border:1px solid var(--hair-soft);border-radius:var(--r-sm);background:var(--paper);
   padding:.95rem 1.1rem;font-size:.95rem;line-height:1.65;
@@ -896,6 +896,37 @@ footer{padding:3rem 0 6.5rem}
 html.paged [data-pg]{display:none}
 html.paged [data-pg].pg-on{display:block}
 html.paged section.tech[data-pg].pg-on{display:block}
+
+/* ---------- Telefona dizains: apakšas loksnes un pilna platuma darbības ---------- */
+@media (max-width:600px){
+  dialog.dlg{
+    width:100vw;max-width:100vw;
+    margin:auto 0 0;
+    border-radius:22px 22px 0 0;
+    border-left:0;border-right:0;border-bottom:0;
+    max-height:94dvh;
+    transition:opacity .3s var(--ease-strong),transform .3s var(--ease-strong);
+  }
+  @starting-style{
+    dialog.dlg[open]{opacity:1;transform:translateY(100%)}
+  }
+  .dlg-head{padding:1rem 1.05rem}
+  .dlg-body{padding:1rem 1.05rem;max-height:calc(94dvh - 11rem)}
+  .dlg-cta{padding:1rem 1.05rem calc(1.05rem + env(safe-area-inset-bottom))}
+  .dlg-cta .btn{width:100%;justify-content:center}
+  .dlg-cta b{font-size:1rem}
+  .payoff{padding:.8rem 1.05rem 0}
+  .dlg-tools{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding-bottom:.35rem;margin-inline:-.15rem;scrollbar-width:none}
+  .dlg-tools::-webkit-scrollbar{display:none}
+  .dlg-tools .btn2{flex:none;scroll-snap-align:start}
+  .hero-cta .btn,.hero-cta .btn2{width:100%;justify-content:center}
+  .dlg-cta,.b-actions{flex-wrap:wrap}
+  .b-actions .btn,.b-actions .btn2{flex:1 1 auto;justify-content:center}
+  .roi-out{justify-items:stretch}
+  .roi-out .btn{width:100%;justify-content:center}
+  .roi-big b{font-size:2.5rem}
+  .about-mail{width:100%;justify-content:center}
+}
 
 @media (prefers-reduced-transparency:reduce){
   .nav,.mbar{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
