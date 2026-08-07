@@ -874,9 +874,7 @@ footer{padding:3rem 0 6.5rem}
 }
 .burger svg{width:20px;height:20px}
 .burger:hover{border-color:var(--accent)}
-@media (max-width:760px){
-  .burger{display:inline-flex}
-}
+
 .mmenu[hidden]{display:none}
 .mmenu{
   position:fixed;inset:0;z-index:150;background:var(--paper);
@@ -926,6 +924,9 @@ html.paged section.tech[data-pg].pg-on{display:block}
   .roi-out .btn{width:100%;justify-content:center}
   .roi-big b{font-size:2.5rem}
   .about-mail{width:100%;justify-content:center}
+  .faq details{background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--hair);margin-bottom:0;padding:0}
+  .faq details[open]{border-color:var(--hair);border-bottom-color:var(--accent)}
+  .about-card{background:transparent;border:0;box-shadow:none;padding:0}
 }
 
 @media (prefers-reduced-transparency:reduce){
@@ -2087,11 +2088,8 @@ html.io .rv.in{opacity:1;transform:none}
     }
   }
   function applyMode(){
-    if(mq.matches){root.classList.add('paged');setPage(curPage);}
-    else{
-      root.classList.remove('paged');
-      pageEls.forEach(function(el){el.classList.remove('pg-on');});
-    }
+    root.classList.remove('paged');
+    pageEls.forEach(function(el){el.classList.remove('pg-on');});
   }
   function openMenu(o){
     if(!menu)return;
@@ -2106,7 +2104,7 @@ html.io .rv.in{opacity:1;transform:none}
   });
   d.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click',function(ev){
-      if(!mq.matches)return;
+      if(!root.classList.contains('paged'))return;
       var t=a.getAttribute('href').slice(1);
       var map={rezervacija:'rezervacija',piemeri:'piemeri',sakums:'sakums',saturs:'sakums'};
       if(map[t]){ev.preventDefault();setPage(map[t]);openMenu(false);}
