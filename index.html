@@ -547,14 +547,27 @@ html:not(.io) .sect-head h2::after,.sect-head.rv.in h2::after{transform:scaleX(1
 .roi-m:active{transform:scale(.94)}
 .roi-m[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .roi-note{font-size:.85rem;color:var(--muted);max-width:30em}
-.roi-out{display:grid;gap:1rem;justify-items:start}
-.roi-big b{
-  display:block;font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,4.5vw,3.6rem);line-height:1;
+.roi-out{display:grid;gap:1.1rem;justify-items:start}
+.roi-rows{margin:0;width:100%;display:grid;gap:.55rem}
+.roi-rows .rr{
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  font-size:.98rem;
+}
+.roi-rows dt{color:var(--muted)}
+.roi-rows dd{margin:0;font-variant-numeric:tabular-nums;font-weight:660;white-space:nowrap}
+.roi-rows .rr-save{
+  border-top:1px solid rgba(124,58,237,.3);padding-top:.8rem;margin-top:.35rem;
+}
+.roi-rows .rr-save dt{color:var(--ink);font-weight:660}
+.roi-rows .rr-save b{
+  font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1;
   background:linear-gradient(92deg,var(--accent) 15%,var(--orange) 90%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   font-variant-numeric:tabular-nums;
 }
-.roi-big span{font-size:.92rem;color:var(--muted)}
+.roi-rows .rr-save span{font-size:.9rem;color:var(--muted);margin-left:.4rem}
+.roi-year{font-size:.98rem;color:var(--muted)}
+.roi-year b{color:var(--accent-text);font-variant-numeric:tabular-nums}
 
 .xprev{
   background:var(--recessed);border:1px solid var(--hair-soft);border-radius:14px;
@@ -1032,7 +1045,7 @@ html.paged section.tech[data-pg].pg-on{display:block}
   .b-actions .btn,.b-actions .btn2{flex:1 1 auto;justify-content:center}
   .roi-out{justify-items:stretch}
   .roi-out .btn{width:100%;justify-content:center}
-  .roi-big b{font-size:2.5rem}
+  .roi-rows .rr-save b{font-size:2.1rem}
   .about-mail{width:100%;justify-content:center}
   .faq details{background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--hair);margin-bottom:0;padding:0}
   .faq details[open]{border-color:var(--hair);border-bottom-color:var(--accent)}
@@ -1332,7 +1345,7 @@ html.io .rv.in{opacity:1;transform:none}
 
     <div class="roi rv" id="roi">
       <div class="roi-ctl">
-        <h3>Cik tas nozīmētu Jums?</h3>
+        <h3>Cik laika Jūs atgūtu?</h3>
         <label class="roi-l" for="roiRange">Dokumenti vai pieprasījumi mēnesī: <b id="roiN">150</b></label>
         <input type="range" id="roiRange" min="20" max="1000" step="10" value="150" aria-label="Dokumentu skaits mēnesī">
         <span class="roi-l">Minūtes uz vienu, darot ar rokām:</span>
@@ -1341,11 +1354,15 @@ html.io .rv.in{opacity:1;transform:none}
           <button type="button" class="roi-m" data-m="4" aria-pressed="true">4</button>
           <button type="button" class="roi-m" data-m="8">8</button>
         </span>
-        <p class="roi-note">Bez burvestībām: Jūsu skaitļi, sareizināti kopā. Automatizācija lielāko daļu šī laika atdod komandai.</p>
+        <p class="roi-note">Aprēķins atklāts: Jūsu ievadītie skaitļi un viens redzams pieņēmums. Apstiprināšanai cilvēkam paliek aptuveni piektā daļa līdzšinējā laika, pārējo dara sistēma.</p>
       </div>
       <div class="roi-out">
-        <div class="roi-big"><b id="roiH">10</b><span>stundas mēnesī</span></div>
-        <div class="roi-big"><b id="roiD">15</b><span>darba dienas gadā</span></div>
+        <dl class="roi-rows">
+          <div class="rr"><dt>Ar rokām šobrīd</dt><dd id="roiMan">10 h mēnesī</dd></div>
+          <div class="rr"><dt>Cilvēkam paliek apstiprināšana</dt><dd id="roiKeep">~2 h</dd></div>
+          <div class="rr rr-save"><dt>Jūs atgūstat</dt><dd><b id="roiH">~8 h</b><span>mēnesī</span></dd></div>
+        </dl>
+        <p class="roi-year">Gada griezumā tas ir <b id="roiD">12</b> darba dienas</p>
         <a class="btn" href="#rezervacija" id="roiCta">Atgūt šo laiku <span class="arr">→</span></a>
       </div>
     </div>
@@ -1979,14 +1996,20 @@ html.io .rv.in{opacity:1;transform:none}
   /* ================= ROI kalkulators ================= */
   var roiRange=d.getElementById('roiRange'),roiN=d.getElementById('roiN'),
       roiH=d.getElementById('roiH'),roiD=d.getElementById('roiD'),roiMins=4;
+  var roiMan=d.getElementById('roiMan'),roiKeep=d.getElementById('roiKeep');
+  function roiFmtH(x){
+    if(x<10){return (Math.round(x*10)/10).toString().replace('.',',');}
+    return String(Math.round(x));
+  }
   function roiUpd(){
     if(!roiRange)return;
     var n=+roiRange.value;
     roiN.textContent=n;
-    var hours=Math.round(n*roiMins/60);
-    var days=Math.round(n*roiMins*12/60/8);
-    roiH.textContent=hours;
-    roiD.textContent=days;
+    var man=n*roiMins/60,keep=man*.2,save=man-keep;
+    roiMan.textContent=roiFmtH(man)+' h mēnesī';
+    roiKeep.textContent='~'+roiFmtH(keep)+' h';
+    roiH.textContent='~'+roiFmtH(save)+' h';
+    roiD.textContent=String(Math.max(1,Math.round(save*12/8)));
   }
   if(roiRange){
     roiRange.addEventListener('input',roiUpd);
