@@ -747,7 +747,10 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 }
 .faq details[open]::details-content{opacity:1;block-size:auto}
 
-.about{max-width:48rem}
+.about{max-width:64rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+.avatar.av-p{background:linear-gradient(315deg,var(--accent),var(--orange))}
 .about-card{
   display:flex;gap:1.5rem;align-items:flex-start;
   background:var(--raised);border:1px solid var(--hair);border-radius:var(--r-lg);
@@ -1260,13 +1263,23 @@ html.io .rv.in{opacity:1;transform:none}
       <h2 id="h-par">Kas aiz tā stāv</h2>
     </div>
     <div class="about rv dl1">
-      <div class="about-card">
-        <span class="avatar" aria-hidden="true">A</span>
-        <div class="about-txt">
-          <b class="about-name">Arturs</b>
-          <span class="about-role">ArtefyCraft vadītājs</span>
-          <p>Sistēmas būvējam paši: sarunā, izpētē un izstrādē piedalās tie paši cilvēki, kas pēc tam atbild par rezultātu. Solījumu dod tas, kurš to arī pildīs.</p>
-          <a class="btn2 about-mail" href="mailto:arturs@artefycraft.com">Uzrakstīt Arturam tieši</a>
+      <div class="about-grid">
+        <div class="about-card">
+          <span class="avatar" aria-hidden="true">A</span>
+          <div class="about-txt">
+            <b class="about-name">Arturs</b>
+            <span class="about-role">ArtefyCraft vadītājs</span>
+            <p>Sistēmas būvējam paši: sarunā, izpētē un izstrādē piedalās tie paši cilvēki, kas pēc tam atbild par rezultātu. Solījumu dod tas, kurš to arī pildīs.</p>
+            <a class="btn2 about-mail" href="mailto:arturs@artefycraft.com">Uzrakstīt Arturam tieši</a>
+          </div>
+        </div>
+        <div class="about-card">
+          <span class="avatar av-p" aria-hidden="true">P</span>
+          <div class="about-txt">
+            <b class="about-name">Pauls</b>
+            <span class="about-role">ArtefyCraft vadītājs</span>
+            <p>Otrs pāris rokām un acīm visam, kas te top: idejas, kods un izpēte dzimst kopā. Divi cilvēki nozīmē, ka katru risinājumu pārbauda vismaz divas galvas.</p>
+          </div>
         </div>
       </div>
     </div>
