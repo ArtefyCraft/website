@@ -851,6 +851,7 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65);-webkit-backdrop-filter:blur(5p
 .bk-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
 @media (max-width:640px){.bk-fields{grid-template-columns:1fr}}
 .bk-fields label{display:grid;gap:.35rem;font-size:.84rem;color:var(--muted)}
+.bk-fields .bk-full{grid-column:1/-1}
 .bk-fields input{
   min-width:0;width:100%;
   background:var(--paper);color:var(--ink);border:1px solid var(--hair);border-radius:14px;
@@ -1365,8 +1366,9 @@ html.io .rv.in{opacity:1;transform:none}
           <p class="cal-date" id="slotTitle">Izvēlieties dienu kalendārā</p>
           <div class="slots" id="bkTimes" hidden></div>
           <div class="bk-fields" id="whoPane" hidden>
-            <label>Vārds<input type="text" id="bkName" name="Vārds" autocomplete="name" required></label>
-            <label>Tālrunis vai e-pasts atbildei<input type="text" id="bkPhone" name="Kontakts atbildei" autocomplete="tel"></label>
+            <label class="bk-full">Vārds<input type="text" id="bkName" name="Vārds" autocomplete="name" required></label>
+            <label>Tālrunis<input type="tel" id="bkPhone" name="Tālrunis" autocomplete="tel" inputmode="tel" required></label>
+            <label>E-pasts<input type="email" id="bkMail" name="E-pasts" autocomplete="email" inputmode="email" required></label>
           </div>
         </div>
       </div>
@@ -1978,7 +1980,7 @@ html.io .rv.in{opacity:1;transform:none}
   var calGrid=d.getElementById('calGrid'),calTitle=d.getElementById('calTitle'),
       calPrev=d.getElementById('calPrev'),calNext=d.getElementById('calNext'),
       slotTitle=d.getElementById('slotTitle'),bkTimes=d.getElementById('bkTimes'),
-      whoPane=d.getElementById('whoPane'),bkName=d.getElementById('bkName'),bkPhone=d.getElementById('bkPhone'),
+      whoPane=d.getElementById('whoPane'),bkName=d.getElementById('bkName'),bkPhone=d.getElementById('bkPhone'),bkMail=d.getElementById('bkMail'),
       bkSum=d.getElementById('bkSum'),bkSend=d.getElementById('bkSend'),bkHint=d.getElementById('bkHint'),
       bkForm=d.getElementById('bkForm'),bkLaiks=d.getElementById('bkLaiks'),bkSubj=d.getElementById('bkSubj'),
       bkOk=d.getElementById('bkOk'),bkOkSum=d.getElementById('bkOkSum'),bkAgain=d.getElementById('bkAgain'),
@@ -2047,14 +2049,17 @@ html.io .rv.in{opacity:1;transform:none}
       whoPane.hidden=!selTime;
     }
     function upd(){
-      var ready=selDate&&selTime&&bkName.value.trim();
+      var mailOk=bkMail.value.trim()&&bkMail.checkValidity();
+      var ready=selDate&&selTime&&bkName.value.trim()&&bkPhone.value.trim()&&mailOk;
       if(selDate&&selTime){
         bkSum.hidden=false;
         bkSum.innerHTML='Jūsu izvēle: <b>'+fmt(selDate)+' plkst. '+selTime+'</b>';
       }else{bkSum.hidden=true;}
       if(!selDate){bkHint.textContent='1. solis: izvēlieties dienu kalendārā.';}
       else if(!selTime){bkHint.textContent='Tagad izvēlieties laiku.';}
-      else if(!bkName.value.trim()){bkHint.textContent='Atliek ierakstīt vārdu, un pieteikums būs gatavs.';}
+      else if(!bkName.value.trim()){bkHint.textContent='Atliek ierakstīt vārdu un kontaktus.';}
+      else if(!bkPhone.value.trim()){bkHint.textContent='Vēl tālruņa numuru, lai varam sazināties.';}
+      else if(!mailOk){bkHint.textContent='Un e-pastu, uz kuru sūtīsim apstiprinājumu.';}
       else{bkHint.textContent='Viss gatavs! Poga nosūtīs pieteikumu mums.';}
       bkSend.setAttribute('aria-disabled',String(!ready));
     }
@@ -2082,13 +2087,15 @@ html.io .rv.in{opacity:1;transform:none}
       selTime=null;bkName.value='';renderCal();renderSlots();upd();
       bkSend.textContent='Nosūtīt pieteikumu →';
     });}
-    [bkName,bkPhone].forEach(function(inp){inp.addEventListener('input',upd);});
+    [bkName,bkPhone,bkMail].forEach(function(inp){inp.addEventListener('input',upd);});
     bkForm.addEventListener('submit',function(ev){
       ev.preventDefault();
       if(bkSend.getAttribute('aria-disabled')==='true'){
         if(!selDate){calGrid.querySelector('.cal-day:not([disabled])').focus();}
         else if(!selTime){bkTimes.querySelector('.slot').focus();}
-        else{bkName.focus();}
+        else if(!bkName.value.trim()){bkName.focus();}
+      else if(!bkPhone.value.trim()){bkPhone.focus();}
+      else{bkMail.focus();}
         return;
       }
       var laiks=fmt(selDate)+' plkst. '+selTime;
@@ -2099,7 +2106,9 @@ html.io .rv.in{opacity:1;transform:none}
       var fd={
         'Vēlamais laiks':laiks,
         'Vārds':bkName.value.trim(),
-        'Kontakts atbildei':bkPhone.value.trim()||'(nav norādīts)',
+        'Tālrunis':bkPhone.value.trim(),
+        'E-pasts':bkMail.value.trim(),
+        '_replyto':bkMail.value.trim(),
         '_subject':bkSubj.value,'_template':'table','_captcha':'false'
       };
       fetch('https://formsubmit.co/ajax/arturs@artefycraft.com',{
