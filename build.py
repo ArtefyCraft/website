@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Uzbuve index.html no src/ failiem. Palaid: python build.py (vajadzigs Python 3)."""
-import io, re, os
+import io, re, os, hashlib, base64
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 
@@ -21,6 +21,12 @@ if m_style:
 body = body.strip()
 
 doc = rd("src", "page_wrapper.html").format(title=title, style=style, body=body)
+scripts = re.findall(r"<script>(.*?)</script>", doc, re.S)
+assert scripts, "nav inline skriptu CSP hash aprēķinam"
+hashes = " ".join("'sha256-" + base64.b64encode(hashlib.sha256(x.encode("utf-8")).digest()).decode() + "'"
+                  for x in scripts)
+assert doc.count("__CSP_SCRIPT_HASHES__") == 1
+doc = doc.replace("__CSP_SCRIPT_HASHES__", hashes)
 out = os.path.join(BASE, "index.html")
 with io.open(out, "w", encoding="utf-8", newline="\n") as f:
     f.write(doc)
