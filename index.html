@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-CezuKhAP7cbBPmDdNtgZwGHOfzmfHl/JylRyq4aLqTg='; style-src 'unsafe-inline'; img-src 'self' data:; font-src data:; media-src data:; connect-src https://formsubmit.co; form-action https://formsubmit.co; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YPFbnVv7kssOYUCssx0Heimy3P8huHPnGRNG3gLkBT0='; style-src 'unsafe-inline'; img-src 'self' data:; font-src data:; media-src data:; connect-src https://formsubmit.co; form-action https://formsubmit.co; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ArtefyCraft — biznesa procesu automatizācija un AI Latvijā</title>
@@ -163,7 +163,7 @@ img,svg{max-width:100%}
 
   /* Tipogrāfijas skala: 7 izmēri visam lapas tekstam (demo dokumentu atdarinājumi un logo savi) */
   --fs-display:clamp(1.75rem,.9rem + 4.2vw,3.75rem);
-  --fs-h2:clamp(1.9rem,3.9vw,3.1rem);
+  --fs-h2:clamp(1.6rem,1rem + 2.6vw,3.1rem);
   --fs-h3:clamp(1.26rem,2vw,1.5rem);
   --fs-lead:clamp(1.06rem,1.5vw,1.2rem);
   --fs-body:1.0625rem;
@@ -498,8 +498,8 @@ html:not(.io) .sect-head h2::after,.sect-head.rv.in h2::after{transform:scaleX(1
 /* ---------- Piemēru kartes ---------- */
 .xcards{display:grid;grid-template-columns:var(--split-wide);gap:.9rem}
 .xcards .xcard:first-child{grid-row:span 2}
-.xcards .xcard:first-child .xprev{height:auto;flex:1;min-height:clamp(150px,19vw,230px);gap:1.8rem}
-.xcards .xcard:first-child .xprev>*{transform:scale(1.5)}
+.xcards .xcard:first-child .xprev{height:auto;flex:1;min-height:clamp(150px,19vw,230px);gap:clamp(4.5rem,7vw,6.5rem)}
+.xcards .xcard:first-child .xprev>*{transform:scale(2)}
 .xcards .xcard:first-child p{font-size:var(--fs-lead);flex:none}
 @media (max-width:900px){
   .xcards{grid-template-columns:1fr}
@@ -1654,7 +1654,7 @@ html.io .rv.in{opacity:1;transform:none}
       card.addEventListener('pointermove',function(ev){
         if(!rct)rct=card.getBoundingClientRect();
         var px=(ev.clientX-rct.left)/rct.width-.5,py=(ev.clientY-rct.top)/rct.height-.5;
-        card.style.transform='perspective(700px) rotateY('+(px*6).toFixed(2)+'deg) rotateX('+(-py*5).toFixed(2)+'deg) translateY(-6px)';
+        card.style.transform='perspective(700px) rotateY('+(px*6).toFixed(2)+'deg) rotateX('+(-py*5).toFixed(2)+'deg) translateY(-4px)';
       });
       card.addEventListener('pointerleave',function(){card.style.transform='';rct=null;});
     });
