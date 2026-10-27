@@ -1163,8 +1163,7 @@ h1,h2,h3{font-weight:500;letter-spacing:-.02em}
 .vh-cta{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center}
 .vh-note{margin-top:1rem;font-size:var(--fs-small);color:var(--muted)}
 @media (max-width:600px){.vh-cta{display:grid;width:100%}.vh-cta .btn,.vh-cta .vb2{width:100%}.vh{padding-top:6rem}.vh-wrap{margin-top:2rem}}
-.vh{position:relative;isolation:isolate;padding-bottom:0}
-.vh-wrap{background:#3A2170;margin-top:clamp(2.5rem,6vh,4rem);padding-block:clamp(1.5rem,4vh,3rem)}
+.vh{position:relative;isolation:isolate;padding-bottom:clamp(1rem,3vh,2rem)}
 .vh-wrap .vh-photo{margin-top:0;padding-top:clamp(.5rem,2vw,1.5rem)}
 .vh-photo{
   margin-top:clamp(2rem,5vh,3rem);
@@ -1366,6 +1365,8 @@ h1,h2,h3{font-weight:500;letter-spacing:-.02em}
 .vstats li:nth-child(1){background:#EFE9FB}.vstats li:nth-child(2){background:#FCEDE0}
 .vstats li:nth-child(3){background:#FBE6EE}.vstats li:nth-child(4){background:#E3F1E8}
 .vstats li{border-color:transparent}
+
+.vdo .vnum{font-size:clamp(1.7rem,1.3rem + 1vw,2.2rem);letter-spacing:-.02em;margin-bottom:.6rem}
 .vnum{font-size:clamp(2.4rem,1.8rem + 1.6vw,3.2rem);font-weight:500;letter-spacing:-.03em;line-height:1;margin-bottom:.9rem}
 .vstats b{font-weight:500;font-size:1.05rem}
 .vstats li>span:last-child{color:var(--muted);font-size:var(--fs-small)}
@@ -1433,6 +1434,73 @@ dialog.dlg{border-radius:var(--r)}
 .mmenu-list a:hover{color:var(--accent-text)}
 
 
+
+.vh{overflow:clip;padding-bottom:clamp(4.5rem,10vh,6.5rem)}  
+.vglow{position:absolute;z-index:-1;left:50%;top:clamp(2.5rem,7vh,5rem);width:min(1080px,100%);height:clamp(320px,42vw,520px);
+  transform:translateX(-50%);border-radius:50%;filter:blur(46px);
+  background:radial-gradient(closest-side,rgba(255,178,190,.85),rgba(255,196,206,.6) 38%,rgba(196,190,255,.55) 66%,rgba(176,196,255,.32) 84%,rgba(176,196,255,0) 100%)}
+.vpaths{list-style:none;margin:clamp(2.5rem,7vh,4.5rem) auto 0;padding:0;max-width:62rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;align-items:start}
+.vpath{position:relative;display:grid;align-content:start;gap:.7rem;min-height:12.5rem;padding:1.7rem 1.7rem 1.6rem;
+  background:#FDFCFA;border:1px solid var(--hair-soft);border-radius:22px;
+  box-shadow:0 1px 2px rgba(30,28,26,.04),0 18px 36px -24px rgba(30,28,26,.35);
+}
+.vp1{transform:translateY(2.4rem) rotate(-2.5deg)}
+.vp2{transform:rotate(1deg)}
+.vp3{transform:translateY(-1rem) rotate(2.8deg)}
+.vpath b{font-size:clamp(1.45rem,1.15rem + .9vw,1.85rem);font-weight:600;letter-spacing:-.025em;line-height:1.12;color:#141210}
+.vpath>span{color:var(--muted);font-size:var(--fs-small)}
+.vpath .vh-note{margin:0}
+.vpath-btn{justify-self:start;margin-top:auto;padding:.55rem .95rem;border-radius:9px;background:#141210;color:#fff;
+  font-size:.93rem;font-weight:500;text-decoration:none;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.vpath-btn::after{content:"";position:absolute;inset:0;border-radius:22px}
+.vp3 .vpath-btn::after{content:none}  
+.vp1 .vpath-btn{background:var(--accent)}
+.vpath-mail{position:relative;z-index:1;color:var(--ink);text-underline-offset:3px}
+.vpath-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:760px){
+  .vpaths{grid-template-columns:minmax(0,1fr);gap:0;max-width:26rem}
+  .vpath{min-height:0;gap:.55rem;padding:1.4rem 1.4rem 1.3rem}
+  .vpath+.vpath{margin-top:-.35rem}
+  .vp1{transform:rotate(-1.6deg)}.vp2{transform:rotate(1.2deg)}.vp3{transform:rotate(-1deg)}
+}
+
+
+.vtools{padding-top:clamp(1rem,3vh,2rem);overflow-x:clip}
+.vnet{display:grid;gap:clamp(1.1rem,2.4vw,1.8rem);justify-items:center;margin-top:clamp(1.8rem,4vh,2.6rem);padding-bottom:1.6rem}
+.vnet-row{--d:clamp(3.3rem,2.4rem + 3vw,5.2rem);position:relative;list-style:none;margin:0;padding:0;display:flex;gap:clamp(1.3rem,4.5vw,4rem);align-items:center}
+.vnet-row+.vnet-row{transform:translateX(calc((var(--d) + clamp(1.3rem,4.5vw,4rem)) / 2))}
+.vnet-row::before{content:"";position:absolute;z-index:-1;left:calc(var(--d) * -.9);right:calc(var(--d) * -.9);top:50%;height:1px;
+  background:linear-gradient(90deg,rgba(74,44,140,0),rgba(74,44,140,.2) 18%,rgba(74,44,140,.2) 82%,rgba(74,44,140,0))}
+.vlogo{position:relative;flex:none;width:var(--d);height:var(--d);border-radius:50%;background:var(--c);display:grid;place-items:center;
+  border:5px solid #fff;box-shadow:0 0 0 1px rgba(30,28,26,.06),0 12px 26px -14px rgba(30,28,26,.45);outline:none}
+.vlogo:nth-child(2){transform:translateY(-.45rem)}.vlogo:nth-child(3){transform:translateY(.3rem)}.vlogo:nth-child(4){transform:translateY(-.2rem)}
+.vlogo svg{width:44%;height:44%;fill:#fff}
+.vlogo.dark svg{fill:#1C1C1C}
+.vlogo-n{position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);white-space:nowrap;padding:.22rem .7rem;border-radius:999px;
+  background:#fff;border:1px solid var(--hair);font-size:.8rem;color:var(--ink);opacity:0;transition:opacity .2s;pointer-events:none}
+.vlogo:hover .vlogo-n{opacity:1}
+
+.vlogo:first-child .vlogo-n{left:-.3rem;transform:none}.vlogo:last-child .vlogo-n{left:auto;right:-.3rem;transform:none}
+.vnet-row:hover{z-index:2}  
+
+@media (hover:none){.vnet{gap:2.6rem}.vlogo-n{opacity:1;border:0;background:none;padding:0;font-size:.72rem;color:var(--muted);top:calc(100% + .3rem)}}
+
+
+.vmenu{margin-top:clamp(2rem,5vh,3rem);background:#fff;border:1px solid var(--hair-soft);border-radius:20px;padding:clamp(.9rem,2.4vw,1.8rem)}
+.vmenu-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.3rem 1.4rem}
+.vmenu-grid>li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.95rem;align-items:start;padding:.85rem}
+.vic{width:2.8rem;height:2.8rem;border-radius:12px;border:1px solid var(--hair);background:#fff;display:grid;place-items:center;color:#7A4FD0;
+  box-shadow:0 1px 2px rgba(30,28,26,.06)}
+.vic svg{width:1.3rem;height:1.3rem}
+.vmenu-t b{display:block;font-weight:500;font-size:1.04rem;color:var(--ink)}
+.vmenu-t span{display:block;margin-top:.15rem;color:var(--muted);font-size:var(--fs-small)}
+.vchips{list-style:none;margin:.8rem 0 0;padding:1.1rem .85rem .2rem;border-top:1px solid var(--hair-soft);display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.vchips li{padding:.32rem .85rem;border:1px solid var(--hair);border-radius:999px;background:#fff;font-size:var(--fs-small)}
+.vchips li.vchips-h{border:0;padding:0 .3rem 0 0;background:none;color:var(--muted)}
+@media (max-width:900px){.vmenu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.vmenu-grid{grid-template-columns:minmax(0,1fr)}.vmenu-grid>li{padding:.75rem .5rem}}
+
+
 </style>
 </head>
 <body>
@@ -1445,7 +1513,7 @@ dialog.dlg{border-radius:var(--r)}
 <nav class="nav" aria-label="Galvenā navigācija">
   <div class="nav-in">
     <a class="brand" href="#saturs"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><g fill="#4A2C8C"><rect x="3" y="4" width="12" height="4.4" rx="2.2"/><rect x="6.5" y="9.8" width="14.5" height="4.4" rx="2.2"/><rect x="3" y="15.6" width="10" height="4.4" rx="2.2"/></g></svg>Artefy<i>Craft</i></a>
-    <div class="nav-links"><a href="#piemeri">Piemēri</a><a href="#par">Par mums</a><a href="#process">Kā strādājam</a><a href="#buj">Jautājumi</a></div>
+    <div class="nav-links"><a href="#ko-daram">Ko darām</a><a href="#par">Par mums</a><a href="#process">Kā strādājam</a><a href="#buj">Jautājumi</a></div>
     <a class="btn btn-nav" href="#rezervacija">Pieteikt sarunu</a>
     <button class="burger" type="button" id="burgerBtn" aria-label="Atvērt izvēlni" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -1462,7 +1530,7 @@ dialog.dlg{border-radius:var(--r)}
   </div>
   <nav class="mmenu-list" aria-label="Lapas">
     <a href="#sakums">Sākums</a>
-    <a href="#piemeri">Piemēri</a>
+    <a href="#ko-daram">Ko darām</a>
     <a href="#par">Par mums</a>
     <a href="#process">Kā strādājam</a>
     <a href="#buj">Jautājumi</a>
@@ -1474,210 +1542,56 @@ dialog.dlg{border-radius:var(--r)}
 
 <!-- ============ GALVENE ============ -->
 <header class="hero vh" id="sakums" data-pg="sakums">
+  <div class="vglow" aria-hidden="true"></div>
   <div class="wrap vh-head">
     <h1>Automatizācija,<br><span class="vh-accent">kurai vari uzticēties.</span></h1>
     <p class="vh-lead">Pielāgotas sistēmas rēķiniem, <span class="vnw">e-pastiem</span> un zvaniem.</p>
-    <div class="vh-cta">
-      <a class="btn vb" href="#rezervacija">Pieteikt 15 minūšu sarunu</a>
-      <a class="vb2" href="#piemeri">Apskatīt piemērus</a>
-    </div>
-    <p class="vh-note">Pirmā saruna bez maksas.</p>
   </div>
-  <div class="vh-wrap"><div class="wrap">
-    <div class="vh-photo">
-      <div class="vmachine" id="vMachine">
-        <div class="vm-stage" aria-hidden="true">
-          <div class="vm-scene on" data-s="0">
-            <div class="vm-in win">
-              <div class="win-bar"><span class="win-ic pdf"></span><span class="win-t">rēķins_KB-2026-041.pdf</span><span class="win-m">1 / 1</span></div>
-              <div class="win-body paper">
-                <div class="pp-head"><div><b class="vm-f f1">SIA "Kadiķkalnu Būve"</b><span>Rūpniecības iela 7, Sigulda</span></div><div class="pp-no"><b>RĒĶINS</b><span>Nr. KB-2026/041</span></div></div>
-                <div class="pp-kv"><span>Datums</span><b class="vm-f f2">14.07.2026</b></div>
-                <div class="pp-items">
-                  <div><span>Terases dēļi 28×120, 42 m²</span><span>1 054,00</span></div>
-                  <div><span>Skrūves A2, 4 kastes</span><span>186,00</span></div>
-                </div>
-                <div class="pp-tot"><span>Kopā ar PVN</span><b class="vm-f f3">1 500,40 EUR</b></div>
-              </div>
-            </div>
-            <div class="vm-out win">
-              <div class="win-bar"><span class="win-ic sheet"></span><span class="win-t">Izdevumi 2026</span></div>
-              <div class="win-body sheet">
-                <div class="sh-row sh-cols"><span></span><span>A</span><span>B</span><span>C</span><span>D</span></div>
-                <div class="sh-row sh-h"><span>1</span><span>Datums</span><span>Pārdevējs</span><span>Summa</span><span>Statuss</span></div>
-                <div class="sh-row"><span>2</span><span>11.07.2026</span><span>Rasaskalnu Koks</span><span>312,00</span><span>OK</span></div>
-                <div class="sh-row new"><span>3</span><span>14.07.2026</span><span>Kadiķkalnu Būve</span><span>1 500,40</span><span>OK</span></div>
-                <div class="sh-row"><span>4</span><span></span><span></span><span></span><span></span></div>
-                <div class="sh-tabs"><span class="on">Rēķini</span><span>Čeki</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="vm-scene" data-s="1">
-            <div class="vm-in win">
-              <div class="win-bar"><span class="win-ic mail"></span><span class="win-t">Iesūtne</span></div>
-              <div class="win-body">
-                <div class="ml-from"><span class="ml-av">IB</span><div><b>Ilze Bērziņa</b><span>Kad būs piegāde?</span></div><span class="ml-time">09:12</span></div>
-                <p class="ml-text">Labdien! Kad varat piegādāt pasūtījumu Nr. 2207?<br>Ilze</p>
-              </div>
-            </div>
-            <div class="vm-out win">
-              <div class="win-bar"><span class="win-ic mail"></span><span class="win-t">Atbilde, melnraksts</span></div>
-              <div class="win-body">
-                <div class="ml-to"><span>Kam</span>Ilze Bērziņa</div>
-                <p class="ml-text">Labdien! Pasūtījums Nr. 2207 ir gatavs, un to piegādāsim <i class="vgap">laiku ieliek cilvēks</i>.</p>
-                <div class="vm-acts"><span class="vm-btn">Apstiprināt un sūtīt</span><span class="vm-wait">Gaida Jūsu lēmumu</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="vm-scene" data-s="2">
-            <div class="vm-in win">
-              <div class="win-bar"><span class="vm-dot"></span><span class="win-t">Ienākošais zvans</span><span class="win-m">00:47</span></div>
-              <div class="win-body">
-                <div class="tr-line"><span>Klients</span>Gribu pieteikt logu mazgāšanu trešdien no rīta.</div>
-                <div class="tr-line b"><span>Aģents</span>Trešdien plkst. 9.00 ir brīvs. Kolēģis vēl apstiprinās.</div>
-              </div>
-            </div>
-            <div class="vm-out win">
-              <div class="win-bar"><span class="win-ic cl"></span><span class="win-t">Kalendārs, 13.-17. jūlijs</span></div>
-              <div class="win-body">
-                <div class="cw">
-                  <span></span><b>Pr 13</b><b>Ot 14</b><b class="on">Tr 15</b><b>Ce 16</b><b>Pk 17</b>
-                  <em>8.00</em><i class="busy"></i><i></i><i class="busy"></i><i></i><i class="busy"></i>
-                  <em>9.00</em><i></i><i class="busy"></i><i class="ev">Logu mazgāšana</i><i></i><i></i>
-                  <em>10.00</em><i class="busy"></i><i></i><i></i><i class="busy"></i><i></i>
-                </div>
-                <span class="vm-wait">Gaida Jūsu apstiprinājumu</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="vm-tabs" aria-label="Ko dara sistēma">
-          <button type="button" class="vm-tab" data-scene="0" aria-pressed="true">rēķins</button>
-          <button type="button" class="vm-tab" data-scene="1" aria-pressed="false">e-pasts</button>
-          <button type="button" class="vm-tab" data-scene="2" aria-pressed="false">zvans</button>
-        </div>
-      </div>
-    </div>
-  </div></div>
+  <div class="wrap">
+    <ul class="vpaths">
+      <li class="vpath vp1"><b>15 minūšu saruna</b><span class="vh-note">Pirmā saruna bez maksas.</span><a class="vpath-btn" href="#rezervacija">Izvēlēties laiku</a></li>
+      <li class="vpath vp2"><b>Ko darām</b><span>Rēķini, e-pasti, zvani un citi darbi.</span><a class="vpath-btn" href="#ko-daram">Apskatīt</a></li>
+      <li class="vpath vp3"><b>Rakstiet mums</b><span><a class="vpath-mail" href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a></span><a class="vpath-btn" href="https://wa.me/37122000657" target="_blank" rel="noopener">Rakstīt WhatsApp</a></li>
+    </ul>
+  </div>
 </header>
 
 <!-- ============ RĪKI ============ -->
 <section class="vtools" aria-label="Rīki" data-pg="sakums">
-  <div class="wrap"><p>Strādājam ar n8n, Google Workspace, Supabase, Next.js, Python, Anthropic Claude un Mistral.</p></div>
-</section>
-
-<!-- ============ KO BŪVĒJAM ============ -->
-<section class="sect vfeat" id="piemeri" data-pg="piemeri" aria-labelledby="h-piemeri">
-  <div class="wrap">
-    <h2 id="h-piemeri" class="vh2">Trīs piemēri, ko varat izmēģināt</h2>
-    <p class="vsub">Piemēros izmantoti izdomāti dati.</p>
-
-    <div class="vrow">
-      <div class="vmock win" aria-hidden="true">
-        <div class="win-bar"><span class="win-ic pdf"></span><span class="win-t">Rēķinu pārbaude</span><span class="win-m">KB-2026/042</span></div>
-        <div class="win-body">
-          <div class="fx"><span>Pārdevējs</span><b>Kadiķkalnu Būve</b></div>
-          <div class="fx"><span>Summa bez PVN</span><b>1 190,00</b></div>
-          <div class="fx bad"><span>PVN 21%</span><b>245,00</b></div>
-          <div class="fx"><span>Kopā ar PVN</span><b>1 439,90</b></div>
-          <div class="fx-note"><span>21% no 1 190,00 ir 249,90, rēķinā 245,00.</span><i class="vchip warn">JĀPĀRBAUDA</i></div>
-        </div>
-      </div>
-      <div class="vrow-txt">
-        <h3>Rēķins pats nonāk tabulā</h3>
-        <p>Sistēma nolasa rēķinu un pārbauda PVN.</p>
-        <button class="vb2" type="button" data-dlg="dlg1">Izmēģināt piemēru</button>
-      </div>
-    </div>
-
-    <div class="vrow">
-      <div class="vmock win" aria-hidden="true">
-        <div class="win-bar"><span class="win-ic mail"></span><span class="win-t">Iesūtne</span><span class="win-m">3 jaunas</span></div>
-        <div class="win-body">
-          <div class="mi on"><span class="ml-av">IB</span><b>Ilze Bērziņa</b><span class="mi-s">Kad būs piegāde?</span><span class="ml-time">09:12</span></div>
-          <div class="mi"><span class="ml-av b">AK</span><b>Anna Kalniņa</b><span class="mi-s">Konsultācija vakarā</span><span class="ml-time">08:40</span></div>
-          <div class="mi"><span class="ml-av c">GR</span><b>Grāmatvedība</b><span class="mi-s">Lūdzu rēķina kopiju</span><span class="ml-time">vakar</span></div>
-          <div class="md"><span class="md-l">Melnraksts atbildei Ilzei</span><p>Labdien, Ilze! Pasūtījums Nr. 2207 ir gatavs, piegādāsim ceturtdien.</p><span class="vm-btn">Apstiprināt un sūtīt</span></div>
-        </div>
-      </div>
-      <div class="vrow-txt">
-        <h3>Atbildes uzraksta aģents</h3>
-        <p>Jūs tikai apstiprināt sūtīšanu.</p>
-        <button class="vb2" type="button" data-dlg="dlg2">Izmēģināt piemēru</button>
-      </div>
-    </div>
-
-    <div class="vrow">
-      <div class="vmock win" aria-hidden="true">
-        <div class="win-bar"><span class="vm-dot"></span><span class="win-t">Zvans, Strazdukalnu Serviss</span><span class="win-m">00:47</span></div>
-        <div class="win-body">
-          <div class="tr-line"><span>Klients</span>Gribu pieteikt logu mazgāšanu trešdien no rīta.</div>
-          <div class="tr-line b"><span>Aģents</span>Trešdien plkst. 9.00 ir brīvs. Kolēģis vēl apstiprinās.</div>
-          <div class="ag-h">Trešdiena, 15. jūlijs</div>
-          <div class="ag"><em>8.00</em><span>Biroja uzkopšana</span></div>
-          <div class="ag new"><em>9.00</em><span>Logu mazgāšana</span><i class="vchip warn">gaida apstiprinājumu</i></div>
-          <div class="ag"><em>11.00</em><span>Paklāju tīrīšana</span></div>
-        </div>
-      </div>
-      <div class="vrow-txt">
-        <h3>Zvanu pieņem balss aģents</h3>
-        <p>Sarunātais laiks nonāk kalendārā.</p>
-        <button class="vb2" type="button" data-dlg="dlg3">Izmēģināt piemēru</button>
-      </div>
+  <div class="wrap"><p>Strādājam ar n8n, Google Workspace, Supabase, Next.js, Python, Anthropic Claude un Mistral.</p>
+    <div class="vnet">
+    <ul class="vnet-row">
+      <li class="vlogo" style="--c:#EA4B71"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></svg><span class="vlogo-n">n8n</span></li>
+      <li class="vlogo" style="--c:#EA4335"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg><span class="vlogo-n">Gmail</span></li>
+      <li class="vlogo" style="--c:#34A853"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.318 12.545H7.91v-1.909h3.41v1.91zM14.728 0v6h6l-6-6zm1.363 10.636h-3.41v1.91h3.41v-1.91zm0 3.273h-3.41v1.91h3.41v-1.91zM20.727 6.5v15.864c0 .904-.732 1.636-1.636 1.636H4.909a1.636 1.636 0 0 1-1.636-1.636V1.636C3.273.732 4.005 0 4.909 0h9.318v6.5h6.5zm-3.273 2.773H6.545v7.909h10.91v-7.91zm-6.136 4.636H7.91v1.91h3.41v-1.91z"/></svg><span class="vlogo-n">Google Sheets</span></li>
+      <li class="vlogo dark" style="--c:#3FCF8E"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.9 1.036c-.015-.986-1.26-1.41-1.874-.637L.764 12.05C-.33 13.427.65 15.455 2.409 15.455h9.579l.113 7.51c.014.985 1.259 1.408 1.873.636l9.262-11.653c1.093-1.375.113-3.403-1.645-3.403h-9.642z"/></svg><span class="vlogo-n">Supabase</span></li>
+    </ul>
+    <ul class="vnet-row">
+      <li class="vlogo" style="--c:#000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg><span class="vlogo-n">Next.js</span></li>
+      <li class="vlogo" style="--c:#3776AB"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg><span class="vlogo-n">Python</span></li>
+      <li class="vlogo" style="--c:#D97757"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg><span class="vlogo-n">Claude</span></li>
+      <li class="vlogo" style="--c:#FA520F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.143 3.429v3.428h-3.429v3.429h-3.428V6.857H6.857V3.43H3.43v13.714H0v3.428h10.286v-3.428H6.857v-3.429h3.429v3.429h3.429v-3.429h3.428v3.429h-3.428v3.428H24v-3.428h-3.43V3.429z"/></svg><span class="vlogo-n">Mistral AI</span></li>
+    </ul>
     </div>
   </div>
 </section>
 
-<!-- ============ BŪVĒJAM ARĪ ============ -->
-<section class="sect vmore" aria-labelledby="h-ari" data-pg="piemeri">
+<!-- ============ KO DARĀM ============ -->
+<section class="sect vdo" id="ko-daram" data-pg="ko-daram" aria-labelledby="h-daram">
   <div class="wrap">
-    <p class="vmore-line" id="h-ari">Darām arī atskaites, klientu piesaisti, iekšējos rīkus, mājaslapas un AI apmācību komandai.</p>
-  </div>
-</section>
-
-<!-- ============ KONTROLE ============ -->
-<section class="sect vctrl" id="kapec" data-pg="kapec" aria-labelledby="h-kapec">
-  <div class="wrap vctrl-grid">
-    <div class="vmock vctrl-mock win" aria-hidden="true">
-      <div class="win-bar"><span class="win-ic set"></span><span class="win-t">Noteikumi</span></div>
-      <div class="win-body">
-        <div class="vctrl-tabs"><span class="on">Apstiprina cilvēks</span><span>Dara sistēma</span></div>
-        <div class="vctrl-row"><em>Maksājumi un nauda</em><i class="vchip lav">Jūs</i></div>
-        <div class="vctrl-row"><em>Atbildes klientiem</em><i class="vchip lav">Jūs</i></div>
-        <div class="vctrl-row"><em>Sūtīšana ārpus uzņēmuma</em><i class="vchip lav">Jūs</i></div>
-        <div class="vctrl-row"><em>Neskaidrs gadījums</em><i class="vchip warn">JĀPĀRBAUDA</i></div>
-      </div>
-    </div>
-    <div class="vctrl-txt">
-      <h2 id="h-kapec" class="vh2">Svarīgo vienmēr apstiprina cilvēks.</h2>
-      <p class="vsub">Nauda, atbildes klientiem un sūtīšana iet caur Jums.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ APRĒĶINS ============ -->
-<section class="sect vbench-sect" aria-labelledby="h-roi" data-pg="piemeri">
-  <div class="wrap">
-    <h2 id="h-roi" class="vh2">Cik laika Jūs atgūtu?</h2>
-    <div class="vbench" id="roi">
-      <div class="vbench-card">
-        <label class="vbench-top" for="roiRange"><span class="vdot" aria-hidden="true"></span>Dokumenti mēnesī <b id="roiN">150</b></label>
-        <input type="range" id="roiRange" min="20" max="1000" step="10" value="150" aria-label="Dokumentu skaits mēnesī">
-        <div class="vseg"><span>Minūtes uz vienu</span>
-          <button type="button" class="roi-m" data-m="2">2</button>
-          <button type="button" class="roi-m" data-m="4" aria-pressed="true">4</button>
-          <button type="button" class="roi-m" data-m="8">8</button>
-        </div>
-        <div class="vbars">
-          <div class="vbar"><span>Ar rokām</span><span class="vtrack"><i class="w100"></i></span><b id="roiMan">10 h mēnesī</b></div>
-          <div class="vbar hl"><span>Ar sistēmu</span><span class="vtrack"><i class="w20"></i></span><b id="roiKeep">~2 h</b></div>
-        </div>
-        <p class="vbench-res">Jūs atgūstat <b id="roiH">~8 h</b> mēnesī, gadā <b id="roiD">12</b> darba dienas.</p>
-      </div>
-      <div class="vbench-side">
-        <p>Pieņēmums: piektā daļa laika paliek apstiprināšanai. Precīzu vērtējumu dodam sarunā.</p>
-        <a class="btn vb" href="#rezervacija" id="roiCta">Atgūt šo laiku</a>
-      </div>
+    <h2 id="h-daram" class="vh2">Ko sistēma dara Jūsu vietā</h2>
+    <p class="vsub">Svarīgo vienmēr apstiprina cilvēks: nauda, atbildes klientiem un sūtīšana iet caur&nbsp;Jums.</p>
+    <!-- Icons: Lucide 0.469.0, ISC License, (c) Lucide Contributors 2022; portions (c) Cole Bemis 2013-2022 as part of Feather (MIT). Tool logos: Simple Icons, CC0 1.0; trademarks belong to their owners. -->
+    <div class="vmenu">
+      <ul class="vmenu-grid">
+      <li><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span><span class="vmenu-t"><b>Rēķini</b><span>Nolasa rēķinu, pārbauda PVN un ieraksta tabulā.</span></span></li>
+      <li><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span class="vmenu-t"><b>E-pasti</b><span>Uzraksta atbildi, ko Jūs apstiprināt.</span></span></li>
+      <li><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg></span><span class="vmenu-t"><b>Zvani</b><span>Pieņem zvanu un piedāvā laiku, ko Jūs apstiprināt.</span></span></li>
+      <li><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span><span class="vmenu-t"><b>Atskaites</b><span>Saliek datus no vairākām vietām vienā pārskatā.</span></span></li>
+      <li><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="vmenu-t"><b>Klientu piesaiste</b><span>Atrod uzņēmumus un sagatavo pirmo vēstuli.</span></span></li>
+      <li><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><span class="vmenu-t"><b>Iekšējie rīki</b><span>Rīks, kas der tieši Jūsu darba gaitai.</span></span></li>
+      </ul>
+      <ul class="vchips"><li class="vchips-h">Arī</li><li>Mājaslapas</li><li>AI apmācība komandai</li></ul>
     </div>
   </div>
 </section>
@@ -1806,131 +1720,17 @@ dialog.dlg{border-radius:var(--r)}
 </main>
 
 <!-- ============ IZLECOŠIE LOGI ============ -->
-<dialog class="dlg" id="dlg1" aria-labelledby="dlg1h">
-  <div class="dlg-head">
-    <h3 id="dlg1h">Rēķins pats nonāk tabulā</h3>
-    <button class="dlg-x" type="button" data-close aria-label="Aizvērt">✕</button>
-  </div>
-  <div class="dlg-body">
-    <p class="dlg-idea"><b>Ideja:</b> aiz šī stāv nolasīšana, PVN pārbaude un drošības noteikumi. Cilvēks no tā visa redz tikai gatavu rindu.</p>
-    <ol class="pipe" id="aPipe" aria-hidden="true">
-      <li>Nolasa</li><li>Pārbauda PVN</li><li>Ieraksta tabulā</li>
-    </ol>
-    <div class="dlg-tools">
-      <button class="btn2" type="button" data-doc="0" aria-pressed="true">Tīrs rēķins</button>
-      <button class="btn2" type="button" data-doc="1" aria-pressed="false">Rēķins ar kļūdu</button>
-      <button class="btn2" type="button" id="aStart">Vēlreiz</button>
-    </div>
-    <div class="dgrid" id="demoA">
-      <div>
-        <div class="paper-doc" id="aDoc"><div class="scanbeam" aria-hidden="true"></div></div>
-      </div>
-      <div>
-        <div class="vatcard" id="aVat"></div>
-        <div class="sheet">
-          <div class="gridwrap">
-            <table class="grid" aria-label="Tabulas paraugs">
-              <thead><tr><th style="width:2.2rem"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
-              <tbody id="aBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <p class="payoff" id="aPay" hidden>Viss notika dažās sekundēs. Cilvēkam atlika tikai apstiprināt.</p>
-    <div class="dlg-cta">
-      <b>Iedomājieties šo savā uzņēmumā.</b>
-      <button class="btn" type="button" data-goto-book>Vēlos šādu risinājumu</button>
-    </div>
-  <div class="dlg-foot">Piemērs ar izdomātiem datiem. Soļi atveidoti pēc scenārija Jūsu pārlūkā, bez dzīva AI izsaukuma.</div>
-</dialog>
-
-<dialog class="dlg" id="dlg2" aria-labelledby="dlg2h">
-  <div class="dlg-head">
-    <h3 id="dlg2h">Atbildes uzraksta aģents</h3>
-    <button class="dlg-x" type="button" data-close aria-label="Aizvērt">✕</button>
-  </div>
-  <div class="dlg-body">
-    <p class="dlg-idea"><b>Ideja:</b> aģents saprot vēstuli un uzraksta atbildi, bet faktus, kuru tam nav, neizdomā. Sūta tikai cilvēks.</p>
-    <div class="bgrid">
-      <div>
-        <p class="mono" style="margin-bottom:.7rem">Iesūtne · SIA "Strazdukalnu Serviss" · ziņas izdomātas</p>
-        <div class="mail-list" id="bList"></div>
-        <div class="mail-read" id="bRead"></div>
-      </div>
-      <div>
-        <p class="mono" style="margin-bottom:.7rem">Aģents</p>
-        <span class="badge" id="bClass" style="visibility:hidden">·</span>
-        <p class="draft-h">Melnraksts. Vēl nav nosūtīts.</p>
-        <div class="draft" id="bDraft"></div>
-        <p class="gapnote" id="bGapNote">Aģents neizdomā faktus, kuru tam nav. Trūkstošo vietu aizpilda cilvēks.</p>
-        <div class="gapform" id="bGapForm">
-          <input type="text" id="bGapInput" aria-label="Norādiet piegādes laiku" placeholder="Piemēram: rīt līdz plkst. 14.00">
-          <button class="btn2" type="button" id="bGapOk" style="min-height:48px">Ielikt melnrakstā</button>
-        </div>
-        <div class="b-actions">
-          <button class="btn" type="button" id="bApprove" disabled>Apstiprināt</button>
-          <button class="btn2" type="button" id="bEdit">Labot</button>
-          <span class="bstatus" id="bStatus">Gaida cilvēka lēmumu</span>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class="dlg-cta">
-      <b>Iedomājieties šo savā uzņēmumā.</b>
-      <button class="btn" type="button" data-goto-book>Vēlos šādu risinājumu</button>
-    </div>
-  <div class="dlg-foot">Demonstrācijā vēstule netiek nosūtīta. Soļi atveidoti pēc scenārija, bez dzīva AI izsaukuma.</div>
-</dialog>
-
-<dialog class="dlg" id="dlg3" aria-labelledby="dlg3h">
-  <div class="dlg-head">
-    <h3 id="dlg3h">Zvanu pieņem balss aģents</h3>
-    <button class="dlg-x" type="button" data-close aria-label="Aizvērt">✕</button>
-  </div>
-  <div class="dlg-body">
-    <div class="callwrap">
-      <p class="dlg-idea"><b>Ideja:</b> zvans, kas agrāk palika neatbildēts, beidzas ar sagatavotu pierakstu. Apstiprina cilvēks.</p>
-      <div class="callhead">
-        <span class="cdot" aria-hidden="true"></span>
-        <span class="ct">Ienākošais zvans · SIA "Strazdukalnu Serviss"</span>
-        <span class="vwave" id="cWave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="cs" id="cTimer">00:00</span>
-      </div>
-      <div class="chat" id="cChat"></div>
-      <div class="tdots" id="cDots" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="callres" id="cRes">
-        <div class="cr-h">Sagatavots pieraksts</div>
-        <div class="cr-b" id="cResB"></div>
-        <div class="b-actions">
-          <button class="btn" type="button" id="cApprove">Apstiprināt</button>
-          <span class="bstatus" id="cStatus">Gaida cilvēka lēmumu</span>
-        </div>
-      </div>
-      <div class="b-actions" style="margin-top:1rem">
-        <button class="btn2" type="button" id="cReplay">Atskaņot vēlreiz</button>
-        <button class="btn2" type="button" id="cMute" aria-pressed="true">Skaņa: ieslēgta</button>
-      </div>
-    </div>
-  </div>
-    <div class="dlg-cta">
-      <b>Iedomājieties šo savā uzņēmumā.</b>
-      <button class="btn" type="button" data-goto-book>Vēlos šādu risinājumu</button>
-    </div>
-  <div class="dlg-foot">Saruna ir izdomāta un atveidota pēc scenārija Jūsu pārlūkā, bez dzīva AI izsaukuma. Balsis ieskaņotas mākslīgi.</div>
-</dialog>
-
 <!-- ============ KĀJENE ============ -->
 <footer class="vfoot">
   <div class="wrap">
     <div class="vfoot-grid">
       <div><p class="foot-brand"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><g fill="#4A2C8C"><rect x="3" y="4" width="12" height="4.4" rx="2.2"/><rect x="6.5" y="9.8" width="14.5" height="4.4" rx="2.2"/><rect x="3" y="15.6" width="10" height="4.4" rx="2.2"/></g></svg>Artefy<i>Craft</i></p><p class="vfoot-tag">Automatizācijas darbnīca Latvijā.</p></div>
-      <div><p class="vfoot-h">Lapa</p><a href="#piemeri">Piemēri</a><a href="#par">Par mums</a><a href="#process">Kā strādājam</a><a href="#buj">Jautājumi</a></div>
+      <div><p class="vfoot-h">Lapa</p><a href="#ko-daram">Ko darām</a><a href="#par">Par mums</a><a href="#process">Kā strādājam</a><a href="#buj">Jautājumi</a></div>
       <div><p class="vfoot-h">Kontakti</p><a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a><a href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp +371 22 000 657</a></div>
     </div>
     <p class="privacy">Šajā lapā nav sīkdatņu un izsekošanas. Pieteikuma forma nosūta tikai Jūsu ierakstīto (vārdu, kontaktu, izvēlēto laiku) uz mūsu e-pastu ar FormSubmit starpnieka palīdzību; šos datus lietojam vienīgi, lai atbildētu. © 2026 SIA ArtefyCraft. Visas tiesības aizsargātas.</p>
     <p class="vcredit">Foto: <a href="https://commons.wikimedia.org/wiki/File:Abava_valley_-_panoramio_(1).jpg" rel="noopener" target="_blank">«Abava valley»</a>, Paul Berzinn, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener" target="_blank">CC BY-SA 3.0</a>, no Wikimedia Commons, apstrādāts (izgriezums, gleznains mīkstinājums, pasteļu krāsas); apstrādātais attēls pieejams ar to pašu licenci.</p>
+    <p class="vcredit">Rīku logo: <a href="https://simpleicons.org" rel="noopener" target="_blank">Simple Icons</a> (CC0), preču zīmes pieder to īpašniekiem. Ikonas: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (ISC licence).</p>
   </div>
 </footer>
 

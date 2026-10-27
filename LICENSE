@@ -7,8 +7,10 @@ part of it, in whole or in part, without prior written permission from
 SIA ArtefyCraft (arturs@artefycraft.com).
 
 Third-party components keep their own licences, listed in README.md:
-embedded fonts under the SIL Open Font License 1.1, and one adapted
-photograph from Wikimedia Commons under CC BY-SA 3.0. The adapted
+embedded fonts under the SIL Open Font License 1.1, tool logos from Simple
+Icons under CC0 1.0 (trademarks belong to their owners), icons from Lucide
+under the ISC License, and one adapted photograph from Wikimedia Commons
+under CC BY-SA 3.0. The adapted
 photograph (embedded in index.html and src/site_core.html) is available
 under the same licence as its original; nothing in this file restricts it.
 
