@@ -7,11 +7,10 @@ part of it, in whole or in part, without prior written permission from
 SIA ArtefyCraft (arturs@artefycraft.com).
 
 Third-party components keep their own licences, listed in README.md:
-embedded fonts under the SIL Open Font License 1.1, and two adapted
-photographs from Wikimedia Commons under CC BY-SA 4.0 and CC BY-SA 3.0.
-The adapted photographs (embedded in index.html and src/site_core.html)
-are available under the same licences as their originals; nothing in this
-file restricts them.
+embedded fonts under the SIL Open Font License 1.1, and one adapted
+photograph from Wikimedia Commons under CC BY-SA 3.0. The adapted
+photograph (embedded in index.html and src/site_core.html) is available
+under the same licence as its original; nothing in this file restricts it.
 
 Visas tiesības aizsargātas. Šīs vietnes kodu, dizainu un saturu bez
 SIA ArtefyCraft rakstiskas atļaujas nedrīkst kopēt, pārveidot vai izmantot.
