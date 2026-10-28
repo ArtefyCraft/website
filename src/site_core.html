@@ -1469,8 +1469,12 @@ dialog.dlg{border-radius:var(--r)}
   .vpaths,.vd-list{display:flex;max-width:none;gap:.9rem;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);
     scroll-padding-inline:var(--pad);overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
   .vpaths::-webkit-scrollbar,.vd-list::-webkit-scrollbar{display:none}
+  
+  .vpaths,.vd-list{padding-inline-end:0}
+  .vpaths::after,.vd-list::after{content:"";flex:0 0 max(1px,calc(var(--pad) - .9rem))}
+  .vtools{padding-top:.25rem}
   .vh{padding-bottom:clamp(.5rem,2vh,1.25rem)}
-  .vpaths{padding-block:1.2rem 2.2rem;align-items:stretch}
+  .vpaths{margin-top:1.5rem;padding-block:1rem 1.6rem;align-items:stretch}
   .vpath{flex:0 0 min(78%,19rem);scroll-snap-align:start}
   .vpath+.vpath{margin-top:0}
   .vp1{transform:rotate(-1.4deg)}.vp2{transform:rotate(1deg)}.vp3{transform:rotate(-1deg)}
