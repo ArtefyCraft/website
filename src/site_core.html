@@ -1305,8 +1305,8 @@ h1,h2,h3{font-weight:500;letter-spacing:-.02em}
 @media (max-width:760px){.vpeople{grid-template-columns:minmax(0,1fr)}}
 .vperson{position:relative;border-top:1px solid var(--hair);padding-top:1.3rem;display:grid;gap:.4rem;align-content:start}
 .vperson h3{font-size:var(--fs-h3)}
-.vrole{justify-self:start;font-family:var(--mono);font-size:var(--fs-label);color:#4A2C8C;background:#ECE5FA;padding:.1rem .6rem;border-radius:999px}
-.vperson:nth-child(2) .vrole{color:#17573F;background:#DDF0E5}
+.vrole{justify-self:start;display:inline-flex;align-items:center;gap:.5rem;font-size:var(--fs-small);color:var(--muted)}
+.vrole svg{width:1.05rem;height:1.05rem;color:#5B3FB0;flex:none}
 .vperson p{margin-top:.5rem;font-size:var(--fs-lead);line-height:1.5;max-width:30em}
 .vacts{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
 
@@ -1395,7 +1395,15 @@ dialog.dlg{border-radius:var(--r)}
   background:linear-gradient(90deg,rgba(74,44,140,0),rgba(74,44,140,.2) 18%,rgba(74,44,140,.2) 82%,rgba(74,44,140,0))}
 .vlogo{position:relative;flex:none;width:var(--d);height:var(--d);border-radius:50%;background:var(--c);display:grid;place-items:center;
   border:5px solid #fff;box-shadow:0 0 0 1px rgba(30,28,26,.06),0 12px 26px -14px rgba(30,28,26,.45);outline:none}
-.vlogo:nth-child(2){transform:translateY(-.45rem)}.vlogo:nth-child(3){transform:translateY(.3rem)}.vlogo:nth-child(4){transform:translateY(-.2rem)}
+.vlogo{--y:0rem;transform:translateY(var(--y));animation:vfloat 6s ease-in-out infinite}
+.vlogo:nth-child(2){--y:-.45rem;animation-delay:-1.5s}.vlogo:nth-child(3){--y:.3rem;animation-delay:-3s}.vlogo:nth-child(4){--y:-.2rem;animation-delay:-4.5s}
+.vnet-row+.vnet-row .vlogo{animation-duration:7s}
+.vlogo:hover,.vlogo:focus-visible{animation-play-state:paused}
+@keyframes vfloat{0%,100%{transform:translateY(var(--y))}50%{transform:translateY(calc(var(--y) - 7px))}}
+
+.vnet-row::after{content:"";position:absolute;z-index:-1;top:calc(50% - 3px);left:0;width:6px;height:6px;border-radius:50%;background:#7B5FD0;animation:vrun 9s linear infinite}
+.vnet-row+.vnet-row::after{animation-duration:11s;animation-direction:reverse}
+@keyframes vrun{0%{left:calc(var(--d) * -.6);opacity:0}8%,92%{opacity:1}100%{left:calc(100% + var(--d) * .6);opacity:0}}
 .vlogo svg{width:44%;height:44%;fill:#fff}
 .vlogo.dark svg{fill:#1C1C1C}
 .vlogo-n{position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);white-space:nowrap;padding:.22rem .7rem;border-radius:999px;
@@ -1411,7 +1419,7 @@ dialog.dlg{border-radius:var(--r)}
 .vmenu{margin-top:clamp(2rem,5vh,3rem);background:#fff;border:1px solid var(--hair-soft);border-radius:20px;padding:clamp(.9rem,2.4vw,1.8rem)}
 .vmenu-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.3rem 1.4rem}
 .vmenu-grid>li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.95rem;align-items:start;padding:.85rem}
-.vic{width:2.8rem;height:2.8rem;border-radius:12px;border:1px solid var(--hair);background:#fff;display:grid;place-items:center;color:#7A4FD0;
+.vic{width:2.8rem;height:2.8rem;border-radius:12px;border:1px solid #E4DCF5;background:#F1ECFA;display:grid;place-items:center;color:#5B3FB0;
   box-shadow:0 1px 2px rgba(30,28,26,.06)}
 .vic svg{width:1.3rem;height:1.3rem}
 .vmenu-t b{display:block;font-weight:500;font-size:1.04rem;color:var(--ink)}
@@ -1423,18 +1431,37 @@ dialog.dlg{border-radius:var(--r)}
 @media (max-width:560px){.vmenu-grid{grid-template-columns:minmax(0,1fr)}.vmenu-grid>li{padding:.75rem .5rem}}
 
 
-.vexs{padding-top:0}
-.vex-list{list-style:none;margin:clamp(1.8rem,4vh,2.6rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,4vw,3rem)}
-.vex{display:grid;gap:1.1rem;justify-items:center;text-align:center}
-.vflow{display:flex;align-items:flex-start;justify-content:center;width:100%;max-width:17rem}
-.vnode{display:grid;justify-items:center;gap:.5rem;flex:none;width:5.2rem}
-.vnode-c{width:3.8rem;height:3.8rem;border-radius:50%;background:#F1ECFA;color:#5B3FB0;display:grid;place-items:center}
-.vnode-c svg{width:1.55rem;height:1.55rem}
-.vnode-l{font-size:var(--fs-small);color:var(--ink)}
-.vlink{flex:1;min-width:1.5rem;height:1px;margin-top:1.9rem;background:#CFC3EC;position:relative}
-.vlink::after{content:"";position:absolute;right:-1px;top:-3px;width:7px;height:7px;border-top:1px solid #CFC3EC;border-right:1px solid #CFC3EC;transform:rotate(45deg)}
-.vex p{margin:0;color:var(--muted);font-size:var(--fs-small);max-width:16rem}
-@media (max-width:760px){.vex-list{grid-template-columns:minmax(0,1fr);gap:2.2rem}}
+.vexs{padding-top:0;position:relative;isolation:isolate;overflow-x:clip}
+
+.vexs::before{content:"";position:absolute;z-index:-1;left:50%;top:-4rem;width:min(1080px,100%);height:clamp(320px,40vw,480px);transform:translateX(-50%);border-radius:50%;filter:blur(46px);background:radial-gradient(closest-side,rgba(196,190,255,.6),rgba(255,196,206,.45) 55%,rgba(176,196,255,.25) 80%,rgba(176,196,255,0) 100%)}
+.vd-list{list-style:none;margin:clamp(1.8rem,4vh,2.6rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2rem)}
+.vd{display:grid;gap:.9rem;grid-template-rows:1fr auto}
+.vd>p{margin:0;color:var(--muted);font-size:var(--fs-small)}
+.vwin{background:#fff;border:1px solid var(--hair);border-radius:14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;font-size:.875rem;line-height:1.35;color:#2B2926}
+.vwin-bar{display:flex;align-items:center;gap:.45rem;padding:.55rem .85rem;background:#F5F3EF;border-bottom:1px solid var(--hair-soft);font-size:.8rem;color:#5B554F}
+.vwin-bar svg{width:.95rem;height:.95rem;color:#5B3FB0;flex:none}
+.vwin-b{padding:1rem .95rem 1.1rem;display:grid}
+.vd-in,.vd-out{border-radius:8px;padding:.6rem .75rem}
+.vd-in{border:1px solid var(--hair-soft)}
+.vd-out{border:1px solid #CFC3EC;background:#F7F4FD;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+.vd b{display:block;font-weight:700}
+.vd-doc{display:grid;gap:.45rem}
+.vd-sk{height:6px;border-radius:3px;background:#ECEAE6;width:80%}.vd-s2{width:55%}
+.vd-sum{font-weight:700;justify-self:end}
+.vd-ok{display:grid;place-items:center;color:#5B3FB0}.vd-ok svg{width:1.05rem;height:1.05rem}
+.vd-msg{display:flex;align-items:center;gap:.65rem}
+.vd-av{flex:none;width:2rem;height:2rem;border-radius:50%;background:#EEEAF6;color:#5B3FB0;display:grid;place-items:center;font-size:.72rem;font-weight:700}
+.vd-av svg{width:.95rem;height:.95rem}
+.vd-btn{flex:none;background:#5B3FB0;color:#fff;border-radius:6px;padding:.3rem .75rem;font-size:.78rem;font-weight:700}
+.vd-cal{justify-content:flex-start}
+.vd-t{font-weight:700;font-size:1.05rem;color:#5B3FB0}
+
+.vd-go{position:relative;justify-self:center;width:1px;height:1.7rem;margin:.3rem 0;background:#CFC3EC}
+.vd-go::after{content:"";position:absolute;left:-3px;bottom:0;width:5px;height:5px;border-right:1px solid #CFC3EC;border-bottom:1px solid #CFC3EC;transform:rotate(45deg)}
+.vd-go::before{content:"";position:absolute;left:-2.5px;top:0;width:6px;height:6px;border-radius:50%;background:#7B5FD0;animation:vdrop 2.4s ease-in infinite}
+@keyframes vdrop{0%{transform:translateY(0);opacity:0}20%,75%{opacity:1}100%{transform:translateY(1.4rem);opacity:0}}
+@media (max-width:760px){.vd-list{grid-template-columns:minmax(0,1fr);max-width:26rem;margin-inline:auto}}
+@media (prefers-reduced-motion:reduce){.vlogo,.vnet-row::after,.vd-go::before{animation:none}.vnet-row::after,.vd-go::before{display:none}}
 
 </style>
 
@@ -1530,17 +1557,39 @@ dialog.dlg{border-radius:var(--r)}
 <section class="sect vexs" id="piemeri" data-pg="piemeri" aria-labelledby="h-piemeri">
   <div class="wrap">
     <h2 id="h-piemeri" class="vh2">Piemēri</h2>
-    <ul class="vex-list">
-      <li class="vex">
-        <div class="vflow"><span class="vnode"><span class="vnode-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span><span class="vnode-l">Rēķins</span></span><span class="vlink" aria-hidden="true"></span><span class="vnode"><span class="vnode-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="3" x2="21" y1="15" y2="15"/><line x1="9" x2="9" y1="9" y2="21"/><line x1="15" x2="15" y1="9" y2="21"/></svg></span><span class="vnode-l">Tabula</span></span></div>
+    <p class="vsub">Dati piemēros ir izdomāti.</p>
+    <ul class="vd-list">
+      <li class="vd">
+        <div class="vwin">
+          <div class="vwin-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Rēķins.pdf</div>
+          <div class="vwin-b">
+            <div class="vd-in vd-doc"><b>Kadiķkalnu Būve</b><span class="vd-sk"></span><span class="vd-sk vd-s2"></span><span class="vd-sum">Kopā 1 439,90 €</span></div>
+            <div class="vd-go" aria-hidden="true"></div>
+            <div class="vd-out vd-row"><span>Kadiķkalnu Būve</span><span>1 439,90 €</span><span class="vd-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Ierakstīts"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+          </div>
+        </div>
         <p>PDF rēķins kļūst par rindu tabulā.</p>
       </li>
-      <li class="vex">
-        <div class="vflow"><span class="vnode"><span class="vnode-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span class="vnode-l">Vēstule</span></span><span class="vlink" aria-hidden="true"></span><span class="vnode"><span class="vnode-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="m10 7-3 3 3 3"/><path d="M17 13v-1a2 2 0 0 0-2-2H7"/></svg></span><span class="vnode-l">Atbilde</span></span></div>
+      <li class="vd">
+        <div class="vwin">
+          <div class="vwin-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>E-pasts</div>
+          <div class="vwin-b">
+            <div class="vd-in vd-msg"><span class="vd-av" aria-hidden="true">IB</span><span><b>Ilze Bērziņa</b>Kad būs piegāde?</span></div>
+            <div class="vd-go" aria-hidden="true"></div>
+            <div class="vd-out vd-reply"><span>Piegādāsim ceturtdien.</span><span class="vd-btn">Sūtīt</span></div>
+          </div>
+        </div>
         <p>Jautājums saņem gatavu atbildi.</p>
       </li>
-      <li class="vex">
-        <div class="vflow"><span class="vnode"><span class="vnode-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg></span><span class="vnode-l">Zvans</span></span><span class="vlink" aria-hidden="true"></span><span class="vnode"><span class="vnode-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span><span class="vnode-l">Kalendārs</span></span></div>
+      <li class="vd">
+        <div class="vwin">
+          <div class="vwin-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>Zvans</div>
+          <div class="vwin-b">
+            <div class="vd-in vd-msg"><span class="vd-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg></span><span><b>Klients</b>Vai varu piektdien desmitos?</span></div>
+            <div class="vd-go" aria-hidden="true"></div>
+            <div class="vd-out vd-cal"><span class="vd-t">10:00</span><span><b>Piektdiena</b>Tikšanās</span></div>
+          </div>
+        </div>
         <p>Zvans kļūst par pierakstu kalendārā.</p>
       </li>
     </ul>
@@ -1555,13 +1604,13 @@ dialog.dlg{border-radius:var(--r)}
     <div class="vpeople">
       <div class="vperson">
         <h3>Arturs</h3>
-        <span class="vrole">Sarunas un sistēmas</span>
+        <span class="vrole"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Sarunas un sistēmas</span>
         <p>Ja vakaros Jūs vēl sēžat pie rēķiniem, mēs sapratīsimies no pusvārda. Sarunu es vienmēr sāku ar klausīšanos, nevis ar piedāvājumu.</p>
         <div class="vacts"><a class="vb2" href="mailto:arturs@artefycraft.com">Uzrakstīt Arturam</a><a class="vb2" href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp</a></div>
       </div>
       <div class="vperson">
         <h3>Pauls</h3>
-        <span class="vrole">Idejas un kods</span>
+        <span class="vrole"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Idejas un kods</span>
         <p>Laba tehnoloģija ir tā, kuru nemaz nepamana. Jūs vienkārši strādājat, un viss pārējais notiek pats.</p>
       </div>
     </div>
