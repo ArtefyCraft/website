@@ -1463,6 +1463,29 @@ dialog.dlg{border-radius:var(--r)}
 @media (max-width:760px){.vd-list{grid-template-columns:minmax(0,1fr);max-width:26rem;margin-inline:auto}}
 @media (prefers-reduced-motion:reduce){.vlogo,.vnet-row::after,.vd-go::before{animation:none}.vnet-row::after,.vd-go::before{display:none}}
 
+
+@media (max-width:760px){
+  
+  .vpaths,.vd-list{display:flex;max-width:none;gap:.9rem;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);
+    scroll-padding-inline:var(--pad);overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+  .vpaths::-webkit-scrollbar,.vd-list::-webkit-scrollbar{display:none}
+  .vh{padding-bottom:clamp(.5rem,2vh,1.25rem)}
+  .vpaths{padding-block:1.2rem 2.2rem;align-items:stretch}
+  .vpath{flex:0 0 min(78%,19rem);scroll-snap-align:start}
+  .vpath+.vpath{margin-top:0}
+  .vp1{transform:rotate(-1.4deg)}.vp2{transform:rotate(1deg)}.vp3{transform:rotate(-1deg)}
+  .vd-list{padding-block:.3rem 1rem}
+  .vd{flex:0 0 min(86%,22rem);scroll-snap-align:start}
+}
+@media (max-width:560px){
+  
+  .vmenu{padding:.9rem .7rem}
+  .vmenu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.2rem .5rem}
+  .vmenu-grid>li{grid-template-columns:minmax(0,1fr);gap:.55rem;padding:.75rem .45rem}
+  .vmenu-t b{font-size:.98rem}
+  .vmenu-t span{font-size:.84rem;line-height:1.4}
+}
+
 </style>
 
 <a class="skip" href="#saturs">Pāriet uz saturu</a>
@@ -1711,8 +1734,7 @@ dialog.dlg{border-radius:var(--r)}
       <div class="hero-cta" style="gap:1rem">
         <button class="btn" id="bkSend" type="submit" aria-disabled="true">Nosūtīt pieteikumu</button>
       </div>
-      <p class="bk-hint" id="bkHint">1. solis: izvēlieties dienu kalendārā.</p>
-      <p class="bk-disc">Laiku apstiprināsim pa e-pastu vai tālruni. Ja ērtāk, rakstiet: <a class="mail-alt" style="min-height:0" href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a> vai WhatsApp: <a class="mail-alt" style="min-height:0" href="https://wa.me/37122000657" target="_blank" rel="noopener">+371 22 000 657</a></p>
+      <p class="bk-hint sr-only" id="bkHint" aria-live="polite">1. solis: izvēlieties dienu kalendārā.</p>
     </form>
   </div>
 </section>
