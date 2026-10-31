@@ -1,7 +1,7 @@
 # ArtefyCraft majaslapa
 
 Viens fails: index.html. Hosting: GitHub Pages (artefycraft.com).
-Fonti: Hanken Grotesk, IBM Plex Mono (SIL OFL, iegulti).
+Fonti: Hanken Grotesk, IBM Plex Mono un virsrakstiem Newsreader (Production Type, SIL OFL 1.1, iegulti; https://github.com/productiontype/Newsreader).
 
 Fotogrāfiju lapā nav (kopš v52).
 
