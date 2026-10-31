@@ -1,9 +1,9 @@
 # ArtefyCraft majaslapa
 
-Viens fails: index.html. Hosting: GitHub Pages (artefycraft.com).
+Lapa: index.html un Artura portrets (arturs-480.webp, arturs-640.webp). Hosting: GitHub Pages (artefycraft.com).
 Fonti: Hanken Grotesk, IBM Plex Mono un virsrakstiem Newsreader (Production Type, SIL OFL 1.1, iegulti; https://github.com/productiontype/Newsreader).
 
-Fotogrāfiju lapā nav (kopš v52).
+Vienīgā fotogrāfija lapā ir Artura portrets (kopš v58); tā izmantošana citur nav atļauta.
 
 Rīku logo (n8n, Gmail, Google Sheets, Supabase, Next.js, Python, Claude: Simple Icons 13.21.0; Mistral AI: 16.33.0),
 https://simpleicons.org, CC0 1.0. Preču zīmes pieder to īpašniekiem; logo rāda tikai rīkus, ar kuriem strādājam.
