@@ -1550,6 +1550,27 @@ dialog.dlg{border-radius:var(--r)}
 .vpath-btn:hover{background:var(--accent-strong)}
 .vp1 .vpath-btn:hover{background:var(--ink)}
 .cal,.slot,.bk-fields input,.mmenu-list a{border-radius:var(--r)}
+.vh{--sun:#C87A53;--sun-up:21rem}
+.vh::before{content:"";position:absolute;z-index:-1;left:50%;bottom:0;width:min(max(62rem,92vw),76rem);aspect-ratio:1;border-radius:50%;background:var(--sun);
+  transform:translate(-50%,calc(100% - var(--sun-up)));animation:vh-rise 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes vh-rise{from{transform:translate(-50%,calc(100% - var(--sun-up) + 7rem))}}
+.vh-mark{position:relative;display:inline-block}
+.vh-stroke{position:absolute;left:-.04em;bottom:-.12em;width:calc(100% + .08em);height:.2em;overflow:visible}
+.vh-stroke path{fill:none;stroke:var(--sun);stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;animation:vh-draw 1.1s .5s ease-out both}
+@keyframes vh-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.vh-head{position:relative;z-index:2}
+.vh-seal{position:absolute;right:clamp(.5rem,4vw,3.5rem);bottom:-3.2rem;display:block;width:7rem;height:7rem;border-radius:50%;transform:rotate(-8deg)}
+.vh-seal:hover{transform:rotate(-8deg) scale(1.06)}
+.vh-seal:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.vh-seal svg{display:block;width:100%;height:100%}
+.vh-seal circle{fill:var(--accent-strong)}
+.vh-seal text{font:600 9.6px "Hanken Grotesk",sans-serif;letter-spacing:.09em;fill:var(--raised)}
+.vh-seal-t{transform-origin:60px 60px;animation:vh-turn 22s linear infinite}
+.vh-seal-a{fill:none;stroke:#E8A583;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+@keyframes vh-turn{to{transform:rotate(360deg)}}
+@media (max-width:1000px){.vh-seal{width:5.6rem;height:5.6rem;bottom:-2.6rem;right:1rem}}
+@media (max-width:760px){.vh{--sun-up:15.5rem;margin-bottom:.8rem}.vh::before{width:max(44rem,190vw)}.vh-seal{position:relative;bottom:auto;right:auto;margin:.2rem 0 -1.3rem;width:5.4rem;height:5.4rem;order:9}}
+@media (prefers-reduced-motion:reduce){.vh::before,.vh-stroke path,.vh-seal-t{animation:none}}
 
 
 </style>
@@ -1594,7 +1615,8 @@ dialog.dlg{border-radius:var(--r)}
 <!-- ============ GALVENE ============ -->
 <header class="hero vh" id="sakums" data-pg="sakums">
   <div class="wrap vh-head">
-    <h1>Automatizācija,<br><span class="vh-accent">kurai vari uzticēties.</span></h1>
+    <a class="vh-seal" href="#rezervacija" aria-label="Izvēlēties laiku"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="59"/><g class="vh-seal-t"><path id="vhRing" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" fill="none"/><text><textPath href="#vhRing">PIRMĀ SARUNA BEZ MAKSAS  ·  15 MINŪTES  ·  </textPath></text></g><path class="vh-seal-a" d="M60 42v35m-13-13 13 13 13-13"/></svg></a>
+    <h1>Automatizācija,<br><span class="vh-accent">kurai vari <span class="vh-mark">uzticēties.<svg class="vh-stroke" viewBox="0 0 300 16" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 11C52 5 101 4 150 6s96 3 147-1"/></svg></span></span></h1>
     <p class="vh-lead">Pielāgotas sistēmas rēķiniem, <span class="vnw">e-pastiem</span> un zvaniem.</p>
   </div>
   <div class="wrap">
