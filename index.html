@@ -1370,12 +1370,12 @@ a,button,.btn,.vb2,.vpath-btn{transition:color .4s ease,background-color .4s eas
 .vabout{background:var(--recessed);padding-block:0}
 .vabout>.wrap{padding-block:var(--v-sect)}
 .vabout .vh2,.vabout .vsub{text-align:center;margin-inline:auto}
-.vpeople{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto 1fr;gap:clamp(1.5rem,3vw,2.4rem) clamp(2rem,6vw,5rem);margin-top:clamp(2rem,5vh,3rem)}
-.vportrait{grid-row:1/span 2;margin:0}
-.vportrait img{display:block;width:100%;height:auto;border-radius:var(--r)}
-.vportrait figcaption{margin-top:.55rem;font-size:var(--fs-small);color:var(--muted)}
-@media (max-width:760px){.vpeople{grid-template-columns:minmax(0,1fr);grid-template-rows:none}.vportrait{grid-row:auto;max-width:28rem}.vportrait figcaption{display:none}}
+.vpeople{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,5vw,4rem);margin-top:clamp(2rem,5vh,3rem)}
+@media (max-width:760px){.vpeople{grid-template-columns:minmax(0,1fr)}}
 .vperson{position:relative;border-top:1px solid var(--hair);padding-top:1.3rem;display:grid;gap:.4rem;align-content:start}
+.vperson-top{display:flex;align-items:center;gap:.9rem}
+.vperson-name{display:grid;gap:.4rem;min-width:0}
+.vavatar{width:4.5rem;height:4.5rem;border-radius:50%;object-fit:cover;flex:none}
 .vperson h3{font-size:var(--fs-h3)}
 .vrole{justify-self:start;display:inline-flex;align-items:center;gap:.5rem;font-size:var(--fs-small);color:var(--muted)}
 .vrole svg{width:1.05rem;height:1.05rem;color:#4A5D4E;flex:none}
@@ -1695,13 +1695,14 @@ dialog.dlg{border-radius:var(--r)}
     <h2 id="h-par" class="vh2">Kas aiz tā stāv</h2>
     <p class="vsub">Ar Jums runā tie, kas sistēmu būvē.</p>
     <div class="vpeople">
-      <figure class="vportrait">
-        <img src="arturs-640.webp" srcset="arturs-480.webp 480w, arturs-640.webp 640w" sizes="(max-width:760px) min(92vw,28rem), 400px" width="640" height="800" loading="lazy" decoding="async" alt="Arturs smaidot sēž uz akmens kāpņu malas parkā">
-        <figcaption>Arturs</figcaption>
-      </figure>
       <div class="vperson">
-        <h3>Arturs</h3>
-        <span class="vrole"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Sarunas un sistēmas</span>
+        <div class="vperson-top">
+          <img class="vavatar" src="arturs-216.webp" width="72" height="72" loading="lazy" decoding="async" alt="Artura portrets">
+          <div class="vperson-name">
+            <h3>Arturs</h3>
+            <span class="vrole"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Sarunas un sistēmas</span>
+          </div>
+        </div>
         <p>Ja vakaros Jūs vēl sēžat pie rēķiniem, mēs sapratīsimies no pusvārda. Sarunu es vienmēr sāku ar klausīšanos, nevis ar piedāvājumu.</p>
         <div class="vacts"><a class="vb2" href="mailto:arturs@artefycraft.com">Uzrakstīt Arturam</a><a class="vb2" href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp</a></div>
       </div>
