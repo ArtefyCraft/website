@@ -1593,6 +1593,11 @@ dialog.dlg{border-radius:var(--r)}
 
 .vh{background:#2E3B32}
 .vh-say{text-align:left;justify-items:start}
+.vh{padding-bottom:clamp(4rem,10vh,6.5rem)}
+.vh-go{margin-top:2rem}
+.vh-btn{display:inline-block;padding:.85rem 1.4rem;border-radius:var(--r-btn);background:#F4F1EA;color:#242422;font-weight:600;text-decoration:none}
+.vh-btn:hover{background:#FFFFFF}
+.vh-btn:focus-visible{outline:2px solid #E5B44A;outline-offset:3px}
 .vh-line{margin:0;font-family:"Newsreader",Georgia,"Times New Roman",serif;font-size:clamp(2.5rem,1rem + 4.9vw,5rem);line-height:1.04;letter-spacing:-.03em;color:#F4F1EA;max-width:15.5em;text-wrap:balance}
 .vh-line em{font-style:italic;color:#E5B44A}
 .vh-say h1{font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:var(--fs-lead);line-height:1.4;letter-spacing:0;font-weight:500;color:#C9CFC4;margin:1.3rem 0 0}
@@ -1651,13 +1656,7 @@ dialog.dlg{border-radius:var(--r)}
     <p class="vh-line">Ja <em>vakaros</em> Jūs vēl sēžat pie rēķiniem, mēs sapratīsimies no pusvārda.</p>
     <h1>Automatizācija, <span class="vh-accent">kurai vari uzticēties.</span></h1>
   </div>
-  <div class="wrap">
-    <ul class="vpaths">
-      <li class="vpath vp1"><b>15 minūšu saruna</b><span class="vh-note">Pirmā saruna bez maksas.</span><a class="vpath-btn" href="#rezervacija">Izvēlēties laiku</a></li>
-      <li class="vpath vp2"><b>Ko darām</b><span>Rēķini, e-pasti, zvani un citi darbi.</span><a class="vpath-btn" href="#ko-daram">Apskatīt</a></li>
-      <li class="vpath vp3"><b>Rakstiet mums</b><span><a class="vpath-mail" href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a></span><a class="vpath-btn" href="https://wa.me/37122000657" target="_blank" rel="noopener">Rakstīt WhatsApp</a></li>
-    </ul>
-  </div>
+  <div class="wrap vh-go"><a class="vh-btn" href="#rezervacija">Izvēlēties laiku</a></div>
 </header>
 <script>
 (function(){
