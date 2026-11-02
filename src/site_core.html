@@ -1472,6 +1472,18 @@ dialog.dlg{border-radius:var(--r)}
 .vp1 .vpath-btn:hover{background:var(--ink)}
 .cal,.slot,.bk-fields input,.mmenu-list a{border-radius:var(--r)}
 
+
+.vh{background:#2E3B32}
+.vh-say{text-align:left;justify-items:start}
+.vh-line{margin:0;font-family:"Newsreader",Georgia,"Times New Roman",serif;font-size:clamp(2.5rem,1rem + 4.9vw,5rem);line-height:1.04;letter-spacing:-.03em;color:#F4F1EA;max-width:15.5em;text-wrap:balance}
+.vh-line em{font-style:italic;color:#E5B44A}
+.vh-say h1{font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:var(--fs-lead);line-height:1.4;letter-spacing:0;font-weight:500;color:#C9CFC4;margin:1.3rem 0 0}
+.vh-say .vh-accent{color:inherit}
+.vh-dark{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+.vh-lamp{position:absolute;left:0;top:0;width:44rem;height:44rem;margin:-22rem 0 0 -22rem;border-radius:50%;background:radial-gradient(closest-side,rgba(229,180,74,.2),rgba(229,180,74,.07) 48%,rgba(229,180,74,0));transform:translate(26vw,16rem);transition:transform .35s ease-out}
+@media (prefers-reduced-motion:reduce){.vh-lamp{transition:none}}
+@media (forced-colors:active){.vh-dark{display:none}}
+
 </style>
 
 <a class="skip" href="#saturs">Pāriet uz saturu</a>
@@ -1508,9 +1520,10 @@ dialog.dlg{border-radius:var(--r)}
 
 <!-- ============ GALVENE ============ -->
 <header class="hero vh" id="sakums" data-pg="sakums">
-  <div class="wrap vh-head">
-    <h1>Automatizācija,<br><span class="vh-accent">kurai vari uzticēties.</span></h1>
-    <p class="vh-lead">Pielāgotas sistēmas rēķiniem, <span class="vnw">e-pastiem</span> un zvaniem.</p>
+  <div class="vh-dark" aria-hidden="true"><div class="vh-lamp"></div></div>
+  <div class="wrap vh-head vh-say">
+    <p class="vh-line">Ja <em>vakaros</em> Jūs vēl sēžat pie rēķiniem, mēs sapratīsimies no pusvārda.</p>
+    <h1>Automatizācija, <span class="vh-accent">kurai vari uzticēties.</span></h1>
   </div>
   <div class="wrap">
     <ul class="vpaths">
@@ -1520,6 +1533,13 @@ dialog.dlg{border-radius:var(--r)}
     </ul>
   </div>
 </header>
+<script>
+(function(){
+  var h=document.getElementById('sakums'),l=h&&h.querySelector('.vh-lamp');if(!l)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  h.addEventListener('pointermove',function(e){var r=h.getBoundingClientRect();l.style.transform='translate('+Math.round(e.clientX-r.left)+'px,'+Math.round(e.clientY-r.top)+'px)';});
+})();
+</script>
 
 <!-- ============ RĪKI ============ -->
 <section class="vtools" aria-label="Rīki" data-pg="sakums">
@@ -1618,7 +1638,7 @@ dialog.dlg{border-radius:var(--r)}
             <span class="vrole"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Sarunas un sistēmas</span>
           </div>
         </div>
-        <p>Ja vakaros Jūs vēl sēžat pie rēķiniem, mēs sapratīsimies no pusvārda. Sarunu es vienmēr sāku ar klausīšanos, nevis ar piedāvājumu.</p>
+        <p>Sarunu es vienmēr sāku ar klausīšanos, nevis ar piedāvājumu.</p>
         <div class="vacts"><a class="vb2" href="mailto:arturs@artefycraft.com">Uzrakstīt Arturam</a><a class="vb2" href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp</a></div>
       </div>
       <div class="vperson">
