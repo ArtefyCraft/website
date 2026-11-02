@@ -1503,7 +1503,7 @@ dialog.dlg{border-radius:var(--r)}
 @media (max-width:900px){.vdo>.wrap{grid-template-columns:minmax(0,1fr)}.vmenu{grid-column:1;grid-row:auto;margin-top:clamp(1.8rem,4vh,2.4rem)}}
 @media (max-width:560px){.vmenu-t{grid-template-columns:minmax(0,1fr)}.vmenu-t b{font-size:1.25rem}}
 
-.vd-list{list-style:none;margin:clamp(1.8rem,4vh,2.6rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2rem)}
+.vd-list{list-style:none;margin:clamp(1.8rem,4vh,2.6rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2rem)}
 .vd{display:grid;gap:.9rem;grid-template-rows:1fr auto}
 .vd>p{margin:0;color:var(--muted);font-size:var(--fs-small)}
 .vwin{background:var(--raised);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;font-family:Arial,Helvetica,sans-serif;font-size:.875rem;line-height:1.35;color:#2B2926}
@@ -1524,10 +1524,18 @@ dialog.dlg{border-radius:var(--r)}
 .vd-btn{flex:none;background:#4A5D4E;color:#fff;border-radius:6px;padding:.3rem .75rem;font-size:.78rem;font-weight:700}
 .vd-cal{justify-content:flex-start}
 .vd-t{font-weight:700;font-size:1.05rem;color:#4A5D4E}
-@media (min-width:761px){.vd-list{row-gap:.9rem}.vd{grid-row:span 3;grid-template-rows:subgrid}}
-.vd-out>span{white-space:nowrap}
-.vd-try{justify-self:start;background:#4A5D4E;color:#fff;border-radius:6px;padding:.5rem .95rem;font-size:.8rem;font-weight:700;text-decoration:none;line-height:1.2}
-.vd-try:hover{background:var(--accent-strong)}
+@media (min-width:761px) and (max-width:980px){.vd-list{grid-template-columns:minmax(0,1fr);max-width:30rem;margin-inline:auto}}
+.vtry{background:var(--accent-strong)}
+.vtry .vh2{color:var(--raised)}
+.vtry .vsub{color:var(--recessed)}
+.vtry-list{list-style:none;margin:clamp(1.8rem,4vh,2.6rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2rem)}
+.vtry-card{display:grid;gap:.7rem;align-content:start;padding:1.5rem 1.6rem 1.7rem;background:var(--raised);border:1px solid var(--hair);border-radius:var(--r);color:var(--ink);min-width:0}
+.vtry-tag{justify-self:start;font-family:var(--mono);font-size:var(--fs-label);font-weight:500;letter-spacing:.05em;color:var(--accent)}
+.vtry-card h3{font-size:var(--fs-h3);line-height:1.2;margin:0}
+.vtry-card p{margin:0;color:var(--muted);font-size:var(--fs-small)}
+.vtry-btn{justify-self:start;margin-top:.5rem;display:inline-flex;align-items:center;min-height:46px;padding:.65rem 1.3rem;border-radius:var(--r-btn);background:var(--accent);color:var(--on-accent);font-weight:700;font-size:var(--fs-small);text-decoration:none;line-height:1.2}
+.vtry-btn:hover{background:var(--ink)}
+@media (max-width:760px){.vtry-list{grid-template-columns:minmax(0,1fr)}}
 
 .vd-go{position:relative;justify-self:center;width:1px;height:1.7rem;margin:.3rem 0;background:#BFC8BC}
 .vd-go::after{content:"";position:absolute;left:-3px;bottom:0;width:5px;height:5px;border-right:1px solid #BFC8BC;border-bottom:1px solid #BFC8BC;transform:rotate(45deg)}
@@ -1716,17 +1724,27 @@ dialog.dlg{border-radius:var(--r)}
         </div>
         <p>Zvans kļūst par pierakstu kalendārā.</p>
       </li>
-      <li class="vd">
-        <div class="vwin">
-          <div class="vwin-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>QR kods</div>
-          <div class="vwin-b">
-            <div class="vd-in vd-msg"><span class="vd-av" aria-hidden="true">7</span><span><b>Mājas kebabs, ķiploku mērce</b>Apmaksāts telefonā: 6,40 €</span></div>
-            <div class="vd-go" aria-hidden="true"></div>
-            <div class="vd-out vd-row"><span>Virtuve: galds 7</span><span>Gatavs</span><span class="vd-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Pabeigts"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-          </div>
-        </div>
-        <p>Pasūtījums no galda ienāk virtuvē jau apmaksāts.</p>
-        <a class="vd-try" href="/qr-demo/" target="_blank" rel="noopener">Izmēģināt demo</a>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ IZMĒĢINIET ============ -->
+<section class="sect vtry" id="izmeginiet" aria-labelledby="h-try">
+  <div class="wrap">
+    <h2 id="h-try" class="vh2">Izmēģiniet paši</h2>
+    <p class="vsub">Abus var atvērt uzreiz, bez konta.</p>
+    <ul class="vtry-list">
+      <li class="vtry-card">
+        <span class="vtry-tag">Restorāniem</span>
+        <h3>Pasūtīšana no galda</h3>
+        <p>Viesis pasūta un samaksā telefonā, virtuve redz pasūtījumu uzreiz, īpašnieks redz atskaiti. Nauda netiek ņemta.</p>
+        <a class="vtry-btn" href="/qr-demo/" target="_blank" rel="noopener">Izmēģināt demo</a>
+      </li>
+      <li class="vtry-card">
+        <span class="vtry-tag">Grāmatvedībai</span>
+        <h3>Čeki un rēķini tabulā</h3>
+        <p>Ekrāns, kurā darbinieks augšupielādē čeku vai rēķinu, PDF vai foto, un rindas nonāk Google izklājlapā. Demo režīmā failu var izvēlēties, bet tas netiek nosūtīts.</p>
+        <a class="vtry-btn" href="https://app.artefycraft.com/demo" target="_blank" rel="noopener">Atvērt platformas demo</a>
       </li>
     </ul>
   </div>
