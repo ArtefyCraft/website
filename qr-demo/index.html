@@ -348,6 +348,11 @@ body:has(.stage) { background: var(--tile); height: auto; }
 }
 
 .stage-note { font-size: 13px; color: var(--ink-2); }
+.stage-credits { font-size: 11px; color: var(--ink-2); opacity: .75; }
+.stage-credits summary { display: inline; cursor: pointer; list-style: none; }
+.stage-credits summary::-webkit-details-marker { display: none; }
+.stage-credits p { margin-top: 4px; max-width: 74ch; line-height: 1.45; }
+.stage-credits a { color: inherit; }
 </style>
 <main class="stage" data-show="guest">
   <header class="stage-head">
@@ -364,6 +369,7 @@ body:has(.stage) { background: var(--tile); height: auto; }
   </div>
   <section class="stage-owner pane-owner" aria-label="Atskaite īpašniekam"><div class="stage-label">Atskaite īpašniekam. Piemēra dati.</div><div id="owner-screen"></div></section>
   <p class="stage-note">Demo piezīme: nosaukums, dizains, ēdienkarte, cenas un foto šeit ir izdomāts paraugs. Īstajā sistēmā būs jūsu ēdienkarte, jūsu cenas un jūsu izskats.</p>
+  <details class="stage-credits"><summary>Foto</summary><p>Wikimedia Commons: Triplec85 (<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>), Bahnfrend (<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>), Geoff Peters (<a href="https://creativecommons.org/licenses/by/2.0/" rel="license">CC BY 2.0</a>); pārējie CC0 vai publiskais īpašums. Attēli apgriezti un samazināti.</p></details>
 </main>
 <script>
 globalThis.DEMO_MENU = {
