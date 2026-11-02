@@ -1472,6 +1472,11 @@ dialog.dlg{border-radius:var(--r)}
 .vp1 .vpath-btn:hover{background:var(--ink)}
 .cal,.slot,.bk-fields input,.mmenu-list a{border-radius:var(--r)}
 
+
+.vh-threads{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
+@media (forced-colors:active){.vh-threads{display:none}}
+@media print{.vh-threads{display:none}}
+
 </style>
 
 <a class="skip" href="#saturs">Pāriet uz saturu</a>
@@ -1508,6 +1513,7 @@ dialog.dlg{border-radius:var(--r)}
 
 <!-- ============ GALVENE ============ -->
 <header class="hero vh" id="sakums" data-pg="sakums">
+  <canvas class="vh-threads" aria-hidden="true"></canvas>
   <div class="wrap vh-head">
     <h1>Automatizācija,<br><span class="vh-accent">kurai vari uzticēties.</span></h1>
     <p class="vh-lead">Pielāgotas sistēmas rēķiniem, <span class="vnw">e-pastiem</span> un zvaniem.</p>
@@ -1520,6 +1526,49 @@ dialog.dlg{border-radius:var(--r)}
     </ul>
   </div>
 </header>
+<script>
+(function(){
+  var h=document.getElementById('sakums'),c=h&&h.querySelector('.vh-threads');if(!c||!c.getContext)return;
+  var g=c.getContext('2d'),still=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var COL=['#EA4B71','#34A853','#3776AB','#D97757','#3FCF8E','#FA520F','#242422','#EA4335'],lines=[],s=20261102;
+  var rnd=function(){s=(s*16807)%2147483647;return s/2147483647;};
+  var ease=function(v){v=v<0?0:v>1?1:v;return v*v*v*(v*(6*v-15)+10);};
+  var W=0,H=0,D=1,A=0,B=0,T=0,cy=0,neck=0,seen=true,raf=0,t=0,last=0,mx=-999,my=-999,tx=-999,ty=-999,on=0,want=0,n=0,odd=false,lay=null,laid=false;
+  var build=function(){var phone=W<=760,per=phone?4:6;s=20261102;lines=[];n=COL.length*per;
+    for(var i=0;i<n;i++){var u=(i+.5)/n;lines.push({u:u,col:COL[Math.floor(i/per)],l:rnd(),a:18+rnd()*34,k:.0035+rnd()*.0055,p:rnd()*6.28,w:.1+rnd()*.14,k2:.008+rnd()*.008,p2:rnd()*6.28,d:rnd(),v:.035+rnd()*.03});}};
+  var size=function(){var r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2),q=h.querySelector('.vpaths').getBoundingClientRect(),tl=h.querySelector('h1'),rg=document.createRange();
+    rg.selectNodeContents(tl);var tb=rg.getBoundingClientRect(),lead=h.querySelector('.vh-lead').getBoundingClientRect();
+    var w0=W,cw=Math.round(r.width*d),ch=Math.round(r.height*d);W=r.width;H=r.height;D=d;if(c.width!==cw)c.width=cw;if(c.height!==ch)c.height=ch;
+    A=Math.max(tb.left-r.left-24,W*.16);B=Math.min(tb.right-r.left+24,W*.84);
+    if(A>W*.34)A=W*.34;if(B<W*.66)B=W*.66;
+    var low=lead.bottom-r.top+18;T=W<=1000?low:H*.13;if(W<=760){A=B=W*.5;}cy=(q.top+q.bottom)/2-r.top;neck=Math.min(q.height,H*.3)*.56;
+    laid=false;if(W!==w0)build();};
+  var yAt=function(L,x){var yr=T+(H*.97-T)*L.u,yw=W<=760?yr:cy+(L.u-.5)*neck,y;
+    if(x<A){var e=ease(x/A),lo=T+L.a+(H*.97-T-L.a*2)*L.l,wob=(1-e)*(L.a*Math.sin(x*L.k+L.p+t*L.w)+L.a*.5*Math.sin(x*L.k2+L.p2-t*L.w*.7));y=lo+wob+(yw-lo)*e;}
+    else if(x>B){var f=ease((x-B)/(W-B));y=yw+(yr-yw)*f;}
+    else y=yw;
+    if(on>.004){var dx=x-mx,dy=y-my,fall=Math.exp(-(dx*dx+dy*dy)/24000);y+=on*fall*42*dy/(Math.abs(dy)+26);}
+    return y;};
+  var paint=function(p){p.lineWidth=1;p.lineJoin='round';var i,x,L,st=W<=760?10:12;
+    for(i=0;i<lines.length;i++){L=lines[i];p.strokeStyle=L.col;p.globalAlpha=(L.col==='#242422'?.3:.5)*(W<=760?1.5:1);p.beginPath();p.moveTo(0,yAt(L,0));for(x=st;x<W;x+=st)p.lineTo(x,yAt(L,x));p.lineTo(W,yAt(L,W));p.stroke();}};
+  var draw=function(){var i,L,lite=W<=760&&!fine;g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,c.width,c.height);
+    if(lite){if(!laid){lay=lay||document.createElement('canvas');lay.width=c.width;lay.height=c.height;var p=lay.getContext('2d');p.setTransform(D,0,0,D,0,0);paint(p);laid=true;}g.globalAlpha=1;g.drawImage(lay,0,0);}
+    g.setTransform(D,0,0,D,0,0);if(!lite)paint(g);
+    g.globalAlpha=.95;
+    for(i=0;i<lines.length;i++){L=lines[i];var dx=((L.d+t*L.v)%1)*W,dy=yAt(L,dx);g.fillStyle=L.col;g.beginPath();g.arc(dx,dy,W<=760?2.4:1.9,0,6.29);g.fill();}
+    g.globalAlpha=1;};
+  var frame=function(now){raf=0;if(!seen||document.hidden){last=0;return;}odd=!odd;if(odd&&W<=760){raf=requestAnimationFrame(frame);return;}var dt=last?Math.min(.05,(now-last)/1000):.016,k=1-Math.pow(.86,dt*60);last=now;t+=dt;
+    mx+=(tx-mx)*k;my+=(ty-my)*k;on+=(want-on)*k;draw();raf=requestAnimationFrame(frame);};
+  var go=function(){if(!still&&!raf)raf=requestAnimationFrame(frame);};
+  var redo=function(){size();if(still)draw();go();};
+  if(!still&&fine){h.addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;var r=c.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;if(!want){mx=tx;my=ty;}want=1;});
+    h.addEventListener('pointerleave',function(){want=0;});}
+  addEventListener('resize',redo);document.addEventListener('visibilitychange',go);
+  if(!still&&'IntersectionObserver' in window){new IntersectionObserver(function(es){seen=es[es.length-1].isIntersecting;go();}).observe(c);}
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redo);
+  redo();if(still)draw();
+})();
+</script>
 
 <!-- ============ RĪKI ============ -->
 <section class="vtools" aria-label="Rīki" data-pg="sakums">
