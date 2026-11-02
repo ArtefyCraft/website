@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-eTvQiGuQe5tld0wlzIi+o6ZfOyvluIXH8dFNH6rQhA4=' 'sha256-9ykpq46G7w0iMsaaDzU7poaSiYXpcgGLjfAx9XYKcCo=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60='; style-src 'unsafe-inline'; img-src 'self' data:; font-src data:; media-src data:; connect-src https://formsubmit.co; form-action https://formsubmit.co; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-9ykpq46G7w0iMsaaDzU7poaSiYXpcgGLjfAx9XYKcCo=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60='; style-src 'unsafe-inline'; img-src 'self' data:; font-src data:; media-src data:; connect-src https://formsubmit.co; form-action https://formsubmit.co; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ArtefyCraft: biznesa procesu automatizācija un AI Latvijā</title>
@@ -1550,37 +1550,31 @@ dialog.dlg{border-radius:var(--r)}
 .vpath-btn:hover{background:var(--accent-strong)}
 .vp1 .vpath-btn:hover{background:var(--ink)}
 .cal,.slot,.bk-fields input,.mmenu-list a{border-radius:var(--r)}
-.vh{--x:max(var(--pad),calc(50cqw - var(--w)/2 + var(--pad)));padding:0;overflow:clip;container-type:inline-size}
-.vh-scene{position:relative;aspect-ratio:16/9;width:100%;overflow:hidden}
-.vh-scene picture{display:contents}
-.vh-scene img,.vh-rays{position:absolute;inset:0;width:100%;height:100%}
-.vh-scene img{object-fit:cover;object-position:50% 50%}
-.vh-bg{z-index:0;transform:translate3d(calc(var(--px,0)*-16px),calc(var(--py,0)*-9px),0) scale(1.05)}
-.vh-rays{z-index:0;transform:translate3d(calc(var(--px,0)*-16px),calc(var(--py,0)*-9px),0) scale(1.05)}
-.vh-fg{z-index:2;transform:translate3d(calc(var(--px,0)*-16px),calc(var(--py,0)*-9px),0) scale(1.05)}
-.vh .vh-head{position:absolute;z-index:auto;left:0;right:0;top:0;max-width:none;padding:0;display:block;text-align:left}
-.vh .vh-head h1{margin:0;font:inherit;letter-spacing:0;color:#fff}
-.vh-word{position:absolute;z-index:1;left:0;right:0;top:23.9cqw;text-align:center;font:500 12.5cqw/1 "Hanken Grotesk",sans-serif;letter-spacing:-.045em;text-transform:uppercase;white-space:nowrap;text-shadow:0 2px 26px rgba(2,12,20,.4);transform:translate3d(calc(var(--px,0)*9px),calc(var(--py,0)*5px),0)}
-.vh-comma{font-size:0}
-.vh .vh-accent{position:absolute;z-index:3;left:var(--x);top:36.2cqw;font:400 clamp(1.5rem,2.5cqw,2.5rem)/1.15 "Newsreader",Georgia,serif;color:#fff;letter-spacing:-.01em}
-.vh .vh-lead{position:absolute;z-index:3;left:var(--x);top:calc(36.2cqw + clamp(2.1rem,3.3cqw,3.1rem));margin:0;max-width:17em;color:#E8F0F2;font-size:var(--fs-lead)}
-.vh .vh-accent,.vh .vh-lead{text-shadow:0 1px 3px rgba(2,12,20,.85),0 0 16px rgba(2,12,20,.75)}
-.vh .wrap:last-child{position:relative;z-index:3}
-.vh .vpaths{margin-top:-4.6rem;padding-bottom:clamp(1.5rem,4vh,3rem)}
-@media (max-width:1000px){
-  .vh .vh-head{position:static;text-align:center;padding:1.4rem 1rem 0}
-  .vh .vh-head h1{position:static}
-  .vh .vh-accent{position:static;display:block;font-size:1.65rem;color:var(--ink);text-shadow:none}
-  .vh .vh-lead{position:static;margin-top:.5rem;max-width:none;color:var(--muted);text-shadow:none;font-size:1.02rem}
-  .vh .vpaths{margin-top:1.4rem}
-}
-@media (max-width:760px){
-  .vh-scene{aspect-ratio:4/5}
-  .vh-word{top:48cqw;font-size:17.6cqw;line-height:.95;white-space:normal}
-  .vh-w1,.vh-w2{display:block}
-  .vh-w1::after{content:"-"}
-}
-@media (prefers-reduced-motion:reduce){.vh-rays{display:none}}
+.vh-grid{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.vh .vh-head{text-align:left;justify-items:start}
+.vh .vh-head h1{font-size:clamp(2.5rem,1rem + 3.9vw,4.1rem)}
+.vh .vh-lead{margin-bottom:0}
+.vhd{position:relative;padding:clamp(1.2rem,2.6vw,1.9rem) clamp(1.1rem,2.6vw,1.9rem) 2.5rem;border-radius:var(--r);background:var(--accent-strong);font-size:.9rem;line-height:1.35}
+.vhd-sheet{position:relative;overflow:hidden;padding:1.05rem 1.2rem .9rem;border-radius:4px;background:var(--raised);color:var(--ink);transform:rotate(-1.3deg);box-shadow:0 14px 28px -22px rgba(36,36,34,.4)}
+.vhd-top,.vhd-l{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.vhd-top b{font:400 1.3rem/1.2 "Newsreader",Georgia,serif}
+.vhd-from{margin:.35rem 0 .7rem;color:var(--muted)}
+.vhd-l{padding:.3rem 0;border-top:1px solid var(--hair-soft)}
+.vhd-t{font-weight:600}
+.vhd-m{padding:0 .22em;border-radius:2px;background-color:#F2D479;color:var(--ink);animation:vhd-mark 7.5s linear infinite both}
+.vhd-m1{animation-delay:.7s}.vhd-m2{animation-delay:1.2s}.vhd-m3{animation-delay:2s}
+.vhd-scan{position:absolute;left:0;right:0;top:100%;height:2px;background:var(--accent);opacity:0;animation:vhd-scan 7.5s linear infinite}
+.vhd-table{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:.35rem .95rem;margin:-.5rem -.5rem 0 1.2rem;padding:.75rem .9rem;border-radius:4px;background:var(--raised);color:var(--muted);font-size:.8rem;transform:rotate(.9deg);box-shadow:0 14px 28px -22px rgba(36,36,34,.4)}
+.vhd-c{font-weight:600;color:var(--ink);white-space:nowrap;animation:vhd-on 7.5s linear infinite both}
+.vhd-c1{animation-delay:2.7s}.vhd-c2{animation-delay:3.1s}.vhd-c3{animation-delay:3.5s}.vhd-c4{animation-delay:4s}
+.vhd-ok{color:var(--accent-text)}
+.vhd-note{position:absolute;left:clamp(1.1rem,2.6vw,1.9rem);bottom:.75rem;margin:0;font-size:.78rem;color:var(--recessed)}
+@keyframes vhd-mark{0%{background-color:transparent}4%,82%{background-color:#F2D479}90%,100%{background-color:transparent}}
+@keyframes vhd-scan{0%{top:0;opacity:0}3%{opacity:1}30%{top:100%;opacity:1}32%,100%{top:100%;opacity:0}}
+@keyframes vhd-on{0%{opacity:0;transform:translateY(4px)}4%,78%{opacity:1;transform:none}86%,100%{opacity:0}}
+@media (max-width:900px){.vh-grid{grid-template-columns:minmax(0,1fr);gap:1.8rem}.vh .vh-head{text-align:center;justify-items:center}.vhd{justify-self:center;width:100%;max-width:32rem}}
+@media (max-width:400px){.vhd-table{gap:.3rem .6rem;margin-left:.3rem;margin-right:-.3rem;font-size:.74rem;padding:.65rem .7rem}}
+@media (prefers-reduced-motion:reduce){.vhd-m,.vhd-c,.vhd-scan{animation:none}}
 
 
 </style>
@@ -1624,14 +1618,26 @@ dialog.dlg{border-radius:var(--r)}
 
 <!-- ============ GALVENE ============ -->
 <header class="hero vh" id="sakums" data-pg="sakums">
-  <div class="vh-scene" aria-hidden="true">
-    <picture><source media="(max-width:760px)" srcset="hero-m.webp"><source srcset="hero-1280.webp 1280w, hero-1920.webp 1920w" sizes="100vw"><img class="vh-bg" src="hero-1920.webp" width="1920" height="1080" alt="" fetchpriority="high"></picture>
-    <canvas class="vh-rays"></canvas>
-    <picture><source media="(max-width:760px)" srcset="hero-m-fg.webp"><source srcset="hero-1280-fg.webp 1280w, hero-1920-fg.webp 1920w" sizes="100vw"><img class="vh-fg" src="hero-1920-fg.webp" width="1920" height="1080" alt=""></picture>
-  </div><!--/scene-->
-  <div class="wrap vh-head">
-    <h1 aria-label="Automatizācija, kurai vari uzticēties."><span class="vh-word"><span class="vh-w1">Automati</span><span class="vh-w2">zācija<span class="vh-comma">,</span></span></span> <span class="vh-accent">kurai vari uzticēties.</span></h1>
+  <div class="wrap vh-grid">
+    <div class="vh-head">
+    <h1>Automatizācija,<br><span class="vh-accent">kurai vari uzticēties.</span></h1>
     <p class="vh-lead">Pielāgotas sistēmas rēķiniem, <span class="vnw">e-pastiem</span> un zvaniem.</p>
+    </div>
+    <div class="vhd" aria-hidden="true">
+      <div class="vhd-sheet">
+        <i class="vhd-scan"></i>
+        <div class="vhd-top"><b>Rēķins Nr. 2411</b><span class="vhd-m vhd-m1">12.10.2026</span></div>
+        <div class="vhd-from"><span class="vhd-m vhd-m2">SIA "Kadiķkalnu Būve"</span></div>
+        <div class="vhd-l"><span>Būvmateriāli</span><span>1 190,00 €</span></div>
+        <div class="vhd-l"><span>PVN 21 %</span><span>249,90 €</span></div>
+        <div class="vhd-l vhd-t"><span>Kopā</span><span class="vhd-m vhd-m3">1 439,90 €</span></div>
+      </div>
+      <div class="vhd-table">
+        <span>Datums</span><span>Pārdevējs</span><span>Kopā</span><span>Statuss</span>
+        <b class="vhd-c vhd-c1">12.10.2026</b><b class="vhd-c vhd-c2">Kadiķkalnu Būve</b><b class="vhd-c vhd-c3">1 439,90 €</b><b class="vhd-c vhd-c4 vhd-ok">OK</b>
+      </div>
+      <p class="vhd-note">Izdomāts piemērs</p>
+    </div><!--/vhd-->
   </div>
   <div class="wrap">
     <ul class="vpaths">
@@ -1641,30 +1647,6 @@ dialog.dlg{border-radius:var(--r)}
     </ul>
   </div>
 </header>
-<script>
-(function(){
-  var h=document.getElementById('sakums'),c=h&&h.querySelector('.vh-rays');if(!c||!c.getContext)return;
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var fine=matchMedia('(hover:hover) and (pointer:fine)').matches,last=0,g=c.getContext('2d'),phone=function(){return innerWidth<=760;},W=0,H=0,ox=0,oy=0,t=0,x=0,y=0,tx=0,ty=0,seen=true,raf=0,rays=[],s=7;
-  var rnd=function(){s=(s*16807)%2147483647;return s/2147483647;};
-  for(var i=0;i<150;i++){rays.push({a:-Math.PI*(.03+.94*rnd()),l:.3+.7*Math.pow(rnd(),1.4),p:rnd()*6.28,w:.25+rnd()*.5,warm:rnd()<.26,o:.16+rnd()*.42});}
-  var size=function(){var r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5);if(r.width===W&&r.height===H)return;W=r.width;H=r.height;c.width=W*d;c.height=H*d;g.setTransform(d,0,0,d,0,0);ox=W*(phone()?.459:.475);oy=H*(phone()?.615:.628);};
-  var frame=function(now){raf=0;if(!seen||document.hidden){last=0;return;}var dt=last?Math.min(.05,(now-last)/1000):.016,k=1-Math.pow(.93,dt*60);last=now;t+=dt;x+=(tx-x)*k;y+=(ty-y)*k;
-    h.style.setProperty('--px',x.toFixed(3));h.style.setProperty('--py',y.toFixed(3));
-    g.clearRect(0,0,W,H);g.lineCap='round';var reach=Math.max(H*.72,W*.42);
-    for(var i=0;i<rays.length;i++){var r=rays[i],a=r.a+Math.sin(t*r.w+r.p)*.018+x*.42*Math.sin(r.a),l=reach*r.l*(1+.05*Math.sin(t*r.w*1.4+r.p)-y*.16),cx=Math.cos(a),cy=Math.sin(a),
-      ex=ox+cx*l,ey=oy+cy*l,col=r.warm?'243,196,138':'205,236,245';
-      g.strokeStyle='rgba('+col+','+r.o.toFixed(2)+')';g.lineWidth=.8;g.beginPath();g.moveTo(ox+cx*l*.14,oy+cy*l*.14);g.lineTo(ex,ey);g.stroke();
-      g.fillStyle='rgba('+col+','+Math.min(1,r.o*2).toFixed(2)+')';g.beginPath();g.arc(ex,ey,1.5,0,6.29);g.fill();}
-    if(fine){raf=requestAnimationFrame(frame);}};
-  var go=function(){if(!raf)raf=requestAnimationFrame(frame);};
-  h.addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;var r=h.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-.5;ty=(e.clientY-r.top)/r.height-.5;});
-  h.addEventListener('pointerleave',function(){tx=ty=0;});
-  addEventListener('resize',function(){size();go();});document.addEventListener('visibilitychange',go);
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es){seen=es[0].isIntersecting;go();}).observe(c);}
-  size();go();
-})();
-</script>
 
 <!-- ============ RĪKI ============ -->
 <section class="vtools" aria-label="Rīki" data-pg="sakums">
@@ -1886,7 +1868,7 @@ dialog.dlg{border-radius:var(--r)}
       <div><p class="vfoot-h">Kontakti</p><a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a><a href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp +371 22 000 657</a></div>
     </div>
     <p class="privacy">Šajā lapā nav sīkdatņu un izsekošanas. Pieteikuma forma nosūta tikai Jūsu ierakstīto (vārdu, kontaktu, izvēlēto laiku) uz mūsu e-pastu ar FormSubmit starpnieka palīdzību; šos datus lietojam vienīgi, lai atbildētu. © 2026 SIA ArtefyCraft. Visas tiesības aizsargātas.</p>
-    <p class="vcredit">Foto: Eric Kilby, <a href="https://commons.wikimedia.org/wiki/File:Blue_Ice_Cave_-_Flickr_-_Eric_Kilby.jpg" rel="noopener" target="_blank">Blue Ice Cave</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener" target="_blank">CC BY-SA 2.0</a>, apgriezts un sadalīts slāņos. Rīku logo: <a href="https://simpleicons.org" rel="noopener" target="_blank">Simple Icons</a> (CC0), preču zīmes pieder to īpašniekiem. Ikonas: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (ISC licence).</p>
+    <p class="vcredit">Rīku logo: <a href="https://simpleicons.org" rel="noopener" target="_blank">Simple Icons</a> (CC0), preču zīmes pieder to īpašniekiem. Ikonas: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (ISC licence).</p>
   </div>
 </footer>
 
