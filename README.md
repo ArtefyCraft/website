@@ -14,4 +14,4 @@ all other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
 ## Demo lapa /qr-demo/ (2026-11-02)
 
-Pasūtīšanas no galda demo, uz ko ved mājaslapas josla Izmēģiniet paši; bez indeksēšanas (noindex). Foto no Wikimedia Commons: Triplec85 (CC BY-SA 4.0), Bahnfrend (CC BY-SA 4.0), Geoff Peters (CC BY 2.0), pārējie CC0 vai publiskais īpašums; attēli apgriezti un samazināti. Licences: https://creativecommons.org/licenses/by-sa/4.0/ un https://creativecommons.org/licenses/by/2.0/ . Fonti Bitter un Onest (SIL OFL 1.1) iegulti lapā.
+Demo "Galda kods" (pasūtīšana ar QR kodu), uz ko ved sākumlapas kartīte un tās QR kods; bez indeksēšanas (noindex). Foto no Wikimedia Commons: Triplec85 (CC BY-SA 4.0), Bahnfrend (CC BY-SA 4.0), Geoff Peters (CC BY 2.0), pārējie CC0 vai publiskais īpašums; attēli apgriezti un samazināti. Licences: https://creativecommons.org/licenses/by-sa/4.0/ un https://creativecommons.org/licenses/by/2.0/ . Fonti Bitter un Onest (SIL OFL 1.1) iegulti lapā.
