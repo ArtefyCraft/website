@@ -1,7 +1,7 @@
 # ArtefyCraft majaslapa
 
 Lapa: index.html un Artura portrets (arturs-216.webp). Hosting: GitHub Pages (artefycraft.com).
-Fonti: Hanken Grotesk, IBM Plex Mono un virsrakstiem Newsreader (Production Type, SIL OFL 1.1, iegulti; https://github.com/productiontype/Newsreader).
+Fonti: Hanken Grotesk, IBM Plex Mono un virsrakstiem Newsreader (Production Type, SIL OFL 1.1, faili mapē fonti/, licence fonti/OFL.txt; https://github.com/productiontype/Newsreader).
 
 Vienīgā fotogrāfija lapā ir Artura mazais portrets (kopš v59); tā izmantošana citur nav atļauta.
 
