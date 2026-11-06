@@ -1452,9 +1452,7 @@ dialog.dlg{border-radius:var(--r)}
 @media (hover:hover) and (pointer:fine){.vdemo:hover{transform:translateY(-4px);box-shadow:0 30px 60px -26px rgba(31,38,34,.85)}.vdemo:hover .vdemo-qr-box{transform:scale(1.05)}.vdemo-btn:hover{background:#F2C766;transform:translateY(-1px)}}
 .vdemo-btn:focus-visible{outline-color:#F4F1EA}
 .vdemo-btn:active{transform:scale(.97)}
-@media (max-width:560px),(hover:none){.vdemo-hint{display:none}}
 .vdemo-t{padding:1.7rem 1.6rem;display:grid;gap:.65rem;align-content:center}
-.vdemo-k{font-family:var(--mono);font-size:var(--fs-label);color:#E5B44A;letter-spacing:.04em}
 .vdemo h3{font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(1.55rem,1.1rem + 1.1vw,2rem);line-height:1.08;margin:0;letter-spacing:-.012em;color:#F4F1EA}
 .vdemo p{margin:0;color:#C9D0C4;font-size:var(--fs-small)}
 .vdemo-btn{justify-self:start;margin-top:.5rem;background:#E5B44A;color:#1F2622;padding:.7rem 1.2rem;border-radius:var(--r-btn);font-weight:700;font-size:var(--fs-small);text-decoration:none;transition:background .3s ease,transform .3s ease}
@@ -1462,22 +1460,20 @@ dialog.dlg{border-radius:var(--r)}
 .vdemo-code{background:radial-gradient(circle at 50% 42%,rgba(229,180,74,.42) 0%,rgba(229,180,74,.16) 38%,transparent 66%)}
 .vdemo-qr-box{width:min(100%,176px);aspect-ratio:1;background:#fff;border-radius:12px;padding:10px;box-shadow:0 18px 40px -16px rgba(0,0,0,.7);transition:transform .45s ease}
 .vdemo-qr-box svg{display:block;width:100%;height:100%}
-.vdemo-hint{font-family:var(--mono);font-size:.72rem;color:#C9D0C4;text-align:center;max-width:16rem;line-height:1.35}
 .vdemo-film{min-height:230px}
 .vf-phone{position:absolute;left:50%;top:10%;width:72px;height:118px;margin-left:-36px;border:2px solid rgba(244,241,234,.55);border-radius:14px}
 .vf-phone i{position:absolute;left:50%;top:6px;width:18px;height:3px;margin-left:-9px;border-radius:2px;background:rgba(244,241,234,.5)}
 .vf-receipt{position:absolute;left:50%;top:21%;width:46px;height:60px;margin-left:-23px;background:#FDFBF7;border-radius:5px;padding:7px 6px;display:grid;gap:4px;align-content:start;box-shadow:0 8px 20px rgba(0,0,0,.4);animation:vf-receipt 7s ease-in-out infinite}
 .vf-receipt i{display:block;height:3px;border-radius:2px;background:#DDD8CF}.vf-receipt i:nth-child(2){width:70%}.vf-receipt i:nth-child(3){width:85%}
 .vf-receipt b{font-size:.6rem;color:#242422;justify-self:end;margin-top:2px}
-.vf-label{position:absolute;left:10%;bottom:30%;font-family:var(--mono);font-size:.7rem;color:#E5B44A;letter-spacing:.04em}
 .vf-row{position:absolute;left:10%;right:10%;bottom:11%;background:#FDFBF7;border-radius:6px;padding:.55rem .75rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-family:Arial,Helvetica,sans-serif;font-size:.84rem;color:#242422;box-shadow:0 10px 24px rgba(0,0,0,.4);animation:vf-row 7s ease-in-out infinite}
 .vf-row svg{width:1rem;height:1rem;color:#4A5D4E;flex:none}.vf-row span{white-space:nowrap}
-@media (min-width:901px) and (max-width:1100px){.vf-row{left:5%;right:5%;padding:.45rem .55rem;gap:.4rem;font-size:.76rem}.vdemo-k{font-size:.72rem;letter-spacing:.02em}}
+@media (min-width:901px) and (max-width:1100px){.vf-row{left:5%;right:5%;padding:.45rem .55rem;gap:.4rem;font-size:.76rem}}
 @keyframes vf-receipt{0%{transform:scale(.6);opacity:0}12%{transform:scale(1);opacity:1}44%{transform:scale(1) translateY(0);opacity:1}58%{transform:scale(.45) translateY(300%);opacity:0}100%{transform:scale(.45) translateY(300%);opacity:0}}
 @keyframes vf-row{0%,52%{transform:translateY(20px);opacity:0}64%,92%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:0}}
 @media (prefers-reduced-motion:reduce){.vdemo,.vf-receipt,.vf-row{animation:none}.vf-receipt{opacity:0}.vf-row{opacity:1;transform:none}.vdemo,.vdemo-qr-box,.vdemo-btn{transition:none}}
 @media (max-width:900px){.vdemo-list{grid-template-columns:1fr}}
-@media (max-width:560px){.vdemo{grid-template-columns:1fr}.vdemo-f{order:-1;border-radius:10px 10px 0 0;min-height:230px}.vdemo-qr-box{width:min(100%,150px)}.vdemo-k,.vf-label{display:none}}
+@media (max-width:560px){.vdemo{grid-template-columns:1fr}.vdemo-f{order:-1;border-radius:10px 10px 0 0;min-height:230px}.vdemo-qr-box{width:min(100%,150px)}}
 
 .vd-go{position:relative;justify-self:center;width:1px;height:1.7rem;margin:.3rem 0;background:#BFC8BC}
 .vd-go::after{content:"";position:absolute;left:-3px;bottom:0;width:5px;height:5px;border-right:1px solid #BFC8BC;border-bottom:1px solid #BFC8BC;transform:rotate(45deg)}
@@ -1624,18 +1620,16 @@ dialog.dlg{border-radius:var(--r)}
 <section class="sect vexs" id="piemeri" data-pg="piemeri" aria-labelledby="h-piemeri">
   <div class="wrap">
     <h2 id="h-piemeri" class="vh2">Piemēri</h2>
-    <p class="vsub">Dati piemēros ir izdomāti.</p>
     <ul class="vdemo-list">
       <li class="vdemo vdemo-qr">
-        <div class="vdemo-t"><span class="vdemo-k">Galda kods</span><h3>Noskenē un pasūti</h3><p>Klients noskenē kodu uz galda, pasūta un samaksā telefonā. Virtuve redz pasūtījumu uzreiz.</p><a class="vdemo-btn" href="/qr-demo/" target="_blank" rel="noopener" aria-label="Atvērt demo: Galda kods">Atvērt demo</a></div>
-        <div class="vdemo-f vdemo-code"><div class="vdemo-qr-box"><svg role="img" aria-label="QR kods: atver demo telefonā" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" shape-rendering="crispEdges"><path transform="scale(4)" stroke="#1f2622" d="M2 2.5h7m1 0h1m1 0h2m1 0h1m1 0h4m3 0h7m-29 1h1m5 0h1m1 0h1m3 0h3m1 0h1m3 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h3m1 0h4m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m2 0h2m3 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h5m5 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-19 1h1m3 0h1m3 0h2m-19 1h1m4 0h3m4 0h1m1 0h3m3 0h1m5 0h2m-29 1h1m3 0h1m2 0h1m1 0h2m1 0h3m1 0h1m1 0h3m2 0h5m-27 1h1m1 0h1m2 0h1m1 0h2m3 0h2m6 0h3m2 0h1m-25 1h3m3 0h2m2 0h3m4 0h1m2 0h2m1 0h1m-26 1h1m4 0h7m1 0h1m1 0h1m3 0h1m1 0h2m4 0h1m-28 1h2m1 0h3m1 0h1m1 0h5m2 0h1m1 0h3m1 0h1m1 0h2m2 0h1m-29 1h4m2 0h4m1 0h1m1 0h1m2 0h1m3 0h1m1 0h2m-24 1h4m1 0h1m2 0h1m1 0h2m1 0h1m6 0h3m1 0h5m-28 1h1m2 0h1m1 0h1m1 0h5m1 0h2m1 0h1m2 0h2m3 0h3m-28 1h3m7 0h2m1 0h2m3 0h3m1 0h4m2 0h1m-29 1h2m2 0h1m1 0h3m3 0h1m2 0h1m3 0h1m5 0h2m1 0h1m-29 1h1m2 0h1m7 0h1m2 0h3m1 0h1m2 0h2m1 0h1m-25 1h1m2 0h1m1 0h3m2 0h2m1 0h1m2 0h2m2 0h5m1 0h2m-20 1h2m2 0h4m1 0h1m2 0h1m3 0h3m-27 1h7m1 0h1m2 0h2m1 0h3m2 0h2m1 0h1m1 0h1m-25 1h1m5 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h2m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m3 0h3m2 0h2m2 0h6m2 0h2m-29 1h1m1 0h3m1 0h1m7 0h2m1 0h4m2 0h1m1 0h2m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h4m1 0h2m1 0h7m1 0h2m-28 1h1m5 0h1m1 0h6m1 0h1m3 0h1m1 0h1m2 0h3m1 0h1m-29 1h7m2 0h1m3 0h1m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1"/></svg></div><span class="vdemo-hint">Noskenē ar telefonu un izmēģini</span></div>
+        <div class="vdemo-t"><h3>Noskenē un pasūti</h3><p>Klients noskenē kodu uz galda, pasūta un samaksā telefonā. Virtuve redz pasūtījumu uzreiz.</p><a class="vdemo-btn" href="/qr-demo/" target="_blank" rel="noopener" aria-label="Atvērt demo: Galda kods">Atvērt demo</a></div>
+        <div class="vdemo-f vdemo-code"><div class="vdemo-qr-box"><svg role="img" aria-label="QR kods: atver demo telefonā" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" shape-rendering="crispEdges"><path transform="scale(4)" stroke="#1f2622" d="M2 2.5h7m1 0h1m1 0h2m1 0h1m1 0h4m3 0h7m-29 1h1m5 0h1m1 0h1m3 0h3m1 0h1m3 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h3m1 0h4m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m2 0h2m3 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h5m5 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-19 1h1m3 0h1m3 0h2m-19 1h1m4 0h3m4 0h1m1 0h3m3 0h1m5 0h2m-29 1h1m3 0h1m2 0h1m1 0h2m1 0h3m1 0h1m1 0h3m2 0h5m-27 1h1m1 0h1m2 0h1m1 0h2m3 0h2m6 0h3m2 0h1m-25 1h3m3 0h2m2 0h3m4 0h1m2 0h2m1 0h1m-26 1h1m4 0h7m1 0h1m1 0h1m3 0h1m1 0h2m4 0h1m-28 1h2m1 0h3m1 0h1m1 0h5m2 0h1m1 0h3m1 0h1m1 0h2m2 0h1m-29 1h4m2 0h4m1 0h1m1 0h1m2 0h1m3 0h1m1 0h2m-24 1h4m1 0h1m2 0h1m1 0h2m1 0h1m6 0h3m1 0h5m-28 1h1m2 0h1m1 0h1m1 0h5m1 0h2m1 0h1m2 0h2m3 0h3m-28 1h3m7 0h2m1 0h2m3 0h3m1 0h4m2 0h1m-29 1h2m2 0h1m1 0h3m3 0h1m2 0h1m3 0h1m5 0h2m1 0h1m-29 1h1m2 0h1m7 0h1m2 0h3m1 0h1m2 0h2m1 0h1m-25 1h1m2 0h1m1 0h3m2 0h2m1 0h1m2 0h2m2 0h5m1 0h2m-20 1h2m2 0h4m1 0h1m2 0h1m3 0h3m-27 1h7m1 0h1m2 0h2m1 0h3m2 0h2m1 0h1m1 0h1m-25 1h1m5 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h2m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m3 0h3m2 0h2m2 0h6m2 0h2m-29 1h1m1 0h3m1 0h1m7 0h2m1 0h4m2 0h1m1 0h2m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h4m1 0h2m1 0h7m1 0h2m-28 1h1m5 0h1m1 0h6m1 0h1m3 0h1m1 0h1m2 0h3m1 0h1m-29 1h7m2 0h1m3 0h1m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1"/></svg></div></div>
       </li>
       <li class="vdemo vdemo-pl">
-        <div class="vdemo-t"><span class="vdemo-k">ArtefyCraft platforma</span><h3>Čeks kļūst par rindu</h3><p>Darbinieks nofotografē čeku, grāmatvedis redz rindu Google izklājlapā.</p><a class="vdemo-btn" href="https://app.artefycraft.com/demo" target="_blank" rel="noopener" aria-label="Atvērt demo: platforma">Atvērt demo</a></div>
+        <div class="vdemo-t"><h3>Čeks kļūst par rindu</h3><p>Darbinieks nofotografē čeku, grāmatvedis redz rindu Google izklājlapā.</p><a class="vdemo-btn" href="https://app.artefycraft.com/demo" target="_blank" rel="noopener" aria-label="Atvērt demo: platforma">Atvērt demo</a></div>
         <div class="vdemo-f vdemo-film" aria-hidden="true">
           <div class="vf-phone"><i></i></div>
           <div class="vf-receipt"><i></i><i></i><i></i><b>42,10 €</b></div>
-          <span class="vf-label">Google izklājlapa</span>
           <div class="vf-row"><span>Degviela</span><span>42,10 €</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
         </div>
       </li>
