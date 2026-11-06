@@ -1,0 +1,4 @@
+Contact: mailto:arturs@artefycraft.com
+Expires: 2027-05-06T00:00:00.000Z
+Preferred-Languages: lv, en
+Canonical: https://artefycraft.com/.well-known/security.txt
