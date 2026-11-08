@@ -1759,13 +1759,8 @@ dialog.dlg{border-radius:var(--r)}
       <h2 id="h-book">Pieteikt 15 minūšu sarunu</h2>
       <p class="lead">Izvēlieties laiku. Noskaidrosim, kur automatizācija atmaksātos visvairāk.</p>
     </div>
-    <form class="book rv dl1" id="bkForm" action="https://formsubmit.co/arturs@artefycraft.com" method="POST">
-      <input type="hidden" name="_subject" id="bkSubj" value="[SPAM-FILTRS] Pieteikums bez kalendāra plūsmas">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" id="bkNext" value="https://artefycraft.com/?pieteikts">
+    <form class="book rv dl1" id="bkForm" method="post">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <input type="hidden" name="Vēlamais laiks" id="bkLaiks" value="">
       <div class="bk-ok" id="bkOk" hidden>
         <b>Paldies! Pieteikums saņemts.</b>
         <span id="bkOkSum"></span>
@@ -1786,9 +1781,9 @@ dialog.dlg{border-radius:var(--r)}
           <p class="cal-date" id="slotTitle">Izvēlieties dienu kalendārā</p>
           <div class="slots" id="bkTimes" hidden></div>
           <div class="bk-fields" id="whoPane" hidden>
-            <label class="bk-full">Vārds<input type="text" id="bkName" name="Vārds" autocomplete="name" required></label>
-            <label>Tālrunis (nav obligāts)<input type="tel" id="bkPhone" name="Tālrunis" autocomplete="tel" inputmode="tel"></label>
-            <label>E-pasts<input type="email" id="bkMail" name="E-pasts" autocomplete="email" inputmode="email" required></label>
+            <label class="bk-full">Vārds<input type="text" id="bkName" name="vards" autocomplete="name" maxlength="100" required></label>
+            <label>Tālrunis (nav obligāts)<input type="tel" id="bkPhone" name="talrunis" autocomplete="tel" inputmode="tel" maxlength="40"></label>
+            <label>E-pasts<input type="email" id="bkMail" name="epasts" autocomplete="email" inputmode="email" maxlength="200" required></label>
           </div>
         </div>
       </div>
@@ -1797,8 +1792,8 @@ dialog.dlg{border-radius:var(--r)}
         <button class="btn" id="bkSend" type="submit" aria-disabled="true">Nosūtīt pieteikumu</button>
       </div>
       <p class="bk-hint sr-only" id="bkHint" aria-live="polite">1. solis: izvēlieties dienu kalendārā.</p>
-      <p class="bk-err" id="bkErr" role="alert" hidden>Pieteikumu neizdevās nosūtīt. Nosūtiet to mums uz <a id="bkErrMail" href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a> vai <a id="bkErrWa" href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp +371 22 000 657</a>. Nospiežot saiti, teksts jau būs aizpildīts.</p>
-      <p class="bk-pp">Nosūtot pieteikumu, Jūsu vārds, e-pasts un, ja to norādāt, tālrunis caur FormSubmit nonāk pie mums. <a href="privatums/">Kā tos apstrādājam</a></p>
+      <p class="bk-err" id="bkErr" role="alert" hidden><span id="bkErrWhy">Pieteikumu neizdevās nosūtīt.</span> Nosūtiet to mums uz <a id="bkErrMail" href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a> vai <a id="bkErrWa" href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp +371 22 000 657</a>. Nospiežot saiti, teksts jau būs aizpildīts.</p>
+      <p class="bk-pp">Nosūtot pieteikumu, Jūsu vārds, e-pasts un, ja to norādāt, tālrunis tiek saglabāti mūsu sistēmā Eiropas Savienībā, lai mēs varētu Jums atbildēt. <a href="privatums/">Kā tos apstrādājam</a></p>
     </form>
   </div>
 </section>
@@ -1814,7 +1809,7 @@ dialog.dlg{border-radius:var(--r)}
       <div><p class="vfoot-h">Lapa</p><a href="#ko-daram">Ko darām</a><a href="#par">Par mums</a><a href="#process">Kā strādājam</a><a href="#buj">Jautājumi</a></div>
       <div><p class="vfoot-h">Kontakti</p><a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a><a href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp +371 22 000 657</a></div>
     </div>
-    <p class="privacy">Šajā lapā nav sīkdatņu un izsekošanas. Pieteikuma forma nosūta tikai Jūsu ierakstīto (vārdu, kontaktu, izvēlēto laiku) uz mūsu e-pastu ar FormSubmit starpnieka palīdzību; šos datus lietojam vienīgi, lai atbildētu. <a href="privatums/">Privātuma politika</a>.</p>
+    <p class="privacy">Šajā lapā nav sīkdatņu un izsekošanas. Pieteikuma forma nosūta Jūsu ierakstīto (vārdu, kontaktu, izvēlēto laiku) uz mūsu sistēmu Eiropas Savienībā; šos datus lietojam vienīgi, lai atbildētu. <a href="privatums/">Privātuma politika</a>.</p>
     <p class="privacy vlegal">SIA ArtefyCraft, reģ. Nr. 40203723377, PVN reģ. Nr. LV40203723377, juridiskā adrese: Cēsu nov., Priekuļu pag., Dukuri, "Zemturi", LV-4126, <a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a>. © 2026 SIA ArtefyCraft. Visas tiesības aizsargātas.</p>
     <p class="vcredit">Rīku logo: <a href="https://simpleicons.org" rel="noopener" target="_blank">Simple Icons</a> (CC0), preču zīmes pieder to īpašniekiem. Ikonas: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (ISC licence). Fonti: Hanken Grotesk, Newsreader, IBM Plex Mono (<a href="fonti/OFL.txt">SIL Open Font License 1.1</a>).</p>
   </div>
@@ -2276,7 +2271,7 @@ dialog.dlg{border-radius:var(--r)}
       slotTitle=d.getElementById('slotTitle'),bkTimes=d.getElementById('bkTimes'),
       whoPane=d.getElementById('whoPane'),bkName=d.getElementById('bkName'),bkPhone=d.getElementById('bkPhone'),bkMail=d.getElementById('bkMail'),
       bkSum=d.getElementById('bkSum'),bkSend=d.getElementById('bkSend'),bkHint=d.getElementById('bkHint'),
-      bkForm=d.getElementById('bkForm'),bkLaiks=d.getElementById('bkLaiks'),bkSubj=d.getElementById('bkSubj'),
+      bkForm=d.getElementById('bkForm'),bkBlock=0,
       bkOk=d.getElementById('bkOk'),bkErr=d.getElementById('bkErr'),bkSending=false,bkOkSum=d.getElementById('bkOkSum'),bkAgain=d.getElementById('bkAgain'),
       calWrap=bkForm?bkForm.querySelector('.cal-wrap'):null,
       bkDisc=bkForm?bkForm.querySelector('.bk-disc'):null,
@@ -2343,7 +2338,7 @@ dialog.dlg{border-radius:var(--r)}
       whoPane.hidden=!selTime;
     }
     function upd(){
-      var mailOk=bkMail.value.trim()&&bkMail.checkValidity();
+      var mailOk=bkMail.value.trim()&&bkMail.checkValidity()&&/^[^@\s]+@[^@\s]+\.[^@\s.]{2,}$/.test(bkMail.value.trim());
       var ready=selDate&&selTime&&bkName.value.trim()&&mailOk;
       if(selDate&&selTime){
         bkSum.hidden=false;
@@ -2352,10 +2347,10 @@ dialog.dlg{border-radius:var(--r)}
       if(!selDate){bkHint.textContent='1. solis: izvēlieties dienu kalendārā.';}
       else if(!selTime){bkHint.textContent='Tagad izvēlieties laiku.';}
       else if(!bkName.value.trim()){bkHint.textContent='Atliek ierakstīt vārdu un e-pastu.';}
-      else if(!mailOk){bkHint.textContent='Un e-pastu, uz kuru sūtīsim apstiprinājumu.';}
-      else{bkHint.textContent='Viss gatavs! Poga nosūtīs pieteikumu mums.';}
-      bkSend.setAttribute('aria-disabled',String(!ready||bkSending));
-      if(bkErr&&!bkSending)bkErr.hidden=true;
+      else if(!mailOk){bkHint.textContent=bkMail.value.trim()?'Pārbaudiet e-pasta adresi, piemēram, vards@uznemums.lv.':'Un e-pastu, uz kuru sūtīsim apstiprinājumu.';}
+      else if(!(Date.now()<bkBlock)){bkHint.textContent='Viss gatavs! Poga nosūtīs pieteikumu mums.';}
+      bkSend.setAttribute('aria-disabled',String(!ready||bkSending||Date.now()<bkBlock));
+      if(bkErr&&!bkSending&&!(Date.now()<bkBlock))bkErr.hidden=true;
     }
     function pad2(n){return (n<10?'0':'')+n;}
     function gcalHref(){
@@ -2384,7 +2379,7 @@ dialog.dlg{border-radius:var(--r)}
     [bkName,bkPhone,bkMail].forEach(function(inp){inp.addEventListener('input',upd);});
     bkForm.addEventListener('submit',function(ev){
       ev.preventDefault();
-      if(bkSending)return;
+      if(bkSending||Date.now()<bkBlock)return;
       if(bkSend.getAttribute('aria-disabled')==='true'){
         if(!selDate){calGrid.querySelector('.cal-day:not([disabled])').focus();}
         else if(!selTime){bkTimes.querySelector('.slot').focus();}
@@ -2393,34 +2388,43 @@ dialog.dlg{border-radius:var(--r)}
         return;
       }
       var laiks=fmt(selDate)+' plkst. '+selTime;
-      bkLaiks.value=laiks;
-      bkSubj.value='Sarunas pieteikums: '+laiks;
       bkSend.setAttribute('aria-disabled','true');
       bkSend.textContent='Sūta...';
       bkSending=true;if(bkErr)bkErr.hidden=true;
       var ctl=('AbortController' in window)?new AbortController():null;
-      var tmo=setTimeout(function(){if(ctl){ctl.abort();}else{bkSending=false;bkFail();}},20000);
+      var tmo=setTimeout(function(){if(ctl){ctl.abort();}else{bkSending=false;bkFail(-1);}},30000);
       var fd={
-        'Vēlamais laiks':laiks,
-        'Vārds':bkName.value.trim(),
-        'Tālrunis':bkPhone.value.trim(),
-        'E-pasts':bkMail.value.trim(),
-        '_replyto':bkMail.value.trim(),
-        '_subject':bkSubj.value,'_template':'table','_captcha':'false',
-        '_honey':(bkForm.querySelector('input[name="_honey"]')||{}).value||''
+        laiks:laiks,
+        vards:bkName.value.trim(),
+        talrunis:bkPhone.value.trim(),
+        epasts:bkMail.value.trim(),
+        _honey:(bkForm.querySelector('input[name="_honey"]')||{}).value||''
       };
-      fetch('https://formsubmit.co/ajax/arturs@artefycraft.com',{
+      fetch('https://zcbwdbcfalwhapwgzswj.supabase.co/functions/v1/site-lead?forceFunctionRegion=eu-central-1',{
         method:'POST',
+        mode:'cors',
+        credentials:'omit',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
         body:JSON.stringify(fd),
         signal:ctl?ctl.signal:undefined
-      }).then(function(r){return r.json().then(function(j){return r.ok&&j&&(j.success===true||j.success==='true');},function(){return false;});})
-      .then(function(ok){clearTimeout(tmo);bkSending=false;if(ok){showOk();}else{bkFail();}})
-      .catch(function(){clearTimeout(tmo);bkSending=false;bkFail();});
-      function bkFail(){
-        bkSend.textContent='Neizdevās. Mēģināt vēlreiz';
-        bkSend.setAttribute('aria-disabled','false');
-        var txt='Sarunas pieteikums: '+laiks+'\r\nVārds: '+fd['Vārds']+(fd['Tālrunis']?'\r\nTālrunis: '+fd['Tālrunis']:'')+'\r\nE-pasts: '+fd['E-pasts'];
+      }).then(function(r){var ra=r.headers.get('Retry-After');return r.json().then(function(j){return [(r.status===200&&j&&j.success===true)?0:(r.status||-1),ra];},function(){return [r.status||-1,ra];});})
+      .then(function(x){clearTimeout(tmo);bkSending=false;if(x[0]===0){showOk();}else{bkFail(x[0],x[1]);}})
+      .catch(function(){clearTimeout(tmo);bkSending=false;bkFail(-1);});
+      function bkFail(st,ra){
+        var why=d.getElementById('bkErrWhy');
+        if(st===429){
+          var mins=Math.min(120,Math.max(1,Math.ceil((parseInt(ra,10)||3600)/60)));
+          bkBlock=Date.now()+mins*60000;
+          var say=function(m){if(why)why.textContent='Pēdējās stundas laikā no šī tīkla jau bija 5 mēģinājumi, tāpēc šo nepieņēmām. Vēlreiz varēsiet mēģināt pēc '+m+' min.';bkSend.textContent='Mēģiniet vēlreiz pēc '+m+' min.';};
+          say(mins);
+          var tick=setInterval(function(){var left=Math.ceil((bkBlock-Date.now())/60000);if(left>0){say(left);return;}clearInterval(tick);bkBlock=0;bkSend.textContent='Nosūtīt pieteikumu';upd();},60000);
+          bkSend.setAttribute('aria-disabled','true');
+        }else{
+          if(why)why.textContent=st===400?'Nevarējām pieņemt šo e-pasta adresi. Izlabojiet to un mēģiniet vēlreiz.':'Pieteikumu neizdevās nosūtīt.';
+          bkSend.textContent='Neizdevās. Mēģināt vēlreiz';
+          bkSend.setAttribute('aria-disabled','false');
+        }
+        var txt='Sarunas pieteikums: '+laiks+'\r\nVārds: '+fd.vards+(fd.talrunis?'\r\nTālrunis: '+fd.talrunis:'')+'\r\nE-pasts: '+fd.epasts;
         if(bkErr){
           d.getElementById('bkErrMail').href='mailto:arturs@artefycraft.com?subject='+encodeURIComponent('Sarunas pieteikums: '+laiks)+'&body='+encodeURIComponent(txt);
           d.getElementById('bkErrWa').href='https://wa.me/37122000657?text='+encodeURIComponent(txt);

@@ -25,5 +25,5 @@ Dzīvā lapa: https://artefycraft.com (GitHub Pages no šī repo `master`/`main`
 ## Piezīmes
 
 - Lapa neielādē neko no citiem domēniem: fonti ir mapē `fonti/`, logo ir iegults.
-- Pieteikuma forma sūta e-pastu caur FormSubmit uz arturs@artefycraft.com.
+- Pieteikuma forma sūta pieteikumu uz https://zcbwdbcfalwhapwgzswj.supabase.co/functions/v1/site-lead?forceFunctionRegion=eu-central-1 (mūsu platforma), kur tas tiek saglabāts; īpašnieks saņem paziņojumu bez personas datiem. Kļūdas gadījumā lapa piedāvā e-pastu un WhatsApp ar aizpildītu tekstu.
 - Fontu licences aprakstītas `README.md`.
