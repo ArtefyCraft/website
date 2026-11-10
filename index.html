@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-b19RryGZ+yaGGSZK6sji0mhTj8WR85nh6gdhPHZwMCQ=' 'sha256-RRSqWIy7KfkCwquiKXopQ5FGmrYZEYsfQMzoIpePAYw=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://zcbwdbcfalwhapwgzswj.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-b19RryGZ+yaGGSZK6sji0mhTj8WR85nh6gdhPHZwMCQ=' 'sha256-H9xbKPs+6GqctsWBT7fHJi2YNaZ1xFNQmWUExeQFsFk=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://zcbwdbcfalwhapwgzswj.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preload" href="fonti/hanken-grotesk-768af2923e.woff2" as="font" type="font/woff2" crossorigin>
@@ -1111,7 +1111,7 @@ html.io .rv.in{opacity:1;transform:none}
 :root{
   --paper:#F4F1EA;--raised:#FDFBF7;--recessed:#E9E3D6;
   --ink:#242422;--muted:#5A574F;--hair:rgba(36,36,34,.18);--hair-soft:rgba(36,36,34,.1);
-  --accent:#4A5D4E;--accent-strong:#3A4A3E;--accent-text:#3A4A3E;--on-accent:#FDFBF7;
+  --accent:#4A5D4E;--accent-strong:#3A4A3E;--accent-text:#3A4A3E;--on-accent:#FDFBF7;--sun:#E5B44A;
   --r:8px;--r-lg:8px;--r-sm:6px;--r-btn:6px;
   --w:1152px;
   --fs-body:1.0625rem;--fs-small:.9375rem;--fs-lead:1.1875rem;--fs-label:.8125rem;
@@ -1433,6 +1433,14 @@ dialog.dlg{border-radius:var(--r)}
 .vfoot-grid a:hover{color:var(--accent-text)}
 .vfoot .foot-brand{margin:0}
 .vfoot .privacy{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--hair-soft);font-size:.8125rem}
+/* Akcenta līnijas (2026-11-10): viena dzeltenā līnija zem navigācijas, īsa svītra virs sekciju virsrakstiem, līnija kājenes augšā. */
+.nav{border-bottom:2px solid var(--sun)}
+.nav.scrolled{border-bottom-color:var(--sun)}
+.vh2::before{content:"";display:block;width:2.5rem;height:2px;background:var(--sun);margin:0 0 1.1rem}
+.vabout .vh2::before{margin-inline:auto}
+.book-sect .sect-head h2::before{content:"";display:block;width:2.5rem;height:2px;background:var(--sun);margin:0 auto 1.1rem}
+.vfoot{border-top:2px solid var(--sun)}
+@media (prefers-contrast:more){.nav{border-bottom-color:var(--ink)}}
 .vcredit{margin-top:.6rem;font-size:.8125rem;color:var(--muted)}
 .vcredit a{color:var(--muted)}
 
@@ -1536,7 +1544,7 @@ dialog.dlg{border-radius:var(--r)}
 .vd-t{font-weight:700;font-size:1.05rem;color:#4A5D4E}
 @property --vda{syntax:"<angle>";inherits:false;initial-value:0deg}
 .vdemo-list{list-style:none;margin:clamp(1.8rem,4vh,2.6rem) 0 clamp(2.4rem,5vh,3.4rem);padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,2.8vw,2.2rem)}
-.vdemo{--vda:0deg;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,46%);min-height:320px;color:#F4F1EA;border:2px solid transparent;border-radius:12px;background:linear-gradient(#1F2622,#1F2622) padding-box,conic-gradient(from var(--vda),#E5B44A,#4A5D4E 40%,#1F2622 62%,#E5B44A) border-box;box-shadow:0 24px 50px -28px rgba(31,38,34,.7);animation:vd-turn 9s linear infinite;transition:transform .35s ease,box-shadow .35s ease}
+.vdemo{--vda:0deg;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,46%);min-height:320px;color:#F4F1EA;border:2px solid transparent;border-radius:12px;background:linear-gradient(#1F2622,#1F2622) padding-box,conic-gradient(from var(--vda),var(--sun),#4A5D4E 40%,#1F2622 62%,var(--sun)) border-box;box-shadow:0 24px 50px -28px rgba(31,38,34,.7);animation:vd-turn 9s linear infinite;transition:transform .35s ease,box-shadow .35s ease}
 @keyframes vd-turn{to{--vda:360deg}}
 @media (min-width:761px) and (max-width:980px){.vd-list{grid-template-columns:minmax(0,1fr);max-width:30rem;margin-inline:auto}}
 @media (hover:hover) and (pointer:fine){.vdemo:hover{transform:translateY(-4px);box-shadow:0 30px 60px -26px rgba(31,38,34,.85)}.vdemo:hover .vdemo-qr-box{transform:scale(1.05)}.vdemo-btn:hover{background:#F2C766;transform:translateY(-1px)}}
@@ -1545,7 +1553,7 @@ dialog.dlg{border-radius:var(--r)}
 .vdemo-t{padding:1.7rem 1.6rem;display:grid;gap:.65rem;align-content:center}
 .vdemo h3{font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(1.55rem,1.1rem + 1.1vw,2rem);line-height:1.08;margin:0;letter-spacing:-.012em;color:#F4F1EA}
 .vdemo p{margin:0;color:#C9D0C4;font-size:var(--fs-small)}
-.vdemo-btn{justify-self:start;margin-top:.5rem;background:#E5B44A;color:#1F2622;padding:.7rem 1.2rem;border-radius:var(--r-btn);font-weight:700;font-size:var(--fs-small);text-decoration:none;transition:background .3s ease,transform .3s ease}
+.vdemo-btn{justify-self:start;margin-top:.5rem;background:var(--sun);color:#1F2622;padding:.7rem 1.2rem;border-radius:var(--r-btn);font-weight:700;font-size:var(--fs-small);text-decoration:none;transition:background .3s ease,transform .3s ease}
 .vdemo-f{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;padding:1.4rem;overflow:hidden;border-radius:0 10px 10px 0}
 .vdemo-code{background:radial-gradient(circle at 50% 42%,rgba(229,180,74,.42) 0%,rgba(229,180,74,.16) 38%,transparent 66%)}
 .vdemo-qr-box{width:min(100%,176px);aspect-ratio:1;background:#fff;border-radius:12px;padding:10px;box-shadow:0 18px 40px -16px rgba(0,0,0,.7);transition:transform .45s ease}
@@ -1603,9 +1611,9 @@ dialog.dlg{border-radius:var(--r)}
 .vh-go{margin-top:2rem}
 .vh-btn{display:inline-block;padding:.85rem 1.4rem;border-radius:var(--r-btn);background:#F4F1EA;color:#242422;font-weight:600;text-decoration:none}
 .vh-btn:hover{background:#FFFFFF}
-.vh-btn:focus-visible{outline:2px solid #E5B44A;outline-offset:3px}
+.vh-btn:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
 .vh-line{margin:0;font-family:"Newsreader",Georgia,"Times New Roman",serif;font-size:clamp(2.5rem,1rem + 4.9vw,5rem);line-height:1.04;letter-spacing:-.03em;color:#F4F1EA;max-width:15.5em;text-wrap:balance}
-.vh-line em{font-style:italic;color:#E5B44A}
+.vh-line em{font-style:italic;color:var(--sun)}
 .vh-say h1{font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:var(--fs-lead);line-height:1.4;letter-spacing:0;font-weight:500;color:#C9CFC4;margin:1.3rem 0 0}
 .vh-say .vh-accent{color:inherit}
 .vh-dark{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
@@ -1925,7 +1933,7 @@ dialog.dlg{border-radius:var(--r)}
     d.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
   }
 
-  /* Galvenes mala paradas tikai tad, kad saturs slid apaksa */
+  /* Klase 'scrolled' paliek; galvenes akcenta linija ir pastaviga (2026-11-10) */
   var navEl=d.querySelector('.nav');
   if(navEl){
     var navTick=false;
