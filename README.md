@@ -14,7 +14,7 @@ all other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
 ## Demo lapa /qr-demo/ (2026-11-02)
 
-Demo "Galda kods" (pasūtīšana ar QR kodu), uz ko ved sākumlapas kartīte un tās QR kods; bez indeksēšanas (noindex). Kopš 2026-11-11 izskats: restorāns "Liepa" (izdomāts paraugs), fonti Cormorant Garamond un Onest (SIL OFL 1.1) iegulti lapā. Visi foto ar CC0 licenci (https://creativecommons.org/publicdomain/zero/1.0/), apgriezti un samazināti; avoti (vieta lapā: autors, lapa):
+Demo "Galda kods" (pasūtīšana ar QR kodu), uz ko ved sākumlapas kartīte un tās QR kods; bez indeksēšanas (noindex). Kopš 2026-11-10 izskats: restorāns "Liepa" (izdomāts paraugs), fonti Cormorant Garamond un Onest (SIL OFL 1.1) iegulti lapā. Visi foto ar CC0 licenci (https://creativecommons.org/publicdomain/zero/1.0/), apgriezti un samazināti; avoti (vieta lapā: autors, lapa):
 - hero: Jay Wennington, https://stocksnap.io/photo/restaurant-food-47E77904CB
 - steak: rawpixel, https://www.rawpixel.com/image/5927188/free-steak-image-public-domain-food-cc0-photo
 - fish: Tim Sullivan, https://stocksnap.io/photo/gourmet-food-AW3QDDIGZP
@@ -23,7 +23,7 @@ Demo "Galda kods" (pasūtīšana ar QR kodu), uz ko ved sākumlapas kartīte un 
 - soup: rawpixel, https://www.rawpixel.com/image/5922901/photo-image-public-domain-leaf-fruit
 - salad: rawpixel, https://www.rawpixel.com/image/5927262/photo-image-wallpaper-public-domain-food
 - salmon: Lukasz Kowalewski, https://stocksnap.io/photo/salmon-fish-AV3IUF5EDB
-- tiramisu: Daria Yakovleva, https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg
+- cake: Daria Yakovleva, https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg
 - cheesecake: Valeria Boltneva, https://stocksnap.io/photo/cheesecake-cake-BTS87FY8YX
 - gin: Toni Cuenca, https://stocksnap.io/photo/cocktail-glass-PAWENRFMUL
 - latte: phatonlaphat thongsriphong, https://stocksnap.io/photo/coffee-cup-CQQMILRZPU
