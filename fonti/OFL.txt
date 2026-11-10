@@ -6,7 +6,7 @@ Newsreader: Copyright 2020 The Newsreader Project Authors (https://github.com/pr
 IBM Plex Mono: Copyright 2017 IBM Corp., with Reserved Font Name "Plex"
 
 Demo page /qr-demo/ (embedded in the page):
-Bitter: Copyright 2011 The Bitter Project Authors (https://github.com/solmatas/BitterPro)
+Cormorant Garamond: Copyright 2015 The Cormorant Project Authors (https://github.com/CatharsisFonts/Cormorant)
 Onest: Copyright 2021 The Onest Project Authors (https://github.com/simpals/onest)
 
 All five are licensed under the SIL Open Font License, Version 1.1, reproduced below.
