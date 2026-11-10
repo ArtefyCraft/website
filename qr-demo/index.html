@@ -48,7 +48,6 @@ h1, h2, h3, p { margin: 0; }
 .g-ambient::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(24,28,27,.8), rgba(24,28,27,.66) 45%, rgba(24,28,27,.82)); }
 body:has(.g-app) { background: #1E2322; }
 .g-center { flex: 1; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--g-txt-2); }
-.g-demo { background: var(--g-deep); color: var(--g-txt-2); font-size: 12px; text-align: center; padding: 5px 12px; }
 .g-head { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; padding: 12px 16px 14px; background: var(--g-deep); overflow: hidden; }
 .g-head.has-photo { min-height: 216px; }
 .g-hero-photo { position: absolute; inset: 0; }
@@ -1184,7 +1183,7 @@ const STRINGS = {
     payingTitle: 'Demo maksājums', payingBody: 'Šeit klients redzētu Apple Pay, Google Pay vai kartes logu. Demo versijā nauda netiek ņemta.', payConfirm: 'Apstiprināt demo maksājumu',
     orderNo: 'Pasūtījums', paid: 'Apmaksāts', confirming: 'Apstiprinām maksājumu…', stepPaid: 'Saņemts', stepCooking: 'Gatavojam', stepReady: 'Gatavs', stepDone: 'Izsniegts', stepServed: 'Atnests',
     readyHint: 'Tavs ēdiens ir gatavs. Paņem to pie kases.', readyCarry: 'Tavs ēdiens ir gatavs. Nesam to uz galdu', waitHint: 'Vari mierīgi palikt pie galda. Šis ekrāns atjaunojas pats.', orderMore: 'Pasūtīt vēl',
-    lineRemoved: 'Šī pozīcija ir izņemta, nauda tiks atmaksāta.', cancelled: 'Pasūtījums atcelts. Nauda tiks atmaksāta uz tavu karti.', expired: 'Šis pasūtījums netika apmaksāts.', sample: 'Demo: cenas un foto ir piemērs, nauda netiek ņemta', allergensAsk: 'jautā darbiniekam',
+    lineRemoved: 'Šī pozīcija ir izņemta, nauda tiks atmaksāta.', cancelled: 'Pasūtījums atcelts. Nauda tiks atmaksāta uz tavu karti.', expired: 'Šis pasūtījums netika apmaksāts.', allergensAsk: 'jautā darbiniekam',
     error: 'Neizdevās. Pārbaudi internetu un mēģini vēlreiz.', tableMissing: 'Šis QR kods nav derīgs. Lūdzu, pajautā darbiniekam.', loading: 'Ielādējam…', receiptHint: 'Čeku izsniegsim kopā ar ēdienu.',
     gluten: 'glutēns', milk: 'piens', egg: 'olas', nuts: 'rieksti', none: 'nav',
   },
@@ -1196,7 +1195,7 @@ const STRINGS = {
     payingTitle: 'Demo payment', payingBody: 'A guest would see Apple Pay, Google Pay or a card form here. The demo takes no money.', payConfirm: 'Confirm demo payment',
     orderNo: 'Order', paid: 'Paid', confirming: 'Confirming your payment…', stepPaid: 'Received', stepCooking: 'Cooking', stepReady: 'Ready', stepDone: 'Handed over', stepServed: 'Served',
     readyHint: 'Your food is ready. Please collect it at the till.', readyCarry: 'Your food is ready. We are bringing it to table', waitHint: 'Stay at your table. This screen updates by itself.', orderMore: 'Order more',
-    lineRemoved: 'This item was removed and will be refunded.', cancelled: 'Order cancelled. The money will return to your card.', expired: 'This order was not paid.', sample: 'Demo: example prices and photos, no money is taken', allergensAsk: 'ask a member of staff',
+    lineRemoved: 'This item was removed and will be refunded.', cancelled: 'Order cancelled. The money will return to your card.', expired: 'This order was not paid.', allergensAsk: 'ask a member of staff',
     error: 'That did not work. Check your connection and try again.', tableMissing: 'This QR code is not valid. Please ask a member of staff.', loading: 'Loading…', receiptHint: 'Your receipt comes with your food.',
     gluten: 'gluten', milk: 'milk', egg: 'egg', nuts: 'nuts', none: 'none',
   },
@@ -1208,7 +1207,7 @@ const STRINGS = {
     payingTitle: 'Демо-оплата', payingBody: 'Здесь гость увидел бы Apple Pay, Google Pay или форму карты. В демо деньги не списываются.', payConfirm: 'Подтвердить демо-оплату',
     orderNo: 'Заказ', paid: 'Оплачено', confirming: 'Подтверждаем оплату…', stepPaid: 'Принят', stepCooking: 'Готовим', stepReady: 'Готово', stepDone: 'Выдан', stepServed: 'Подан',
     readyHint: 'Ваш заказ готов. Заберите его у кассы.', readyCarry: 'Ваш заказ готов. Несём его к столу', waitHint: 'Можете спокойно оставаться за столом. Экран обновляется сам.', orderMore: 'Заказать ещё',
-    lineRemoved: 'Эта позиция убрана, деньги будут возвращены.', cancelled: 'Заказ отменён. Деньги вернутся на вашу карту.', expired: 'Этот заказ не был оплачен.', sample: 'Демо: цены и фото примерные, деньги не списываются', allergensAsk: 'спросите у сотрудника',
+    lineRemoved: 'Эта позиция убрана, деньги будут возвращены.', cancelled: 'Заказ отменён. Деньги вернутся на вашу карту.', expired: 'Этот заказ не был оплачен.', allergensAsk: 'спросите у сотрудника',
     error: 'Не получилось. Проверьте интернет и попробуйте снова.', tableMissing: 'Этот QR-код недействителен. Пожалуйста, обратитесь к сотруднику.', loading: 'Загрузка…', receiptHint: 'Чек выдадим вместе с едой.',
     gluten: 'глютен', milk: 'молоко', egg: 'яйца', nuts: 'орехи', none: 'нет',
   },
@@ -1351,10 +1350,8 @@ function mountGuest(root, api, route, { lang } = {}) {
     const t = tr();
     const name = state.data?.restaurant?.name ?? '';
     const table = state.data?.table?.label ?? state.order?.tableLabel ?? '';
-    const demo = state.data?.restaurant?.sample ?? true;
     const hero = state.data?.hero;
     return `
-      ${demo ? `<div class="g-demo">${esc(t.sample)}</div>` : ''}
       <header class="g-head ${hero ? 'has-photo' : ''}">
         ${hero ? `<div class="g-hero-photo">${itemVisual({ photo: hero })}</div>` : ''}
         <div class="g-head-top">
@@ -2359,7 +2356,7 @@ function createDemoWorld(restaurantName) {
   const engine = new Engine({
     menu: globalThis.DEMO_MENU,
     tables: sampleTables,
-    restaurant: { name: restaurantName, sample: true },
+    restaurant: { name: restaurantName },
     now: () => frozenClock ?? Date.now(),
     newId,
   });
