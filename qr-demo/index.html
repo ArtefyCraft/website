@@ -347,12 +347,12 @@ body:has(.stage) { background: var(--tile); height: auto; }
 .stage-room { display: grid; grid-template-columns: 404px minmax(0, 1fr); gap: 32px; align-items: start; }
 .stage-label { font: var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
 /* The frames fit the window a person has (the owner's 807 px laptop window included), so the phone's bottom buttons are above the fold; the screens scroll inside. */
-.stage-phone { position: relative; width: 100%; max-width: 404px; height: clamp(600px, calc(100svh - 210px), 884px); padding: 12px; border: 0; border-radius: 58px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
+.stage-phone { position: relative; width: 100%; max-width: 404px; height: clamp(560px, calc(100svh - 232px), 884px); padding: 12px; border: 0; border-radius: 58px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
 .stage-phone::before { content: ""; position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 118px; height: 34px; border-radius: 20px; background: #0B0B0A; z-index: 3; pointer-events: none; }
 /* A status-bar band at the top of the screen: the island sits in it, so nothing scrolled or sticky (the category tabs) ever runs under the island. */
 #phone-screen { height: 100%; padding-top: 50px; border-radius: 46px; overflow: hidden; background: #0E0D0C; }
 .stage-mount { height: 100%; background: var(--night); }
-.stage-tablet { height: clamp(600px, calc(100svh - 210px), 884px); padding: 14px; border-radius: 30px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
+.stage-tablet { height: clamp(560px, calc(100svh - 232px), 884px); padding: 14px; border-radius: 30px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
 /* #kitchen-screen itself scrolls: it persists across the kitchen's full re-renders, so its scroll position survives them (the .k-app inside is rebuilt every 20 s). */
 .stage-kitchen { height: 100%; overflow: auto; border-radius: 18px; background: var(--night); }
 .stage-kitchen .k-app { min-height: 100%; padding: 18px 22px 24px; }
