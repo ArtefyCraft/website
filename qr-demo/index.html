@@ -341,18 +341,19 @@ body:has(.stage) { background: var(--tile); height: auto; }
 .stage-rule { display: block; width: 40px; height: 1px; background: var(--gold); margin: 4px 0 6px; }
 .stage-head p { color: var(--ink-2); line-height: 1.5; max-width: 62ch; font-size: 15px; }
 /* On a phone the view switcher stays at the top of the window while the page scrolls (the pointer's way to the kitchen is this bar) */
-.stage-tabs { display: none; gap: 2px; position: sticky; top: 8px; z-index: 5; background: var(--tile); box-shadow: 0 0 0 8px var(--tile); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.stage-tabs { display: none; gap: 2px; position: sticky; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 5; background: var(--tile); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.stage-tabs::before { content: ""; position: absolute; inset: -9px -16px; background: var(--tile); z-index: -1; }
 .stage-tabs button { flex: 1; min-height: 42px; border: 0; background: none; border-radius: 999px; font: 500 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
 .stage-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--tile); }
 .stage-room { display: grid; grid-template-columns: 404px minmax(0, 1fr); gap: 32px; align-items: start; }
 .stage-label { font: var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
-/* The frames fit the window a person has (the owner's 807 px laptop window included), so the phone's bottom buttons are above the fold; the screens scroll inside. */
-.stage-phone { position: relative; width: 100%; max-width: 404px; height: clamp(560px, calc(100svh - 232px), 884px); padding: 12px; border: 0; border-radius: 58px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
+/* The frames fit the window a person has: 232 px is the head, label and gaps above the frame plus the bar at its bottom (measured at 1400x900 and 1533x807 by check_lux.py); the screens scroll inside. The plain height first is the fallback for browsers without svh. */
+.stage-phone { position: relative; width: 100%; max-width: 404px; height: 700px; height: clamp(560px, calc(100svh - 232px), 884px); padding: 12px; border: 0; border-radius: 58px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
 .stage-phone::before { content: ""; position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 118px; height: 34px; border-radius: 20px; background: #0B0B0A; z-index: 3; pointer-events: none; }
 /* A status-bar band at the top of the screen: the island sits in it, so nothing scrolled or sticky (the category tabs) ever runs under the island. */
-#phone-screen { height: 100%; padding-top: 50px; border-radius: 46px; overflow: hidden; background: #0E0D0C; }
+#phone-screen { height: 100%; padding-top: 56px; border-radius: 46px; overflow: hidden; background: #0E0D0C; }
 .stage-mount { height: 100%; background: var(--night); }
-.stage-tablet { height: clamp(560px, calc(100svh - 232px), 884px); padding: 14px; border-radius: 30px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
+.stage-tablet { height: 700px; height: clamp(560px, calc(100svh - 232px), 884px); padding: 14px; border-radius: 30px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
 /* #kitchen-screen itself scrolls: it persists across the kitchen's full re-renders, so its scroll position survives them (the .k-app inside is rebuilt every 20 s). */
 .stage-kitchen { height: 100%; overflow: auto; border-radius: 18px; background: var(--night); }
 .stage-kitchen .k-app { min-height: 100%; padding: 18px 22px 24px; }
@@ -387,7 +388,7 @@ body:has(.stage) { background: var(--tile); height: auto; }
   .stage-head p { font-size: 15px; line-height: 1.45; }
   .stage-phone { height: 800px; padding: 10px; border-radius: 48px; }
   .stage-phone::before { top: 22px; width: 100px; height: 28px; }
-  #phone-screen { border-radius: 38px; padding-top: 40px; }
+  #phone-screen { border-radius: 38px; padding-top: 46px; }
   .stage-phone .g-head.has-photo { min-height: 200px; }
   .stage-phone .g-head strong { font-size: 34px; }
   .stage-phone .g-cat h2 { padding: 12px 0 10px; }
@@ -454,7 +455,8 @@ globalThis.DEMO_MENU = {
           "priceCents": 2800,
           "available": true,
           "allergens": [
-            "milk"
+            "milk",
+            "sulphites"
           ],
           "name": {
             "lv": "Liellopa fileja",
@@ -560,7 +562,8 @@ globalThis.DEMO_MENU = {
           "available": true,
           "allergens": [
             "crustaceans",
-            "milk"
+            "milk",
+            "sulphites"
           ],
           "name": {
             "lv": "Garneļu risoto",
@@ -602,7 +605,8 @@ globalThis.DEMO_MENU = {
           "allergens": [
             "fish",
             "sesame",
-            "soy"
+            "soy",
+            "gluten"
           ],
           "name": {
             "lv": "Lasis ar sezamu",
@@ -654,7 +658,8 @@ globalThis.DEMO_MENU = {
           "available": true,
           "allergens": [
             "milk",
-            "nuts"
+            "nuts",
+            "mustard"
           ],
           "suggestRank": 1,
           "name": {
@@ -1459,7 +1464,7 @@ const STRINGS = {
     readyHint: 'Jūsu ēdiens ir gatavs. Lūdzu, paņemiet to pie letes.', readyCarry: 'Jūsu ēdiens ir gatavs. Nesam to uz galdu', waitHint: 'Varat palikt pie galda. Šis ekrāns atjaunojas pats.', orderMore: 'Pasūtīt vēl',
     lineRemoved: 'Šī pozīcija ir izņemta, nauda tiks atmaksāta.', cancelled: 'Pasūtījums atcelts. Nauda tiks atmaksāta uz Jūsu karti.', expired: 'Šis pasūtījums netika apmaksāts.', allergensAsk: 'jautājiet darbiniekam',
     error: 'Neizdevās. Pārbaudiet internetu un mēģiniet vēlreiz.', tableMissing: 'Šis QR kods nav derīgs. Lūdzu, pajautājiet darbiniekam.', loading: 'Ielādējam…', receiptHint: 'Čeku izsniegsim kopā ar ēdienu.',
-    gluten: 'glutēns', milk: 'piens', egg: 'olas', nuts: 'rieksti', fish: 'zivs', crustaceans: 'vēžveidīgie', sesame: 'sezams', soy: 'soja', none: 'nav', venue: 'Restorāns',
+    gluten: 'glutēns', milk: 'piens', egg: 'olas', nuts: 'rieksti', fish: 'zivs', crustaceans: 'vēžveidīgie', sesame: 'sezams', soy: 'soja', sulphites: 'sulfīti', mustard: 'sinepes', none: 'nav', venue: 'Restorāns',
   },
   en: {
     table: 'Table', from: 'from', tableCheck: 'This must match the number on your table.', cart: 'Cart', add: 'Add', addFor: 'Add', soldOut: 'Sold out', required: 'Choose one',
@@ -1471,7 +1476,7 @@ const STRINGS = {
     readyHint: 'Your food is ready. Please collect it at the till.', readyCarry: 'Your food is ready. We are bringing it to table', waitHint: 'Stay at your table. This screen updates by itself.', orderMore: 'Order more',
     lineRemoved: 'This item was removed and will be refunded.', cancelled: 'Order cancelled. The money will return to your card.', expired: 'This order was not paid.', allergensAsk: 'ask a member of staff',
     error: 'That did not work. Check your connection and try again.', tableMissing: 'This QR code is not valid. Please ask a member of staff.', loading: 'Loading…', receiptHint: 'Your receipt comes with your food.',
-    gluten: 'gluten', milk: 'milk', egg: 'egg', nuts: 'nuts', fish: 'fish', crustaceans: 'crustaceans', sesame: 'sesame', soy: 'soy', none: 'none', venue: 'Restaurant',
+    gluten: 'gluten', milk: 'milk', egg: 'egg', nuts: 'nuts', fish: 'fish', crustaceans: 'crustaceans', sesame: 'sesame', soy: 'soy', sulphites: 'sulphites', mustard: 'mustard', none: 'none', venue: 'Restaurant',
   },
   ru: {
     table: 'Стол', from: 'от', tableCheck: 'Номер должен совпадать с номером на вашем столе.', cart: 'Корзина', add: 'Добавить', addFor: 'Добавить', soldOut: 'Закончилось', required: 'Выберите один',
@@ -1483,7 +1488,7 @@ const STRINGS = {
     readyHint: 'Ваш заказ готов. Заберите его у кассы.', readyCarry: 'Ваш заказ готов. Несём его к столу', waitHint: 'Можете спокойно оставаться за столом. Экран обновляется сам.', orderMore: 'Заказать ещё',
     lineRemoved: 'Эта позиция убрана, деньги будут возвращены.', cancelled: 'Заказ отменён. Деньги вернутся на вашу карту.', expired: 'Этот заказ не был оплачен.', allergensAsk: 'спросите у сотрудника',
     error: 'Не получилось. Проверьте интернет и попробуйте снова.', tableMissing: 'Этот QR-код недействителен. Пожалуйста, обратитесь к сотруднику.', loading: 'Загрузка…', receiptHint: 'Чек выдадим вместе с едой.',
-    gluten: 'глютен', milk: 'молоко', egg: 'яйца', nuts: 'орехи', fish: 'рыба', crustaceans: 'ракообразные', sesame: 'кунжут', soy: 'соя', none: 'нет', venue: 'Ресторан',
+    gluten: 'глютен', milk: 'молоко', egg: 'яйца', nuts: 'орехи', fish: 'рыба', crustaceans: 'ракообразные', sesame: 'кунжут', soy: 'соя', sulphites: 'сульфиты', mustard: 'горчица', none: 'нет', venue: 'Ресторан',
   },
 };
 
@@ -2819,6 +2824,7 @@ function startTour() {
       const bar = phone.querySelector('.g-tabs');
       if (bar) top = Math.max(top, bar.getBoundingClientRect().bottom);
     }
+    if (tabs && shown(tabs) && !tabs.contains(el)) top = Math.max(top, tabs.getBoundingClientRect().bottom + 8);
     top = Math.max(top, 0); left = Math.max(left, 0);
     right = Math.min(right, window.innerWidth); bottom = Math.min(bottom, window.innerHeight);
     const min = need ?? Math.min(48, r.height);

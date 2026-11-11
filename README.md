@@ -14,7 +14,7 @@ all other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
 ## Demo lapa /qr-demo/ (2026-11-02)
 
-Demo "Galda kods" (pasūtīšana ar QR kodu), uz ko ved sākumlapas kartīte un tās QR kods; bez indeksēšanas (noindex). Kopš 2026-11-10 izskats: restorāns "Liepa" (izdomāts paraugs), fonti Cormorant Garamond un Onest (SIL OFL 1.1) iegulti lapā. Visi foto ar CC0 licenci (https://creativecommons.org/publicdomain/zero/1.0/), apgriezti un samazināti; avoti (vieta lapā: autors, lapa):
+Demo "Galda kods" (pasūtīšana ar QR kodu), uz ko ved sākumlapas kartīte un tās QR kods; bez indeksēšanas (noindex). Kopš 2026-11-11 izskats: restorāns "Liepa" (izdomāts paraugs), fonti Cormorant Garamond un Onest (SIL OFL 1.1) iegulti lapā. Visi foto ar CC0 licenci (https://creativecommons.org/publicdomain/zero/1.0/), apgriezti un samazināti; avoti (vieta lapā: autors, lapa):
 - hero: Jay Wennington, https://stocksnap.io/photo/restaurant-food-47E77904CB
 - steak: rawpixel, https://www.rawpixel.com/image/5927188/free-steak-image-public-domain-food-cc0-photo
 - fish: Tim Sullivan, https://stocksnap.io/photo/gourmet-food-AW3QDDIGZP
