@@ -10,272 +10,319 @@
 </head>
 <body>
 <style>
-/* Layout concept: the guest phone is a dark evening room (charcoal, cream, one champagne-gold line), the kitchen a dark board, the owner's report on paper. Luxury here is restraint: hairlines, small spaced capitals, a high-contrast serif, one accent. */
+/* Layout concept: dark gold app. The guest phone, the kitchen tablet and the owner's report are one product UI in the look of the owner's 2026-11-14 reference: charcoal screens, cards a step lighter with a gold hairline, one warm gold for every action, price, active state and icon stroke, light text with grey for what matters less, a thin line-icon set in circles, round food photos, a serif for the names and titles only and a sans for everything else. Nothing decorative beyond that: no gradients, no second colour, no shadows beyond a card's edge and the cart bar's lift. */
 :root {
-  --pine: #1B1917;
-  --pine-2: #2A2622;
-  --leaf: #1B1917;
-  --chip: #F1EDE3;
-  --turmeric: #C8A96A;
-  --chili: #B5452F;
-  --tile: #F4F1EA;
-  --paper: #FFFFFF;
-  --ink: #1B1917;
-  --ink-2: #5E584F;
-  --line: #E3DDD0;
-  --night: #121110;
-  --night-2: #1B1917;
-  --night-3: #2E2A25;
-  --ticket: #1B1917;
-  --ok: #5E9E6A;
-  --gold: #C8A96A;
-  --gold-2: #8E7746;
-  --cream: #F1EADD;
-  --cream-2: #B9B1A3;
-  --display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  color-scheme: dark;
+  --accent: #D4B16A;
+  --accent-ink: #15171C;
+  --accent-tint: rgba(212,177,106,.12);
+  --gold-line: rgba(212,177,106,.28);
+  --pine: #F2EFE8;
+  --pine-2: #9AA0AA;
+  --leaf: #D4B16A;
+  --chip: #242933;
+  --turmeric: #D4B16A;
+  --chili: #D4B16A;
+  --tile: #1F232B;
+  --paper: #0F1116;
+  --screen: #171A21;
+  --card: #1F232B;
+  --raise: #242933;
+  --ink: #F2EFE8;
+  --ink-2: #9AA0AA;
+  --line: rgba(255,255,255,.08);
+  --night: #171A21;
+  --night-2: #1F232B;
+  --night-3: #242933;
+  --ticket: #F2EFE8;
+  --ok: #9AA0AA;
+  --gold: #D4B16A;
+  --gold-2: #C4A25E;
+  --cream: #F2EFE8;
+  --cream-2: #9AA0AA;
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --display: Onest, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --body: Onest, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
-  --caps: 500 11px/1 var(--body);
+  /* the icon set: 16 thin-line icons, 24 px grid, stroke 1.6, used as masks over currentColor */
+  --i-cloche: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 16.5h18'/%3E%3Cpath d='M5 16.5a7 7 0 0 1 14 0'/%3E%3Cpath d='M12 9.5v-2'/%3E%3Ccircle cx='12' cy='6' r='1.2'/%3E%3C/svg%3E");
+  --i-bowl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 11.5h16a8 8 0 0 1-16 0z'/%3E%3Cpath d='M9 8.5c0-1.5 1-2 1-3.5M13.5 8.5c0-1.5 1-2 1-3.5'/%3E%3C/svg%3E");
+  --i-cake: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5h16'/%3E%3Cpath d='M5 19.5v-5.5a7 7 0 0 1 14 0v5.5'/%3E%3Cpath d='M12 7V4.5'/%3E%3Cpath d='M7.5 14c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0'/%3E%3C/svg%3E");
+  --i-glass: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 3.5h10l-1 8.5a4 4 0 0 1-8 0z'/%3E%3Cpath d='M12 16v4.5'/%3E%3Cpath d='M8.5 20.5h7'/%3E%3C/svg%3E");
+  --i-bag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8.5h14l-1 12H6z'/%3E%3Cpath d='M9 8.5V6.5a3 3 0 0 1 6 0v2'/%3E%3C/svg%3E");
+  --i-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+  --i-pot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.5h16v5.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z'/%3E%3Cpath d='M2 10.5h20'/%3E%3Cpath d='M9.5 7.5c0-1.5 1-2 1-3.5M14 7.5c0-1.5 1-2 1-3.5'/%3E%3C/svg%3E");
+  --i-bell: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 17h12l-1.5-2.5V11a4.5 4.5 0 0 0-9 0v3.5z'/%3E%3Cpath d='M10 20h4'/%3E%3Cpath d='M12 6.5V4.5'/%3E%3C/svg%3E");
+  --i-table: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5h18'/%3E%3Cpath d='M5.5 8.5l.8 11M18.5 8.5l-.8 11'/%3E%3Cpath d='M7 14.5h10'/%3E%3C/svg%3E");
+  --i-receipt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.5h12v17l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5-2 1.5z'/%3E%3Cpath d='M9 8.5h6M9 12h6M9 15.5h4'/%3E%3C/svg%3E");
+  --i-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='6.5' height='6.5' rx='1.5'/%3E%3Crect x='13.5' y='4' width='6.5' height='6.5' rx='1.5'/%3E%3Crect x='4' y='13.5' width='6.5' height='6.5' rx='1.5'/%3E%3Crect x='13.5' y='13.5' width='6.5' height='6.5' rx='1.5'/%3E%3C/svg%3E");
+  --i-check-circle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M8.5 12.5l2.5 2.5 4.5-5.5'/%3E%3C/svg%3E");
+  --i-coins: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='6.5' rx='7' ry='3'/%3E%3Cpath d='M5 6.5v11c0 1.7 3.1 3 7 3s7-1.3 7-3v-11'/%3E%3Cpath d='M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3'/%3E%3C/svg%3E");
+  --i-plus-circle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M12 8v8M8 12h8'/%3E%3C/svg%3E");
+  --i-repeat: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10a8 8 0 0 1 14-4l2 2'/%3E%3Cpath d='M20 4v4h-4'/%3E%3Cpath d='M20 14a8 8 0 0 1-14 4l-2-2'/%3E%3Cpath d='M4 20v-4h4'/%3E%3C/svg%3E");
+  --i-percent: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6L6 18'/%3E%3Ccircle cx='7.5' cy='7.5' r='2.2'/%3E%3Ccircle cx='16.5' cy='16.5' r='2.2'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
-/* Cormorant's default figures are old-style; lining figures everywhere. !important because the `font:` shorthand resets font-feature-settings on every element that uses it, and the figure style must never depend on that. */
 * { font-feature-settings: "lnum" 1 !important; }
-body { font-family: var(--body); color: var(--ink); background: var(--tile); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--body); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
 b, output, .k-table, .k-meta, .a-stat, .g-pay-total, .g-ticket-no, .g-ticket-total, .k-col h2 span, .k-till, .g-cta { font-variant-numeric: tabular-nums; }
 button, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
-:focus-visible { outline: 2px solid var(--turmeric); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 h1, h2, h3, p { margin: 0; }
+/* an icon: a pseudo-element masked with one of the set, painted in the current text colour */
+.g-tabs button::after, .g-steps li::after, .k-top nav button::before, .a-stat::after, .g-cta-label::before { content: ""; display: block; background: currentColor; -webkit-mask: var(--i) center / contain no-repeat; mask: var(--i) center / contain no-repeat; }
 
 /* ---- guest ---- */
-.g-app { --g-bg: #121110; --g-card: #1B1917; --g-raise: #2A2622; --g-txt: #F1EADD; --g-txt-2: #B9B1A3; --g-rule: #2E2A25; --g-oak: #C8A96A; --g-oak-ink: #121110; --g-block: #C8A96A; --g-block-ink: #121110; --g-velvet: #2F4A3C; --g-deep: #0E0D0C; position: relative; isolation: isolate; display: flex; flex-direction: column; height: 100%; max-width: 560px; margin: 0 auto; background: var(--g-bg); color: var(--g-txt); overflow: hidden; }
+.g-app { --g-bg: #171A21; --g-card: #1F232B; --g-raise: #242933; --g-txt: #F2EFE8; --g-txt-2: #9AA0AA; --g-rule: rgba(255,255,255,.08); --g-rule-2: rgba(212,177,106,.28); --g-oak: #D4B16A; --g-oak-ink: #15171C; --g-block: #D4B16A; --g-block-ink: #15171C; --g-velvet: #1F232B; --g-deep: #171A21; position: relative; isolation: isolate; display: flex; flex-direction: column; height: 100%; max-width: 560px; margin: 0 auto; background: var(--g-bg); color: var(--g-txt); overflow: hidden; }
 .g-ambient { display: none; }
-body:has(.g-app) { background: #121110; }
+body:has(.g-app) { background: #171A21; }
 .g-center { flex: 1; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--g-txt-2); }
-.g-eyebrow { display: block; font: var(--caps); letter-spacing: .22em; text-transform: uppercase; color: var(--g-oak); margin-bottom: 7px; }
-.g-head { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; padding: 14px 20px 18px; background: var(--g-deep); overflow: hidden; }
-.g-head.has-photo { min-height: 300px; }
-.g-hero-photo { position: absolute; inset: 0; }
-.g-hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; filter: saturate(.9); }
-.g-hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,13,12,.55) 0%, rgba(14,13,12,0) 36%, rgba(14,13,12,0) 56%, rgba(14,13,12,.94) 100%); }
+/* the head is a bar: table on the left, languages on the right, the restaurant's name under them in the serif */
+.g-eyebrow { display: block; font: 500 12px/1 var(--body); color: var(--g-txt-2); margin-bottom: 4px; }
+.g-head { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 8px 16px 14px; background: var(--g-bg); overflow: hidden; }
+.g-head.has-photo { min-height: 0; }
+.g-hero-photo { display: none; }
 .g-head-top { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .g-name { position: relative; }
-.g-head strong { display: block; font-family: var(--display); font-size: 42px; font-weight: 500; line-height: 1; text-wrap: balance; }
-.g-table-no { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid rgba(200,169,106,.8); border-radius: 999px; background: rgba(18,17,16,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: var(--g-txt); font: var(--caps); letter-spacing: .14em; text-transform: uppercase; }
-.g-table-no b { font-family: var(--display); font-size: 17px; font-weight: 600; line-height: 1; color: var(--g-oak); letter-spacing: 0; }
-.g-langs { display: flex; gap: 2px; padding: 3px 6px; border-radius: 999px; border: 1px solid rgba(241,234,221,.25); background: rgba(18,17,16,.5); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.g-langs button { border: 0; background: none; color: var(--g-txt-2); font-size: 12px; font-weight: 500; letter-spacing: .12em; min-width: 38px; min-height: 36px; border-radius: 999px; }
-.g-langs button[aria-pressed="true"] { color: var(--g-txt); box-shadow: inset 0 -1px 0 var(--g-oak); }
-.g-tabs { position: sticky; top: 0; z-index: 2; display: flex; gap: 6px; overflow-x: auto; padding: 0 12px; background: rgba(18,17,16,.9); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--g-rule); scrollbar-width: none; }
-.g-tabs button { flex: none; min-height: 50px; border: 0; background: none; color: var(--g-txt-2); padding: 4px 10px 0; border-bottom: 1px solid transparent; font: var(--caps); letter-spacing: .16em; text-transform: uppercase; }
-.g-tabs button[aria-current="true"] { color: var(--g-txt); border-bottom-color: var(--g-oak); }
+.g-head strong { display: block; font: 500 30px/1.1 var(--serif); letter-spacing: 0; text-wrap: balance; color: var(--g-txt); }
+.g-table-no { display: inline-flex; align-items: baseline; gap: 5px; padding: 0; border: 0; border-radius: 0; background: none; color: var(--g-txt-2); font: 500 13px/1 var(--body); }   /* plain text, no chip around a word and a number */
+.g-table-no b { font-size: 14px; font-weight: 700; line-height: 1; color: var(--g-txt); }
+.g-langs { display: flex; gap: 2px; padding: 0; border: 0; background: none; }
+.g-langs button { border: 0; background: none; color: var(--g-txt-2); font-size: 13px; font-weight: 500; min-width: 36px; min-height: 36px; border-radius: 10px; }
+.g-langs button[aria-pressed="true"] { color: var(--g-oak); font-weight: 700; background: var(--g-raise); }
+/* the category row, as the reference's quick actions: four circles with a line icon and a label under each; the current one gold-filled; it stays sticky because the category jump needs it */
+.g-tabs { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; overflow: visible; padding: 8px 12px 10px; background: rgba(23,26,33,.96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--g-rule); scrollbar-width: none; }
+.g-tabs button { position: relative; flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 0; border: 0; background: none; padding: 0; color: var(--g-txt-2); font-size: 12px; font-weight: 500; line-height: 1.1; white-space: nowrap; }
+.g-tabs button::before { content: ""; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--g-rule-2); background: var(--g-card); }
+.g-tabs button::after { position: absolute; top: 11px; left: 50%; margin-left: -11px; width: 22px; height: 22px; color: var(--g-oak); }
+.g-tabs button:nth-child(1) { --i: var(--i-cloche); }
+.g-tabs button:nth-child(2) { --i: var(--i-bowl); }
+.g-tabs button:nth-child(3) { --i: var(--i-cake); }
+.g-tabs button:nth-child(4) { --i: var(--i-glass); }
+.g-tabs button:nth-child(n+5) { --i: var(--i-cloche); }
+.g-tabs button[aria-current="true"] { color: var(--g-txt); font-weight: 600; }
+.g-tabs button[aria-current="true"]::before { background: var(--g-oak); border-color: var(--g-oak); }
+.g-tabs button[aria-current="true"]::after { color: var(--g-oak-ink); }
 .g-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 96px; }
-.g-cat { padding: 0 18px; scroll-margin-top: 50px; }
-.g-cat h2 { font: var(--caps); letter-spacing: .22em; text-transform: uppercase; color: var(--g-txt-2); padding: 26px 0 12px; }
-.g-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.g-item { position: relative; display: flex; flex-direction: column; border-radius: 14px; background: var(--g-card); box-shadow: inset 0 0 0 1px var(--g-rule); overflow: hidden; cursor: pointer; }
-.g-item-text { order: 2; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 12px 14px 14px; }
-.g-item h3 { font-family: var(--display); font-size: 21px; font-weight: 500; line-height: 1.1; }
-.g-item p { font-size: 13px; line-height: 1.4; color: var(--g-txt-2); }
-.g-item b { margin-top: auto; padding-top: 6px; color: var(--g-oak); font-family: var(--display); font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.g-item-pic { order: 1; position: relative; display: grid; }
-.g-item-pic .g-visual { width: 100%; aspect-ratio: 4 / 3; border-radius: 0; }
-.g-item-pic:not(:has(.g-visual)) { position: absolute; right: 10px; bottom: 10px; }
-.g-item-text:has(+ .g-item-pic:not(:has(.g-visual))) { padding-right: 58px; }
-.g-item:only-child, .g-item:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; min-height: 118px; }
-.g-item:only-child .g-item-pic, .g-item:last-child:nth-child(odd) .g-item-pic { flex: none; width: 42%; }
-.g-item:only-child .g-item-pic .g-visual, .g-item:last-child:nth-child(odd) .g-item-pic .g-visual { height: 100%; aspect-ratio: auto; }
-.g-cat:first-of-type .g-items { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-.g-cat:first-of-type .g-item, .g-cat:first-of-type .g-item:last-child:nth-child(odd) { flex-direction: column; }
-.g-cat:first-of-type .g-item-pic, .g-cat:first-of-type .g-item:last-child:nth-child(odd) .g-item-pic { width: 100%; }
-.g-cat:first-of-type .g-item-pic .g-visual, .g-cat:first-of-type .g-item:last-child:nth-child(odd) .g-item-pic .g-visual { height: auto; aspect-ratio: 16 / 10; }
-.g-cat:first-of-type .g-item h3 { font-size: 26px; }
-.g-cat:first-of-type .g-item-text { padding: 14px 16px 16px; }
-.g-visual { display: block; border-radius: 12px; overflow: hidden; background: var(--g-card); }
+.g-cat { padding: 0 16px; scroll-margin-top: 78px; }
+.g-cat h2 { font-size: 13px; font-weight: 600; color: var(--g-txt-2); padding: 18px 0 2px; }
+/* dishes are rows: a round photo at the left, the text, the price in gold, the add circle at the right, a hairline between rows */
+.g-items { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.g-item { position: relative; display: flex; flex-direction: row; align-items: center; gap: 12px; padding: 12px 0; border-radius: 0; background: none; box-shadow: none; border-bottom: 1px solid var(--g-rule); overflow: visible; cursor: pointer; }
+.g-item-pic { display: contents; }   /* its photo and its add control become the row's own items: photo left, control right */
+.g-item-pic .g-visual { order: 0; flex: none; width: 48px; height: 48px; aspect-ratio: 1 / 1; border-radius: 50%; }
+.g-item-text { order: 1; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding: 0; }
+.g-item h3 { font-size: 16px; font-weight: 600; line-height: 1.25; }
+.g-item p { font-size: 13px; line-height: 1.4; color: var(--g-txt-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.g-item b { margin-top: 2px; align-self: flex-start; color: var(--g-oak); font-size: 15px; font-weight: 600; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.g-visual { display: block; border-radius: 50%; overflow: hidden; background: var(--g-raise); }
 .g-visual img, .g-visual svg { display: block; width: 100%; height: 100%; object-fit: cover; }
-.g-item-add { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--g-oak); background: rgba(18,17,16,.6); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); color: var(--g-oak); font-family: var(--display); font-size: 25px; font-weight: 400; line-height: 1; }
-.g-visual + .g-item-add { position: absolute; right: 10px; bottom: 10px; }
-.g-item.has-qty .g-item-add { background: var(--g-oak); color: var(--g-oak-ink); font-family: var(--body); font-size: 15px; font-weight: 700; }
+.g-item-add { order: 2; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--g-rule-2); background: var(--g-card); color: var(--g-oak); box-shadow: none; font-size: 20px; font-weight: 400; line-height: 1; }
+/* a chosen dish: its count stands as "1 ×" in gold text where the add circle was (no disc around a number) */
+.g-item.has-qty .g-item-add { display: block; white-space: nowrap; width: auto; height: auto; padding: 0; border: 0; border-radius: 0; background: none; font-size: 15px; font-weight: 700; line-height: 1.4; }
+.g-item.has-qty .g-item-add::after { content: " \00d7"; }
 .g-cat .g-item.is-out { cursor: default; }
 .g-item.is-out h3, .g-item.is-out p { color: var(--g-txt-2); }
 .g-item.is-out b { color: var(--g-txt-2); text-decoration: line-through; }
 .g-item.is-out img { filter: grayscale(1); opacity: .4; }
-.g-item-foot { display: flex; margin-top: 6px; }
-.g-chip { font: var(--caps); letter-spacing: .14em; text-transform: uppercase; border: 1px solid var(--g-rule); border-radius: 999px; padding: 7px 10px; color: var(--g-txt-2); }
+.g-item-foot { display: flex; margin-top: 2px; }
+.g-chip { font-size: 12px; font-weight: 600; border: 0; border-radius: 0; padding: 0; color: var(--g-txt-2); }   /* a status as plain text */
 .g-bar { position: absolute; z-index: 3; left: 14px; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
-.g-bar .g-cta { box-shadow: 0 12px 32px rgba(0,0,0,.6); }
-.g-cta { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; min-height: 56px; border: 0; border-radius: 999px; padding: 0 22px; background: var(--g-txt); color: var(--g-oak-ink); font-size: 16px; font-weight: 600; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
-.g-cta > span:last-child:not(:only-child) { font-family: var(--display); font-size: 20px; font-weight: 600; }
-.g-cta:active { background: #DED6C6; }
+.g-bar .g-cta { box-shadow: 0 10px 28px rgba(0,0,0,.45); }
+.g-cta { display: flex; justify-content: space-between; align-items: center; gap: 6px; width: 100%; min-height: 54px; border: 0; border-radius: 999px; padding: 0 20px; background: var(--g-oak); color: var(--g-oak-ink); font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.g-cta > span:last-child:not(:only-child) { font-size: 17px; font-weight: 700; }
+.g-cta:active { background: var(--gold-2); }
 .g-cta:disabled { background: var(--g-raise); color: var(--g-txt-2); cursor: default; }
 .g-cta > span:only-child { margin: 0 auto; }
-.g-cta-label { flex: 1; text-align: left; }
-.g-cta-count { display: grid; place-items: center; min-width: 28px; height: 28px; border-radius: 50%; background: var(--g-oak-ink); color: var(--g-txt); font-size: 14px; }
-.g-backdrop { position: absolute; z-index: 5; inset: 0; background: rgba(8,7,6,.72); }
-.g-sheet { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; max-height: 92%; display: flex; flex-direction: column; background: var(--g-bg); border-radius: 28px 28px 0 0; overflow: hidden; }
+.g-cta > span { white-space: nowrap; }
+.g-sheet-foot.is-add .g-cta { padding: 0 16px; min-width: 0; }
+.g-sheet-foot.is-add .g-qty button { width: 36px; }
+.g-cta-count { display: inline; order: 1; flex: 1; min-width: 0; height: auto; border-radius: 0; background: none; color: inherit; font-size: 16px; font-weight: 600; text-align: left; }
+.g-cta-count::before { content: "("; }
+.g-cta-count::after { content: ")"; }
+.g-cta-label { order: 0; flex: none; display: inline-flex; align-items: center; gap: 8px; --i: var(--i-bag); }
+.g-cta-label::before { width: 20px; height: 20px; }
+.g-cta > span:last-child:not(:only-child) { order: 2; }
+.g-backdrop { position: absolute; z-index: 5; inset: 0; background: rgba(0,0,0,.55); }
+.g-sheet { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; max-height: 92%; display: flex; flex-direction: column; background: var(--g-card); border-radius: 20px 20px 0 0; overflow: hidden; }
 .g-sheet-tall { height: 90%; }
 .g-sheet-body { flex: 1; overflow-y: auto; padding: 20px 20px; }
-.g-sheet-body h2 { font-family: var(--display); font-size: 34px; font-weight: 500; line-height: 1.05; }
-.g-close { position: absolute; z-index: 1; top: 14px; right: 14px; width: 40px; height: 40px; border: 1px solid rgba(241,234,221,.3); border-radius: 50%; background: rgba(18,17,16,.55); color: var(--g-txt); font-size: 22px; line-height: 1; }
+.g-sheet-body h2 { font: 500 26px/1.15 var(--serif); letter-spacing: 0; }
+.g-close { position: absolute; z-index: 1; top: 12px; right: 12px; width: 36px; height: 36px; border: 1px solid var(--g-rule-2); border-radius: 50%; background: var(--g-raise); color: var(--g-txt); font-size: 20px; line-height: 1; }
 .g-close + .g-sheet-body h2 { padding-right: 44px; }
-.g-sheet-photo { position: relative; margin: -20px -20px 18px; height: 240px; overflow: hidden; }
+.g-sheet-photo { position: relative; margin: -20px -20px 16px; height: 220px; overflow: hidden; }
 .g-sheet-photo .g-visual { height: 100%; border-radius: 0; }
-.g-sheet-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,17,16,.35), rgba(18,17,16,0) 40%, rgba(18,17,16,0) 70%, rgba(18,17,16,1)); pointer-events: none; }
+.g-sheet-photo::after { display: none; }
 .g-sheet-photo + h2 { padding-right: 0; }
-.g-sheet-foot { padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--g-rule); display: grid; gap: 10px; }
+.g-sheet-foot { padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--g-rule); display: grid; gap: 10px; }
 .g-sheet-foot.is-add { display: flex; align-items: stretch; gap: 10px; }
 .g-sheet-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.g-sheet-title b { color: var(--g-oak); }
 .g-muted { color: var(--g-txt-2); line-height: 1.45; margin-top: 8px; }
 .g-small { font-size: 13px; }
-.g-group { border: 0; padding: 0; margin: 22px 0 0; display: grid; gap: 8px; }
+.g-group { border: 0; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
 .g-group.is-one { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
-.g-group legend { font: var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--g-txt); padding: 0 0 10px; display: flex; justify-content: space-between; align-items: baseline; width: 100%; }
-.g-group legend small { font: 400 12px/1 var(--body); letter-spacing: 0; text-transform: none; color: var(--g-txt-2); margin-left: 6px; }
-.g-choice { display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 16px; border: 1px solid var(--g-rule); border-radius: 999px; background: transparent; color: var(--g-txt); font-size: 14px; font-variant-numeric: tabular-nums; text-align: left; }
+.g-group legend { font-size: 14px; font-weight: 600; color: var(--g-txt); padding: 0 0 8px; display: flex; justify-content: space-between; align-items: baseline; width: 100%; }
+.g-group legend small { font: 400 12px/1 var(--body); color: var(--g-txt-2); margin-left: 6px; }
+.g-choice { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border: 1px solid var(--g-rule); border-radius: 12px; background: var(--g-raise); color: var(--g-txt); font-size: 14px; font-variant-numeric: tabular-nums; text-align: left; }
 .g-choice.is-many > span:first-child { flex: 1; }
-.g-choice.is-one { flex-direction: column; justify-content: center; gap: 3px; min-height: 64px; padding: 6px; border-radius: 16px; text-align: center; }
+.g-choice.is-one { flex-direction: column; justify-content: center; gap: 3px; min-height: 60px; padding: 6px; border-radius: 12px; text-align: center; }
 .g-choice.is-one span + span { color: var(--g-txt-2); font-size: 13px; }
-.g-choice span + span { color: var(--g-oak); font-family: var(--display); font-size: 15px; font-weight: 600; }
-.g-choice.is-many::before { content: ""; flex: none; width: 18px; height: 18px; border: 1px solid var(--g-txt-2); border-radius: 50%; }
-.g-choice[aria-pressed="true"] { border-color: var(--g-oak); background: rgba(200,169,106,.08); font-weight: 500; }
-.g-choice.is-many[aria-pressed="true"]::before { border-color: var(--g-oak); background: var(--g-oak); box-shadow: inset 0 0 0 3px var(--g-bg); }
+.g-choice span + span { color: var(--g-txt); font-size: 14px; font-weight: 600; }
+.g-choice.is-many::before { content: ""; flex: none; width: 18px; height: 18px; border: 1.5px solid var(--g-txt-2); border-radius: 50%; }
+.g-choice[aria-pressed="true"] { border-color: var(--g-oak); background: var(--accent-tint); font-weight: 500; }
+.g-choice.is-many[aria-pressed="true"]::before { border-color: var(--g-oak); background: var(--g-oak); box-shadow: inset 0 0 0 3px var(--g-raise); }
 .g-choice[aria-pressed="true"] span + span { color: var(--g-oak); }
-.g-note { display: block; font: var(--caps); letter-spacing: .2em; text-transform: uppercase; margin-top: 24px; }
-.g-note-input { width: 100%; min-height: 50px; margin-top: 10px; padding: 0 14px; border: 1px solid var(--g-rule); border-radius: 12px; background: transparent; color: var(--g-txt); }
+.g-note { display: block; font-size: 14px; font-weight: 600; margin-top: 20px; }
+.g-note-input { width: 100%; min-height: 48px; margin-top: 8px; padding: 0 12px; border: 1px solid var(--g-rule); border-radius: 12px; background: var(--g-raise); color: var(--g-txt); }
 .g-note-input::placeholder { color: var(--g-txt-2); opacity: 1; }
-.g-qty { flex: none; display: inline-flex; align-items: center; border: 1px solid var(--g-rule); border-radius: 999px; background: transparent; }
-.g-qty button { width: 42px; height: 54px; border: 0; background: none; color: var(--g-txt); font-size: 21px; }
-.g-qty output { min-width: 22px; text-align: center; font-family: var(--display); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.g-qty { flex: none; display: inline-flex; align-items: center; border: 1px solid var(--g-rule-2); border-radius: 999px; background: var(--g-raise); }
+.g-qty button { width: 42px; height: 52px; border: 0; background: none; color: var(--g-oak); font-size: 20px; }
+.g-qty output { min-width: 22px; text-align: center; font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .g-qty-small { border-radius: 999px; }
-.g-qty-small button { width: 38px; height: 42px; }
-.g-line { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--g-rule); }
-.g-line-pic { flex: none; width: 60px; height: 60px; }
-.g-line-text { flex: 1; min-width: 0; display: grid; gap: 3px; }
-.g-line-text b { font-family: var(--display); font-size: 20px; font-weight: 500; line-height: 1.1; }
+.g-qty-small button { width: 36px; height: 40px; }
+.g-line { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--g-rule); }
+.g-line-pic { flex: none; width: 44px; height: 44px; border-radius: 50%; }
+.g-line-text { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.g-line-text b { font-size: 15px; font-weight: 600; line-height: 1.25; }
 .g-line-text span { color: var(--g-txt-2); font-size: 13px; font-variant-numeric: tabular-nums; }
-.g-line-text .g-line-price { color: var(--g-oak); font-family: var(--display); font-size: 17px; font-weight: 600; }
-.g-also { font: var(--caps); letter-spacing: .22em; text-transform: uppercase; color: var(--g-oak); margin: 24px 0 12px; }
-.g-suggest { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.g-suggest-item { display: grid; gap: 8px; align-content: space-between; min-height: 88px; padding: 12px; border: 1px solid var(--g-rule); border-radius: 14px; background: transparent; color: var(--g-txt); text-align: left; overflow: hidden; }
-.g-suggest-name { font-family: var(--display); font-size: 16px; line-height: 1.15; font-weight: 500; }
-.g-suggest-price { color: var(--g-oak); font-family: var(--display); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.g-cart-table { display: flex; align-items: center; gap: 12px; font-size: 13px; line-height: 1.35; color: var(--g-txt-2); }
-.g-cart-table b { flex: none; padding: 9px 12px; border-radius: 999px; background: var(--g-oak); color: var(--g-oak-ink); font: var(--caps); letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
-.g-hint { text-align: center; color: var(--g-txt-2); font-size: 12px; letter-spacing: .04em; }
-.g-notice { background: rgba(200,169,106,.1); border: 1px solid var(--g-oak); border-radius: 12px; padding: 10px 12px; font-size: 14px; margin: 12px 18px; }
+.g-line-text .g-line-price { color: var(--g-oak); font-size: 14px; font-weight: 600; }
+.g-also { font-size: 14px; font-weight: 600; color: var(--g-txt); margin: 20px 0 10px; }
+.g-suggest { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.g-suggest-item { display: grid; gap: 6px; align-content: space-between; min-height: 80px; padding: 10px; border: 1px solid var(--g-rule); border-radius: 12px; background: var(--g-raise); color: var(--g-txt); text-align: left; overflow: hidden; }
+.g-suggest-name { font-size: 13px; line-height: 1.25; font-weight: 600; }
+.g-suggest-price { color: var(--g-oak); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.g-cart-table { display: flex; align-items: center; gap: 10px; font-size: 13px; line-height: 1.35; color: var(--g-txt-2); }
+.g-cart-table b { flex: none; padding: 0; border-radius: 0; background: none; color: var(--g-txt); font-size: 13px; font-weight: 600; }
+.g-hint { text-align: center; color: var(--g-txt-2); font-size: 12px; }
+.g-notice { background: var(--accent-tint); border: 1px solid var(--g-rule-2); border-radius: 12px; padding: 10px 12px; font-size: 14px; margin: 12px 16px; }
 .g-sheet .g-notice { margin: 0 0 8px; }
-.g-error { color: #E7B3A5; font-size: 14px; font-weight: 600; }
-.g-brand { flex: none; padding: 18px 20px; background: var(--g-deep); border-bottom: 1px solid var(--g-rule); font-family: var(--display); font-size: 28px; font-weight: 500; line-height: 1; }
-.g-pay-table { align-self: flex-start; padding: 9px 12px; border-radius: 999px; background: var(--g-oak); color: var(--g-oak-ink); font: var(--caps); letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
-.g-pay { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 28px 24px; }
-.g-pay h1 { font-family: var(--display); font-size: 38px; font-weight: 500; line-height: 1.05; }
+.g-error { color: var(--g-oak); font-size: 14px; font-weight: 600; }
+.g-brand { flex: none; padding: 14px 20px 12px; background: var(--g-bg); border-bottom: 1px solid var(--g-rule); font: 500 24px/1.1 var(--serif); }
+.g-pay-table { align-self: flex-start; padding: 0; border-radius: 0; background: none; color: var(--g-txt); font-size: 13px; font-weight: 600; }
+.g-pay { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 28px 24px; }
+.g-pay h1 { font: 500 28px/1.15 var(--serif); }
 .g-pay p { color: var(--g-txt-2); line-height: 1.5; }
-.g-pay-total { font-family: var(--display); font-size: 60px; font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
-.g-order { display: grid; gap: 14px; align-content: start; padding: 20px; }
-.g-status { display: grid; gap: 16px; padding: 22px; border-radius: 18px; border: 1px solid var(--g-rule); background: transparent; }
-.g-status.is-ready { background: var(--g-velvet); border-color: var(--g-velvet); }
+/* the amount is the largest thing on the screen, as in the reference app */
+.g-pay-total { font-size: 48px; font-weight: 700; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.g-order { display: grid; gap: 12px; align-content: start; padding: 16px; }
+.g-status { display: grid; gap: 16px; padding: 18px; border-radius: 16px; border: 1px solid var(--g-rule-2); background: var(--g-card); }
+.g-status.is-ready { background: var(--accent-tint); border-color: var(--g-oak); }
 .g-status-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-.g-status h1 { font-family: var(--display); font-size: 42px; font-weight: 500; line-height: 1; }
-.g-ticket-no { flex: none; margin-left: auto; display: grid; justify-items: center; min-width: 64px; padding: 8px 12px 7px; border-radius: 14px; border: 1px solid var(--g-oak); background: transparent; color: var(--g-txt); font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
-.g-ticket-no small { font: 500 10px/1.4 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--g-txt-2); }
+.g-status h1 { font: 500 32px/1.05 var(--serif); letter-spacing: 0; }
+.g-ticket-no { flex: none; margin-left: auto; display: grid; justify-items: end; min-width: 0; padding: 2px 0 0; border-radius: 0; border: 0; background: none; color: var(--g-oak); font-size: 24px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }   /* the table as plain gold text */
+.g-ticket-no small { font: 500 10px/1.4 var(--body); color: var(--g-txt-2); }
+/* the four steps as circles with icons: past and current gold-filled with the dark icon, the rest outlined */
 .g-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.g-steps li { padding-top: 10px; font-size: 12px; letter-spacing: .04em; color: var(--g-txt-2); border-top: 2px solid var(--g-rule); }
-.g-steps .is-past { border-color: var(--g-oak); }
-.g-steps .is-now { border-color: var(--g-oak); color: var(--g-txt); font-weight: 600; }
-.g-status.is-ready .g-steps li { color: #DCE6E0; border-top-color: rgba(255,255,255,.28); }
-.g-status.is-ready .g-steps .is-past, .g-status.is-ready .g-steps .is-now { border-top-color: var(--g-oak); }
-.g-message { font-size: 16px; line-height: 1.45; }
-.g-message.is-ready { font-size: 17px; font-weight: 600; }
-.g-ticket { background: transparent; border: 1px solid var(--g-rule); border-radius: 18px; padding: 14px 20px 16px; font-size: 15px; }
-.g-ticket-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; color: var(--g-oak); font: 500 13px/1.3 var(--body); letter-spacing: .08em; }
-.g-paid { color: var(--g-oak); font-weight: 600; }
-.g-ticket-line { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--g-rule); font-variant-numeric: tabular-nums; }
-.g-ticket-line small { display: block; color: var(--g-txt-2); margin-top: 3px; font-size: 13px; }
+.g-steps li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: 0; font-size: 11px; line-height: 1.2; text-align: center; color: var(--g-txt-2); }
+.g-steps li::before { content: ""; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--g-rule-2); background: var(--g-raise); }
+.g-steps li::after { position: absolute; top: 9px; left: 50%; margin-left: -9px; width: 18px; height: 18px; color: var(--g-txt-2); }
+.g-steps li:nth-child(1) { --i: var(--i-check); }
+.g-steps li:nth-child(2) { --i: var(--i-pot); }
+.g-steps li:nth-child(3) { --i: var(--i-bell); }
+.g-steps li:nth-child(4) { --i: var(--i-table); }
+.g-steps .is-past::before, .g-steps .is-now::before { background: var(--g-oak); border-color: var(--g-oak); }
+.g-steps .is-past::after, .g-steps .is-now::after { color: var(--g-oak-ink); }
+.g-steps .is-now { color: var(--g-txt); font-weight: 600; }
+.g-status.is-ready .g-steps li { color: var(--g-txt-2); }
+.g-status.is-ready .g-steps .is-now { color: var(--g-txt); }
+.g-message { font-size: 15px; line-height: 1.45; }
+.g-message.is-ready { font-size: 16px; font-weight: 600; }
+.g-ticket { background: var(--g-card); border: 1px solid var(--g-rule); border-radius: 14px; padding: 12px 16px 14px; font-size: 15px; }
+.g-ticket-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; color: var(--g-txt-2); font: 500 13px/1.3 var(--body); }
+.g-paid { color: var(--g-txt); font-weight: 700; }
+.g-ticket-line { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--g-rule); font-variant-numeric: tabular-nums; }
+.g-ticket-line small { display: block; color: var(--g-txt-2); margin-top: 2px; font-size: 13px; }
 .g-ticket-line.is-removed > span { color: var(--g-txt-2); text-decoration: line-through; }
 .g-ticket-line.is-removed small { text-decoration: none; display: block; }
-.g-ticket-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 13px; border-top: 1px solid var(--g-txt-2); font-family: var(--display); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.g-ticket-total b { color: var(--g-oak); font-family: var(--display); font-size: 24px; font-weight: 600; }
-.g-order .g-cta { background: none; border: 1px solid var(--g-oak); color: var(--g-txt); }
+.g-ticket-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid var(--g-rule-2); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.g-ticket-total b { color: var(--g-oak); font-size: 28px; font-weight: 700; letter-spacing: -.01em; }
+.g-order .g-cta { background: var(--g-card); border: 1px solid var(--g-rule-2); color: var(--g-txt); }
 
 /* ---- kitchen ---- */
-.k-app { min-height: 100%; background: var(--night); color: var(--cream); padding: env(safe-area-inset-top, 0px) 16px 24px; font-size: 16px; }
-.k-offline { margin: 0 0 12px; padding: 14px 16px; border-radius: 12px; background: #4A1F15; color: #fff; font-size: 16px; }
-.k-sound-hint { margin: 0 0 12px; padding: 10px 14px; border-radius: 12px; background: rgba(200,169,106,.12); border: 1px solid var(--gold); color: var(--cream); font-weight: 500; }
-.app-install { position: fixed; z-index: 20; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); max-width: 460px; margin: 0 auto; display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border: 1px solid var(--night-3); border-radius: 14px; background: var(--night-2); color: #fff; font-size: 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, .3); }
+.k-app { min-height: 100%; background: var(--screen); color: var(--ink); padding: env(safe-area-inset-top, 0px) 16px 24px; font-size: 16px; }
+/* one hue: what is wrong is loud gold on this palette (a gold block, a gold edge), never a second colour */
+.k-offline { margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; background: var(--accent); color: var(--accent-ink); font-size: 16px; font-weight: 600; }
+.k-sound-hint { margin: 0 0 12px; padding: 10px 14px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); color: var(--ink); font-weight: 500; }
+.app-install { position: fixed; z-index: 20; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); max-width: 460px; margin: 0 auto; display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border: 1px solid var(--gold-line); border-radius: 14px; background: var(--card); color: var(--ink); font-size: 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, .4); }
 .app-install span { flex: 1; min-width: 0; }
-.app-install button { min-height: 40px; min-width: 40px; border: 0; border-radius: 999px; background: none; color: #fff; font-size: 16px; }
-.app-install [data-install] { padding: 0 14px; background: var(--cream); color: var(--night); font-size: 14px; font-weight: 600; }
-body:has(.k-app), body:has(.a-app) { background: var(--night); }
-body:has(.a-app) { background: var(--tile); }
-.k-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0 16px; flex-wrap: wrap; }
-.k-top nav { display: flex; gap: 8px; }
-.k-top nav button { min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--night-3); background: transparent; color: var(--cream-2); font: 500 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; }
-.k-top nav button[aria-pressed="true"] { background: transparent; border-color: var(--gold); color: var(--cream); }
-.k-status { display: flex; align-items: center; gap: 12px; font: 500 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-2); }
-.k-status button { min-height: 42px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--night-3); background: none; font: inherit; }
-.k-dot::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 8px; vertical-align: 1px; }
-.k-dot.is-off { color: #E7B3A5; }
-.k-dot.is-off::before { background: #C9553C; }
-.k-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
-.k-col h2 { font: var(--caps); letter-spacing: .22em; text-transform: uppercase; color: var(--cream-2); padding: 8px 0 12px; margin-bottom: 12px; border-bottom: 1px solid var(--night-3); display: flex; justify-content: space-between; align-items: baseline; }
-.k-col h2 span { font-family: var(--display); font-size: 20px; font-weight: 600; color: var(--cream); letter-spacing: 0; }
-.k-empty { color: var(--cream-2); padding: 16px 2px; }
-.k-ticket { background: var(--night-2); color: var(--cream); border: 1px solid var(--night-3); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.app-install button { min-height: 40px; min-width: 40px; border: 0; border-radius: 999px; background: none; color: var(--ink); font-size: 16px; }
+.app-install [data-install] { padding: 0 14px; background: var(--accent); color: var(--accent-ink); font-size: 14px; font-weight: 600; }
+body:has(.k-app), body:has(.a-app) { background: var(--screen); }
+.k-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0 14px; flex-wrap: wrap; }
+.k-top nav { display: flex; gap: 6px; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.k-top nav::-webkit-scrollbar { display: none; }
+.k-top nav button { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink-2); font: 500 14px/1 var(--body); white-space: nowrap; flex: none; }
+.k-top nav button::before { width: 18px; height: 18px; }
+.k-top nav button:nth-child(1) { --i: var(--i-receipt); }
+.k-top nav button:nth-child(2) { --i: var(--i-grid); }
+.k-top nav button:nth-child(3) { --i: var(--i-check-circle); }
+.k-top nav button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.k-status { display: flex; align-items: center; gap: 10px; font: 500 13px/1 var(--body); color: var(--ink-2); }
+.k-status button { min-height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font: inherit; }
+.k-dot::before { display: none; }
+.k-dot.is-off { color: var(--accent); }
+.k-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.k-col h2 { font-size: 13px; font-weight: 600; color: var(--ink-2); padding: 6px 0 10px; margin-bottom: 10px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; }
+.k-col h2 span { font-size: 18px; font-weight: 700; color: var(--ink); }
+.k-empty { color: var(--ink-2); padding: 14px 2px; }
+.k-ticket { background: var(--card); color: var(--ink); border: 1px solid var(--gold-line); border-radius: 16px; padding: 14px; margin-bottom: 10px; }
 .k-ticket.is-new { animation: k-in .2s ease-out; }
-.k-ticket.is-late { border-top: 3px solid var(--chili); }
+.k-ticket.is-late { border-top: 2px solid var(--accent); }
 .k-ticket header { display: flex; justify-content: space-between; align-items: flex-end; }
-.k-table { font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1; }
-.k-table small { display: block; font: 500 10px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--cream-2); margin-bottom: 6px; }
-.k-meta { display: grid; justify-items: end; font: 500 12px/1.3 var(--body); letter-spacing: .06em; color: var(--cream-2); }
-.k-meta span:last-child { font: 600 22px var(--display); color: var(--gold); }
-.k-ticket.is-late .k-meta span:last-child { color: #E7B3A5; }
-.k-flag { display: inline-block; margin-top: 10px; font: 500 12px/1.3 var(--body); padding: 5px 10px; border-radius: 999px; background: rgba(200,169,106,.12); border: 1px solid rgba(200,169,106,.45); color: var(--cream); }
-.k-flag-bad { display: block; background: rgba(181,69,47,.15); border-color: var(--chili); color: #F0B8A8; border-radius: 10px; }
-.k-ticket ul { list-style: none; margin: 12px 0; padding: 0; }
-.k-ticket li { padding: 8px 0; border-top: 1px solid var(--night-3); font-size: 17px; line-height: 1.3; }
-.k-ticket li b { font-size: 17px; font-weight: 600; color: var(--gold); margin-right: 4px; }
-.k-ticket li small { display: block; color: var(--cream-2); font-size: 13px; font-weight: 400; }
-.k-ticket li em { display: block; font-style: normal; font-weight: 500; color: #E7B3A5; font-size: 14px; }
-.k-go { width: 100%; min-height: 48px; border: 0; border-radius: 999px; background: var(--cream); color: var(--night); font-weight: 600; font-size: 15px; letter-spacing: .02em; }
+.k-table { font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+.k-table small { display: block; font: 500 13px/1 var(--body); color: var(--ink-2); margin-bottom: 6px; }
+.k-meta { display: grid; justify-items: end; font: 500 12px/1.3 var(--body); color: var(--ink-2); }
+.k-meta span:last-child { font: 700 20px var(--body); color: var(--ink); }
+.k-ticket.is-late .k-meta span:last-child { color: var(--accent); }
+.k-flag { display: block; margin-top: 8px; font: 500 13px/1.3 var(--body); padding: 0; border-radius: 0; background: none; border: 0; color: var(--ink-2); }   /* a status as plain text */
+.k-flag-bad { display: block; color: var(--accent); font-weight: 600; }
+.k-ticket ul { list-style: none; margin: 10px 0; padding: 0; }
+.k-ticket li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.3; }
+.k-ticket li b { font-size: 16px; font-weight: 700; color: var(--accent); margin-right: 4px; }
+.k-ticket li small { display: block; color: var(--ink-2); font-size: 13px; font-weight: 400; }
+.k-ticket li em { display: block; font-style: normal; font-weight: 700; color: var(--ink); font-size: 14px; }
+.k-go { width: 100%; min-height: 46px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 15px; }
 .k-quiet-row { display: flex; justify-content: center; gap: 16px; }
-.k-remove { display: block; margin-top: 6px; min-height: 38px; padding: 0 12px; border: 1px solid var(--chili); border-radius: 999px; background: none; color: #E7B3A5; font-size: 13px; font-weight: 500; }
-.k-quiet { margin-top: 4px; min-height: 44px; border: 0; background: none; color: var(--cream-2); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.k-remove { display: block; margin-top: 6px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink-2); font-size: 13px; font-weight: 500; }
+.k-quiet { margin-top: 4px; min-height: 44px; border: 0; background: none; color: var(--ink-2); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
 .k-confirm { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px; }
 .k-confirm span { grid-column: 1 / -1; font-weight: 500; }
-.k-confirm button { min-height: 42px; border-radius: 999px; border: 1px solid var(--night-3); background: transparent; color: var(--cream); }
-.k-confirm button:first-of-type { background: var(--chili); border-color: var(--chili); color: #fff; font-weight: 600; }
+.k-confirm button { min-height: 42px; border-radius: 999px; border: 1px solid var(--line); background: var(--raise); color: var(--ink); }
+.k-confirm button:first-of-type { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
 .k-receipt { display: grid; gap: 8px; }
-.k-till { display: flex; justify-content: space-between; align-items: baseline; background: rgba(200,169,106,.1); border: 1px solid rgba(200,169,106,.45); padding: 10px 12px; border-radius: 12px; font-weight: 500; }
-.k-till b { font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--gold); font-variant-numeric: tabular-nums; }
-.k-receipt label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--cream-2); }
-.k-receipt input { min-height: 46px; padding: 0 12px; border: 1px solid var(--night-3); border-radius: 12px; background: transparent; color: var(--cream); font-family: var(--mono); font-size: 18px; }
-.k-alert { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; margin-bottom: 12px; border-radius: 12px; background: #4A1F15; font-weight: 500; }
-.k-alert button { min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--cream); color: var(--night); font-weight: 600; }
-.k-error { color: #E7B3A5; font-weight: 500; }
+.k-till { display: flex; justify-content: space-between; align-items: baseline; background: none; border: 0; border-top: 1px solid var(--gold-line); padding: 10px 0 0; border-radius: 0; font-weight: 500; }
+.k-till b { font-size: 22px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.k-receipt label { font-size: 12px; color: var(--ink-2); }
+.k-receipt input { min-height: 46px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--raise); color: var(--ink); font-family: var(--mono); font-size: 18px; }
+.k-alert { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; margin-bottom: 12px; border-radius: 12px; background: var(--accent-tint); border: 1px solid var(--accent); font-weight: 500; }
+.k-alert button { min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.k-error { color: var(--accent); font-weight: 500; }
 .k-error-bar { padding-bottom: 8px; }
-.k-tables { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.k-tile { display: grid; align-content: start; gap: 4px; min-height: 128px; padding: 14px; border-radius: 16px; border: 1px solid var(--night-3); background: var(--night-2); color: var(--cream-2); font-size: 14px; }
-.k-tile b { font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1; color: var(--cream); font-variant-numeric: tabular-nums; }
-.k-tile small { font: 500 12px/1.3 var(--body); letter-spacing: .04em; }
-.k-tile.is-paid, .k-tile.is-preparing, .k-tile.is-ready { background: var(--night-2); border-color: var(--gold); color: var(--cream); font-weight: 500; }
-.k-tile.is-paid b, .k-tile.is-preparing b, .k-tile.is-ready b { color: var(--cream); }
-.k-tile.is-ready { background: rgba(200,169,106,.12); }
-.k-tile.is-late { border-top: 3px solid var(--chili); }
-.k-stop { max-width: 900px; display: grid; gap: 18px; }
-.k-lede { color: var(--cream-2); }
-.k-stop h2 { font: var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--cream-2); margin-bottom: 10px; }
+.k-tables { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.k-tile { display: grid; align-content: start; gap: 4px; min-height: 120px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); color: var(--ink-2); font-size: 14px; }
+.k-tile b { font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.k-tile small { font: 500 12px/1.3 var(--body); }
+.k-tile.is-paid, .k-tile.is-preparing, .k-tile.is-ready { background: var(--card); border-color: var(--accent); color: var(--ink); font-weight: 500; }
+.k-tile.is-paid b, .k-tile.is-preparing b, .k-tile.is-ready b { color: var(--accent); }
+.k-tile.is-ready { background: var(--accent-tint); }
+.k-tile.is-late { border-top: 2px solid var(--accent); }
+.k-stop { max-width: 900px; display: grid; gap: 16px; }
+.k-lede { color: var(--ink-2); }
+.k-stop h2 { font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
 .k-stop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
-.k-stop-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 56px; padding: 0 14px; border-radius: 14px; border: 1px solid var(--night-3); background: transparent; color: var(--cream); text-align: left; }
-.k-stop-item b { font-size: 14px; color: var(--gold); font-weight: 500; }
-.k-stop-item[aria-pressed="true"] { background: var(--chili); border-color: var(--chili); color: #fff; }
-.k-stop-item[aria-pressed="true"] b { color: #fff; }
+.k-stop-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 52px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-align: left; }
+.k-stop-item b { font-size: 14px; color: var(--ink-2); font-weight: 500; }
+.k-stop-item[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.k-stop-item[aria-pressed="true"] b { color: var(--accent-ink); }
 .k-login { max-width: 320px; margin: 0 auto; padding-top: 12vh; display: grid; gap: 10px; }
-.k-login h1 { font-family: var(--display); font-size: 32px; font-weight: 500; margin-bottom: 8px; }
-.k-login .k-go { min-height: 56px; }
-.k-login input { min-height: 52px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--night-3); background: var(--night-2); font-size: 22px; letter-spacing: .2em; }
-.a-app .k-login input { background: var(--paper); border-color: var(--line); }
+.k-login h1 { font: 500 30px/1.1 var(--serif); margin-bottom: 8px; }
+.k-login .k-go { min-height: 54px; }
+.k-login input { min-height: 52px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--raise); color: var(--ink); font-size: 22px; letter-spacing: .2em; }
+.a-app .k-login input { background: var(--raise); border-color: var(--line); }
 @keyframes k-in { from { transform: translateY(-8px); opacity: 0; } }
 
 @media (max-width: 760px) {
@@ -285,46 +332,57 @@ body:has(.a-app) { background: var(--tile); }
 /* ---- owner ---- */
 .a-app { max-width: 1040px; margin: 0 auto; padding: calc(22px + env(safe-area-inset-top, 0px)) 16px 40px; display: grid; gap: 18px; }
 .a-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.a-head h1 { font-family: var(--display); font-size: 34px; font-weight: 500; line-height: 1; }
-.a-seg { display: flex; flex-wrap: wrap; gap: 2px; background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
-.a-seg button { border: 0; background: none; min-height: 40px; padding: 0 14px; border-radius: 999px; font: 500 12px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
-.a-seg button[aria-pressed="true"] { background: var(--ink); color: var(--tile); }
+.a-head h1 { font: 500 30px/1.1 var(--serif); letter-spacing: 0; }
+.a-seg { display: flex; flex-wrap: wrap; gap: 2px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.a-seg button { border: 0; background: none; min-height: 38px; padding: 0 14px; border-radius: 999px; font: 500 14px/1 var(--body); color: var(--ink-2); }
+.a-seg button[aria-pressed="true"] { background: var(--raise); color: var(--accent); font-weight: 600; }
 .a-controls { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
-.a-button { display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); font-weight: 500; font-size: 14px; text-decoration: none; }
+.a-button { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--gold-line); background: var(--card); color: var(--ink); font-weight: 500; font-size: 14px; text-decoration: none; }
 .a-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
-.a-stat { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 4px; align-content: start; }
-.a-stat span { font: 500 12.5px/1.3 var(--body); letter-spacing: .04em; color: var(--ink-2); }
-.a-stat b { font-family: var(--display); font-size: clamp(28px, 3vw, 34px); font-weight: 500; line-height: 1.05; font-variant-numeric: tabular-nums; }
+/* a stat tile: label, value, note, and a small icon circle at the top right */
+.a-stat { position: relative; background: var(--card); border: 1px solid var(--gold-line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; align-content: start; }
+.a-stat::before { content: ""; position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--gold-line); background: var(--raise); }
+.a-stat::after { position: absolute; top: 21px; right: 21px; width: 18px; height: 18px; color: var(--accent); }
+.a-stat:nth-child(1) { --i: var(--i-coins); }
+.a-stat:nth-child(2) { --i: var(--i-receipt); }
+.a-stat:nth-child(3) { --i: var(--i-plus-circle); }
+.a-stat:nth-child(4) { --i: var(--i-repeat); }
+.a-stat:nth-child(5) { --i: var(--i-percent); }
+.a-stat:nth-child(n+6) { --i: var(--i-coins); }
+.a-stat span { font: 500 12.5px/1.3 var(--body); color: var(--ink-2); padding-right: 44px; white-space: normal; }
+.a-stat b { white-space: nowrap; font-size: clamp(22px, 1.6vw + 6px, 28px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .a-stat small { font-size: 12.5px; color: var(--ink-2); }
 .a-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
-.a-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 18px; min-width: 0; }
+.a-panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; min-width: 0; }
 .a-panel:has(.a-hours) { display: flex; flex-direction: column; }
-.a-panel h2 { font: var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 14px; }
+.a-panel h2 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
 .a-muted { color: var(--ink-2); }
 .a-bar { display: grid; grid-template-columns: minmax(0, 1fr) 90px; gap: 4px 8px; padding: 6px 0; font-size: 14px; }
-.a-bar i { grid-column: 1; grid-row: 2; height: 4px; background: linear-gradient(90deg, var(--ink) var(--w), var(--line) var(--w)); }
-.a-bar b { grid-column: 2; grid-row: 1 / 3; align-self: center; text-align: right; font-family: var(--display); font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+/* the bar's filled share is a block, not a gradient */
+.a-bar i { grid-column: 1; grid-row: 2; display: block; height: 4px; border-radius: 2px; background: var(--raise); overflow: hidden; }
+.a-bar i::before { content: ""; display: block; width: var(--w); height: 100%; background: var(--accent); }
+.a-bar b { grid-column: 2; grid-row: 1 / 3; align-self: center; text-align: right; font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .a-hours { flex: 1; display: flex; align-items: flex-end; gap: 4px; min-height: 150px; }
 .a-hour { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; font-size: 12px; color: var(--ink-2); }
-.a-hour i { width: 100%; height: calc((100% - 18px) * var(--f)); background: var(--ink); }
+.a-hour i { width: 100%; height: calc((100% - 18px) * var(--f)); border-radius: 3px 3px 0 0; background: #3A3F4A; }
 .a-price { display: grid; grid-template-columns: minmax(0, 1fr) 90px auto; gap: 8px; align-items: center; padding: 5px 0; }
-.a-price input { min-height: 40px; padding: 0 8px; border: 1px solid var(--line); border-radius: 8px; text-align: right; font-variant-numeric: tabular-nums; }
-.a-price button { min-height: 40px; padding: 0 12px; border: 1px solid var(--ink); background: var(--paper); border-radius: 999px; font-size: 13px; }
+.a-price input { min-height: 40px; padding: 0 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--raise); text-align: right; font-variant-numeric: tabular-nums; }
+.a-price button { min-height: 40px; padding: 0 12px; border: 1px solid var(--line); background: var(--raise); border-radius: 999px; font-size: 13px; }
 .a-qr { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-.a-qr-card { display: grid; justify-items: center; gap: 2px; padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 14px; break-inside: avoid; }
+.a-qr-card { display: grid; justify-items: center; gap: 2px; padding: 12px; background: #fff; color: #111; border: 1px solid var(--line); border-radius: 16px; break-inside: avoid; }
 .a-qr-code { width: 100%; max-width: 180px; }
 .a-qr-code svg { display: block; width: 100%; height: auto; }
-.a-qr-card b { font-family: var(--display); font-size: 36px; font-weight: 500; line-height: 1.1; }
-.a-qr-card span { font-size: 12px; color: var(--ink-2); }
+.a-qr-card b { font-size: 32px; font-weight: 700; line-height: 1.1; }
+.a-qr-card span { font-size: 12px; color: #6E6E6E; }
 
 .home { max-width: 620px; margin: 0 auto; padding: 48px 16px; display: grid; gap: 14px; }
-.home h1 { font-family: var(--display); font-size: 36px; font-weight: 500; }
-.home a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); font-weight: 500; text-decoration: none; }
+.home h1 { font: 500 34px/1.1 var(--serif); }
+.home a { display: block; padding: 14px 16px; border: 1px solid var(--gold-line); border-radius: 16px; background: var(--card); color: var(--ink); font-weight: 500; text-decoration: none; }
 .home p { color: var(--ink-2); line-height: 1.5; }
 
 @media print {
   .a-noprint, .app-install { display: none !important; }
-  body, .a-app { background: #fff; }
+  body, .a-app { background: #fff; color: #000; }
   .a-qr { grid-template-columns: repeat(3, 1fr); }
 }
 
@@ -332,49 +390,49 @@ body:has(.a-app) { background: var(--tile); }
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* The demo stage: a product head on paper, then the phone and the kitchen tablet side by side, as they sit in the room. */
-body:has(.stage) { background: var(--tile); height: auto; }
+/* The demo stage: a dark backdrop as in the reference, the product head in the serif, then the phone and the kitchen tablet side by side. */
+body:has(.stage) { background: var(--paper); height: auto; }
 .stage { max-width: 1360px; margin: 0 auto; padding-block: 40px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 22px; }
 .stage-head { display: grid; gap: 6px; justify-items: start; border-bottom: 1px solid var(--line); padding-bottom: 26px; }
-.stage-eyebrow { font: var(--caps); letter-spacing: .22em; text-transform: uppercase; color: var(--gold-2); }
-.stage-head h1 { font-family: var(--display); font-size: clamp(36px, 4vw, 48px); font-weight: 500; line-height: 1; letter-spacing: -.01em; }
-.stage-rule { display: block; width: 40px; height: 1px; background: var(--gold); margin: 4px 0 6px; }
+.stage-eyebrow { font: 600 12px/1 var(--body); letter-spacing: .04em; color: var(--ink-2); }
+.stage-head h1 { font: 500 clamp(36px, 4vw, 48px)/1 var(--serif); letter-spacing: 0; }
+.stage-rule { display: block; width: 40px; height: 2px; background: var(--accent); margin: 6px 0 6px; }
 .stage-head p { color: var(--ink-2); line-height: 1.5; max-width: 62ch; font-size: 15px; }
 /* On a phone the view switcher stays at the top of the window while the page scrolls (the pointer's way to the kitchen is this bar) */
 .stage-tabs { display: none; gap: 2px; position: sticky; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 5; border-radius: 999px; padding: 4px; }
-/* two backdrops behind the buttons: the paper halo that hides scrolled content, then the pill with its hairline (later in tree order, so it paints above the halo) */
-.stage-tabs::before { content: ""; position: absolute; inset: -9px -16px; background: var(--tile); z-index: -1; }
-.stage-tabs::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--line); border-radius: inherit; background: var(--tile); z-index: -1; }
-.stage-tabs button { flex: 1; min-height: 42px; border: 0; background: none; border-radius: 999px; font: 500 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
-.stage-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--tile); }
+/* two backdrops behind the buttons: the halo that hides scrolled content, then the pill with its hairline (later in tree order, so it paints above the halo) */
+.stage-tabs::before { content: ""; position: absolute; inset: -9px -16px; background: var(--paper); z-index: -1; }
+.stage-tabs::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--line); border-radius: inherit; background: var(--card); z-index: -1; }
+.stage-tabs button { flex: 1; min-height: 40px; border: 0; background: none; border-radius: 999px; font: 500 14px/1 var(--body); color: var(--ink-2); }
+.stage-tabs button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
 .stage-room { display: grid; grid-template-columns: 404px minmax(0, 1fr); gap: 32px; align-items: start; }
-.stage-label { font: var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
-/* The frames fit the window a person has: the head, label and gaps above the frame take about 245 px, so 256 px leaves the whole bezel inside a 900 px window and the phone's bottom buttons above the fold from about 780 px up (measured at 1400x900 and 1533x807 by check_lux.py); the screens scroll inside. Below the 560 px floor the page scrolls (accepted). The vh clamp first is the fallback for browsers without svh. */
-.stage-phone { position: relative; width: 100%; max-width: 404px; height: clamp(560px, calc(100vh - 256px), 884px); height: clamp(560px, calc(100svh - 256px), 884px); padding: 12px; border: 0; border-radius: 58px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
-.stage-phone::before { content: ""; position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 118px; height: 34px; border-radius: 20px; background: #0B0B0A; z-index: 3; pointer-events: none; }
+.stage-label { font: 600 12px/1 var(--body); letter-spacing: .04em; color: var(--ink-2); margin-bottom: 12px; }
+/* The frames fit the window a person has: the head, label and gaps above the frame take about 245 px, so 256 px leaves the whole bezel inside a 900 px window and the phone's bottom buttons above the fold from about 780 px up; the screens scroll inside. Below the 560 px floor the page scrolls (accepted). The vh clamp first is the fallback for browsers without svh. The bezel is a step lighter than the page and the screen, with a lighter inner edge, so the dark screen reads inside a frame. */
+.stage-phone { position: relative; width: 100%; max-width: 404px; height: clamp(560px, calc(100vh - 256px), 884px); height: clamp(560px, calc(100svh - 256px), 884px); padding: 12px; border: 0; border-radius: 58px; background: #2B2F38; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.12); overflow: hidden; }
+.stage-phone::before { content: ""; position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 118px; height: 34px; border-radius: 20px; background: #0A0A0A; z-index: 3; pointer-events: none; }
 /* A status-bar band at the top of the screen: the island sits in it, so nothing scrolled or sticky (the category tabs) ever runs under the island. */
-#phone-screen { height: 100%; padding-top: 56px; border-radius: 46px; overflow: hidden; background: #0E0D0C; }
-.stage-mount { height: 100%; background: var(--night); }
-.stage-tablet { height: clamp(560px, calc(100vh - 256px), 884px); height: clamp(560px, calc(100svh - 256px), 884px); padding: 14px; border-radius: 30px; background: #2B2A28; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45), inset 0 0 0 1px #0E0D0C; overflow: hidden; }
+#phone-screen { height: 100%; padding-top: 56px; border-radius: 46px; overflow: hidden; background: var(--screen); }
+.stage-mount { height: 100%; background: var(--screen); }
+.stage-tablet { height: clamp(560px, calc(100vh - 256px), 884px); height: clamp(560px, calc(100svh - 256px), 884px); padding: 14px; border-radius: 30px; background: #2B2F38; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.12); overflow: hidden; }
 /* #kitchen-screen itself scrolls: it persists across the kitchen's full re-renders, so its scroll position survives them (the .k-app inside is rebuilt every 20 s). */
-.stage-kitchen { height: 100%; overflow: auto; border-radius: 18px; background: var(--night); }
+.stage-kitchen { height: 100%; overflow: auto; border-radius: 18px; background: var(--screen); }
 .stage-kitchen .k-app { min-height: 100%; padding: 18px 22px 24px; }
 .stage-owner { border-top: 1px solid var(--line); padding-top: 28px; min-width: 0; }
-.stage-owner .a-head h1 { font-size: 30px; }
+.stage-owner .a-head h1 { font-size: 28px; }
 .stage-owner .a-app { max-width: none; padding: 0; }
 @media (max-width: 960px) {
   .stage-tabs { display: flex; }
   /* anything scrolled into view (the pointer does that) stops below the sticky view switcher, never under it */
   html { scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
-  /* one column: compact head and hero, so the first dish is on screen at load in a short window */
+  /* one column: compact head, so the first dish is on screen at load in a short window */
   .stage { padding-block: 20px 40px; gap: 16px; }
   .stage-head { padding-bottom: 14px; }
   .stage-head h1 { font-size: 36px; }
   .stage-rule { margin: 4px 0 4px; }
   .stage-head p { font-size: 15px; line-height: 1.45; }
-  .stage-phone .g-head.has-photo { min-height: 220px; }
-  .stage-phone .g-head strong { font-size: 36px; }
-  .stage-phone .g-cat h2 { padding: 12px 0 10px; }
+  .stage-phone .g-head.has-photo { min-height: 0; }
+  .stage-phone .g-head strong { font-size: 26px; }
+  .stage-phone .g-cat h2 { padding: 14px 0 2px; }
   .stage-room { grid-template-columns: minmax(0, 1fr); }
   .stage-phone { margin: 0 auto; }
   .stage[data-show="guest"] .pane-kitchen, .stage[data-show="guest"] .pane-owner,
@@ -391,12 +449,12 @@ body:has(.stage) { background: var(--tile); height: auto; }
   .stage-phone { height: 800px; padding: 10px; border-radius: 48px; }
   .stage-phone::before { top: 22px; width: 100px; height: 28px; }
   #phone-screen { border-radius: 38px; padding-top: 46px; }
-  .stage-phone .g-head.has-photo { min-height: 200px; }
-  .stage-phone .g-head strong { font-size: 34px; }
-  .stage-phone .g-cat h2 { padding: 12px 0 10px; }
+  .stage-phone .g-head.has-photo { min-height: 0; }
+  .stage-phone .g-head strong { font-size: 26px; }
+  .stage-phone .g-cat h2 { padding: 14px 0 2px; }
   .stage-head { padding-bottom: 14px; }
   .stage-tablet { height: 760px; padding: 10px; border-radius: 22px; }
-  .stage-kitchen { border-radius: 14px; }
+  .stage-kitchen { border-radius: 12px; }
   .stage-kitchen .k-app { padding: 14px 14px 20px; }
 }
 
@@ -406,17 +464,36 @@ body:has(.stage) { background: var(--tile); height: auto; }
 .stage-credits summary::-webkit-details-marker { display: none; }
 .stage-credits p { margin-top: 4px; max-width: 74ch; line-height: 1.45; }
 .stage-credits a { color: inherit; }
-/* First-visit pointer at the real buttons: three steps, shown once. Taps pass through the dim
-   and through the text box; only the box's own two buttons take a tap. */
-.tour-ring { position: fixed; z-index: 40; display: none; border-radius: 10px; pointer-events: none; box-shadow: 0 0 0 3px var(--turmeric), 0 0 0 200vmax rgba(20,18,16,.5); }
-.tour-tip { position: fixed; z-index: 41; display: none; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 2px 10px; width: min(320px, calc(100vw - 24px)); padding: 8px 8px 8px 14px; border-radius: 10px; background: var(--paper); color: var(--ink); box-shadow: 0 8px 28px rgba(0,0,0,.3); font-size: 15px; line-height: 1.35; pointer-events: none; }
-.tour-text { flex: 1 1 150px; font-weight: 600; }
-.tour-step { display: block; font-size: 12px; font-weight: 700; color: var(--ink-2); }
-.tour-row { display: flex; gap: 6px; }
-.tour-row button { pointer-events: auto; min-height: 44px; padding: 0 12px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-2); cursor: pointer; }
-.tour-row .tour-done { background: var(--pine); color: #fff; }
+/* First-visit pointer at the real buttons: three steps, shown once. No dim: a frame around the
+   control and a small card beside it, both placed in page coordinates so a scroll moves them with
+   the page. Taps pass through the frame and the card; only the card's own buttons take a tap.
+   Same shape as the platform's guide (2026-11-10). */
+/* The pointer's own tokens, read from the page's accent, card, ink and display face with fallbacks, so a
+   re-theme of the page cannot flip a colour the pointer borrowed (critic round 4, 2026-11-14: the dark look
+   turned --pine to cream and Sapratu went white on cream) */
+:root { --tour-frame: var(--accent, var(--turmeric, #D6A15F)); --tour-bg: var(--card, var(--paper, #FFFFFF)); --tour-ink: var(--ink, #1A1A1A); --tour-ink-2: var(--ink-2, #5C5C5C); --tour-line: var(--gold-line, var(--line, rgba(0,0,0,.14))); --tour-action: var(--accent, var(--pine, #2F5D50)); --tour-action-ink: var(--accent-ink, #FFFFFF); --tour-font: var(--display, var(--body, sans-serif)); }
+.tour-layer { position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: visible; }
+.tour-ring { position: absolute; top: 0; left: 0; z-index: 40; display: none; box-sizing: border-box; border: 2px solid var(--tour-frame); border-radius: 12px; box-shadow: 0 0 0 1px rgba(20,18,16,.35), 0 0 0 6px color-mix(in srgb, var(--tour-frame) 18%, transparent); pointer-events: none; }
+.tour-tip { position: absolute; top: 0; left: 0; z-index: 41; display: none; flex-direction: column; gap: 8px; width: min(300px, calc(100vw - 24px)); padding: 12px 14px; box-sizing: border-box; border: 1px solid var(--tour-line); border-radius: 8px; background: var(--tour-bg); color: var(--tour-ink); box-shadow: 0 1px 2px rgba(0,0,0,.06); font-family: var(--body); pointer-events: none; }
+.tour-tip::before { content: ""; position: absolute; width: 10px; height: 10px; background: var(--tour-bg); border: 0 solid var(--tour-line); transform: rotate(45deg); }
+.tour-tip[data-side="top"]::before { top: -6px; left: var(--ax); border-left-width: 1px; border-top-width: 1px; }
+.tour-tip[data-side="bottom"]::before { bottom: -6px; left: var(--ax); border-right-width: 1px; border-bottom-width: 1px; }
+.tour-tip[data-side="left"]::before { left: -6px; top: var(--ay); border-left-width: 1px; border-bottom-width: 1px; }
+.tour-tip[data-side="right"]::before { right: -6px; top: var(--ay); border-right-width: 1px; border-top-width: 1px; }
+.tour-tip[data-side="none"]::before { display: none; }
+.tour-text { margin: 0; font-family: var(--tour-font); font-weight: 600; font-size: 19px; line-height: 1.3; }
+.tour-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 24px; font-size: 12px; }
+.tour-step { color: var(--tour-ink-2); letter-spacing: .06em; }
+.tour-btns { display: flex; align-items: center; gap: 6px; margin-right: -8px; }
+/* 44 px tap targets in a 24 px row: the buttons reach 10 px above and below it */
+.tour-row button { pointer-events: auto; min-height: 44px; margin: -10px 0; padding: 0 8px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 12px; color: var(--tour-ink-2); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+/* Sapratu is a filled pill in the page's accent: 32 px visible so it keeps clear of the card's edges, with an invisible 44 px tap area around it */
+.tour-row .tour-done { position: relative; min-height: 32px; margin: -4px 0; padding: 0 12px; border-radius: 999px; background: var(--tour-action); color: var(--tour-action-ink); font-size: 13px; font-weight: 600; text-decoration: none; }
+.tour-row .tour-done::before { content: ""; position: absolute; inset: -6px; }
+.tour-tip.is-new { animation: tour-in 160ms ease-out; }
+@keyframes tour-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tour-tip.is-new { animation: none; } }
 .tour-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-
 </style>
 <main class="stage" data-show="guest">
   <header class="stage-head">
@@ -2770,11 +2847,11 @@ function startStage() {
   for (const b of buttons) b.addEventListener('click', () => pane(b.dataset.pane));
   pane('guest');
 }
-// First-visit pointer: dims the page around the real button to tap next. Three steps, in the
-// order an order travels (dish, payment, kitchen). It moves on when the real action happens,
-// its ring and text let every tap through to the page (only Izlaist and Sapratu take one), it
-// never goes back once the order is paid, it ends by itself when the person has seen the
-// ticket and moves on, and it shows once per browser.
+// First-visit pointer: a frame around the real button to tap next and a small card beside it,
+// no dim. Three steps, in the order an order travels (dish, payment, kitchen). It moves on when
+// the real action happens, its frame and card let every tap through to the page (only Izlaist
+// and Sapratu take one), it never goes back once the order is paid, it ends by itself when the
+// person has seen the ticket and moves on, and it shows once per browser.
 function startTour() {
   const KEY = 'gk-tour-v1';
   try { if (localStorage.getItem(KEY)) return; } catch { /* no storage: it shows on every visit */ }
@@ -2789,15 +2866,30 @@ function startTour() {
   ring.setAttribute('aria-hidden', 'true');
   const tip = document.createElement('div');
   tip.className = 'tour-tip';
-  tip.innerHTML = '<p class="tour-text"><span class="tour-step"></span><span class="tour-say"></span></p>'
-    + '<div class="tour-row"><button type="button" class="tour-skip">Izlaist</button>'
-    + '<button type="button" class="tour-done" hidden>Sapratu</button></div>';
+  // the sentence and the counter are read once, from the status line; the buttons stay reachable
+  tip.innerHTML = '<p class="tour-text" aria-hidden="true"><span class="tour-say"></span></p>'
+    + '<div class="tour-row"><span class="tour-step" aria-hidden="true"></span><span class="tour-btns">'
+    + '<button type="button" class="tour-skip">Izlaist</button>'
+    + '<button type="button" class="tour-done" hidden>Sapratu</button></span></div>';
+  tip.dataset.side = 'none';
+  // the fade runs once per step change; without this a hide and show would replay it
+  tip.addEventListener('animationend', () => tip.classList.remove('is-new'));
+  // One layer at the page's origin holds the three; the frame and the card are placed by their
+  // offset from it, whatever the body's own position or padding.
+  const layer = document.createElement('div');
+  layer.className = 'tour-layer';
+  layer.append(live, ring, tip);
   // First in the page, so a keyboard reaches Izlaist before anything else.
-  document.body.prepend(live, ring, tip);
+  document.body.prepend(layer);
   const stepEl = tip.querySelector('.tour-step');
   const sayEl = tip.querySelector('.tour-say');
   const doneEl = tip.querySelector('.tour-done');
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // When a scroll (the page or the phone's list) takes the card's spot away, the card waits out
+  // of sight until the scrolling has stopped for a moment, then settles once; it never hops along.
+  let lastScroll = 0;
+  const onScroll = () => { lastScroll = performance.now(); };
+  document.addEventListener('scroll', onScroll, true);
   const CONTROLS = 'button, [role="button"], input, a[href], summary, select, textarea';
   let active = true;
   let paid = false;         // the phone has shown a paid order: from here the pointer only finishes
@@ -2808,7 +2900,12 @@ function startTour() {
   let lostAt = 0;           // when the ringed ticket went out of sight
   let shownKey = '';
   let drawn = '';
-  let side = '';
+  let side = null;      // the card's spot in use, as its offset from the frame
+  let lastLimit = 500;  // the cover cost the spot in use may reach before it is given up
+  let lastEl = null;    // the control framed at the last draw, and its visible rect
+  let lastR = null;
+  let wasHidden = false; // the card waited out a scroll: it fades in when it comes back
+  let waitPause = false; // and it stays out until the scrolling has paused
 
   const shown = (el) => Boolean(el) && el.getClientRects().length > 0;
 
@@ -2828,12 +2925,45 @@ function startTour() {
       const bar = phone.querySelector('.g-tabs');
       if (bar) top = Math.max(top, bar.getBoundingClientRect().bottom);
     }
+    // the page's sticky view switcher (one-column layouts): a target under it is not on screen (6cf16b3)
     if (tabs && shown(tabs) && !tabs.contains(el)) top = Math.max(top, tabs.getBoundingClientRect().bottom + 8);
     top = Math.max(top, 0); left = Math.max(left, 0);
-    right = Math.min(right, window.innerWidth); bottom = Math.min(bottom, window.innerHeight);
+    right = Math.min(right, document.documentElement.clientWidth); bottom = Math.min(bottom, document.documentElement.clientHeight);
     const min = need ?? Math.min(48, r.height);
     // 2 px of slack: a button scrolled to the window's edge lands a fraction of a pixel outside it.
     return right - left >= Math.min(24, min) - 2 && bottom - top >= min - 2 ? { top, left, right, bottom } : null;
+  }
+
+  // The card's spot is remembered as an offset from the frame's nearest edges (a card below the
+  // frame from its bottom edge, a card to its right from its right edge), so it rides with the
+  // edge it sits beside even while the frame is clipped at the list's header and changes size.
+  // A card standing beside the control's scroll frame (the phone or the kitchen screen), outside
+  // it, is remembered against that screen instead: it stays next to the screen while the list
+  // inside scrolls, and moves with the page like everything else.
+  const screenOf = (el) => el.closest('.stage-phone, .stage-kitchen');
+  function anchor(r, x, y, tw, th, el) {
+    const sc = screenOf(el);
+    if (sc) {
+      const f = sc.getBoundingClientRect();
+      // beside: the card's middle is outside the screen (a spot at the frame's edge may still
+      // overlap the screen's own margin by a few px)
+      if (x + tw / 2 >= f.right || x + tw / 2 <= f.left) {
+        const ax = x + tw / 2 <= f.left ? 'left' : 'right';
+        return { screen: true, ax, ay: 'screen', x: x - (ax === 'left' ? f.left : f.right), y: y - f.top };
+      }
+    }
+    const ax = x + tw <= r.left + 1 ? 'left' : x >= r.right - 1 ? 'right' : x + tw / 2 < (r.left + r.right) / 2 ? 'left' : 'right';
+    const ay = y + th <= r.top + 1 ? 'top' : y >= r.bottom - 1 ? 'bottom' : y + th / 2 < (r.top + r.bottom) / 2 ? 'top' : 'bottom';
+    return { screen: false, ax, ay, x: x - (ax === 'left' ? r.left : r.right), y: y - (ay === 'top' ? r.top : r.bottom) };
+  }
+  function unanchor(r, s, el) {
+    if (s.screen) {
+      const sc = screenOf(el);
+      if (!sc) return [r.left + s.x, r.top + s.y];
+      const f = sc.getBoundingClientRect();
+      return [(s.ax === 'left' ? f.left : f.right) + s.x, f.top + s.y];
+    }
+    return [(s.ax === 'left' ? r.left : r.right) + s.x, (s.ay === 'top' ? r.top : r.bottom) + s.y];
   }
 
   // What to point at now, read from the screens themselves. null: nothing to point at for the
@@ -2876,9 +3006,12 @@ function startTour() {
 
   // Where the text box goes: the spot in the window that sits on no other control of the page,
   // as near the ring as that allows.
+  // tip.dataset.why says what the last call did: kept, or the reason for a new search (step,
+  // window, ring, covered, room).
   function place(r, el, tw, th) {
-    const W = window.innerWidth;
-    const H = window.innerHeight;
+    // the viewport without the scrollbars, so a card clamped to the edge never adds a sideways scroll
+    const W = document.documentElement.clientWidth;
+    const H = document.documentElement.clientHeight;
     const g = 12;
     const m = 8;
     const clampX = (x) => Math.max(m, Math.min(W - tw - m, x));
@@ -2886,42 +3019,95 @@ function startTour() {
     const cx = (r.left + r.right - tw) / 2;
     const cy = (r.top + r.bottom - th) / 2;
     const xs = [m, (W - tw) / 2, W - tw - m, clampX(cx), clampX(r.left), clampX(r.right - tw), r.right + g, r.left - g - tw];
+    // every row is measured from the frame, and the spot in use is remembered by its offset from
+    // the frame, so the card moves with the control while the page scrolls instead of staying put
+    // in the window and hopping later
     const ys = [clampY(cy), r.top - g - th, r.bottom + g];
-    for (let y = m; y <= H - th - m; y += 32) ys.push(y);
-    ys.push(H - th - m);
+    for (let y = r.top - g - th - 32; y >= m; y -= 32) ys.push(y);
+    for (let y = r.bottom + g + 32; y + th <= H - m; y += 32) ys.push(y);
+    // the other controls on screen; whether one is really reachable (not under an open sheet or
+    // another layer) is asked only when the card would touch it, once per call
     const others = [...document.querySelectorAll(CONTROLS)]
       .filter((c) => !tip.contains(c) && !el.contains(c) && !c.contains(el))
-      .map((c) => {
-        const v = visibleRect(c, 1);
-        if (!v) return null;
-        // a control under an open sheet or another layer is not on screen for the person
-        const hit = document.elementFromPoint((v.left + v.right) / 2, (v.top + v.bottom) / 2);
-        return hit && (c.contains(hit) || tip.contains(hit)) ? v : null;
-      }).filter(Boolean);
-    let best = null;
-    xs.forEach((x, xi) => ys.forEach((y, yi) => {
-      if (x < m || y < m || x + tw > W - m || y + th > H - m) return;
-      // never on the ring itself, with a little air around it
-      if (x < r.right + g - 1 && x + tw > r.left - g + 1 && y < r.bottom + g - 1 && y + th > r.top - g + 1) return;
-      let cost = 0.5 * Math.hypot(x + tw / 2 - (r.left + r.right) / 2, y + th / 2 - (r.top + r.bottom) / 2);
-      for (const o of others) {
-        const w = Math.min(x + tw, o.right) - Math.max(x, o.left);
-        const h = Math.min(y + th, o.bottom) - Math.max(y, o.top);
-        if (w <= 0 || h <= 0) continue;
-        // by the share of the control it takes: a corner of a large dish card costs little, most of a small button a lot
-        cost += 1000 * (w * h) / ((o.right - o.left) * (o.bottom - o.top));
-        const ox = (o.left + o.right) / 2;
-        const oy = (o.top + o.bottom) / 2;
-        if (ox >= x && ox <= x + tw && oy >= y && oy <= y + th) cost += 100000;   // it would hide that control
+      .map((c) => { const v = visibleRect(c, 1); return v ? { c, v, hit: null } : null; })
+      .filter(Boolean);
+    const reachable = (o) => {
+      if (o.hit === null) {
+        const hit = document.elementFromPoint((o.v.left + o.v.right) / 2, (o.v.top + o.v.bottom) / 2);
+        o.hit = Boolean(hit && (o.c.contains(hit) || tip.contains(hit)));
       }
-      const name = `${xi}:${yi}`;
-      if (name === side) cost -= 30;   // the spot in use keeps an edge, so the box does not hop about
-      if (!best || cost < best.cost) best = { x, y, cost, name };
-    }));
+      return o.hit;
+    };
+    const inWindow = (x, y) => x >= m && y >= m && x + tw <= W - m && y + th <= H - m;
+    // never on the ring itself, with a little air around it
+    const onRing = (x, y) => x < r.right + g - 1 && x + tw > r.left - g + 1 && y < r.bottom + g - 1 && y + th > r.top - g + 1;
+    // what the card would take from the other controls at a spot: by the share of each (a corner of
+    // a large dish card costs little, most of a small button a lot), and a control whose centre it
+    // would hide costs 100000
+    const coverCost = (x, y) => {
+      let cost = 0;
+      for (const o of others) {
+        const w = Math.min(x + tw, o.v.right) - Math.max(x, o.v.left);
+        const h = Math.min(y + th, o.v.bottom) - Math.max(y, o.v.top);
+        if (w <= 0 || h <= 0 || !reachable(o)) continue;
+        cost += 1000 * (w * h) / ((o.v.right - o.v.left) * (o.v.bottom - o.v.top));
+        const ox = (o.v.left + o.v.right) / 2;
+        const oy = (o.v.top + o.v.bottom) / 2;
+        if (ox >= x && ox <= x + tw && oy >= y && oy <= y + th) cost += 100000;
+      }
+      return cost;
+    };
+    // The spot in use is kept, as its offset from the frame, while it still fits the window, is off
+    // the frame, hides no control's centre and covers no control by more than half: the card then
+    // moves with its control instead of hopping to a slightly better spot as the page scrolls. On
+    // the dish step the frame passes from dish to dish while the list scrolls; the card rides with
+    // the frame and settles again when the frame moves on. tip.dataset.n counts the searches.
+    // once the card has gone out of sight for a scroll it stays out until the scrolling has paused,
+    // even if its spot would qualify again half-way: no blinking while the page moves
+    if (waitPause) {
+      if (performance.now() - lastScroll < 250) { tip.dataset.why = 'scrolling'; return null; }
+      waitPause = false;
+    }
+    if (side) {
+      const [x, y] = unanchor(r, side, el);
+      // the spot may cover up to half a control, or as much as it covered when chosen plus a little, so a
+      // spot chosen on a crowded screen is not given up at once
+      const why = !inWindow(x, y) ? 'window' : onRing(x, y) ? 'ring' : coverCost(x, y) >= (side.limit || 500) ? 'covered' : '';
+      if (!why) { tip.dataset.why = 'kept'; tip.dataset.ax = side.ax; tip.dataset.ay = side.ay; return [x, y]; }
+      tip.dataset.why = why;
+      // the spot went while the page or the list is still scrolling: wait, out of sight, until the
+      // scrolling has paused for a quarter of a second, then settle once
+      if (performance.now() - lastScroll < 250) { tip.dataset.why = 'scrolling'; waitPause = true; return null; }
+    } else if (tip.dataset.why === 'kept') {
+      tip.dataset.why = 'step';
+    }
+    tip.dataset.n = String(Number(tip.dataset.n || 0) + 1);
+    let best = null;
+    const tryAt = (x, y) => {
+      if (!inWindow(x, y) || onRing(x, y)) return;
+      const cost = 0.5 * Math.hypot(x + tw / 2 - (r.left + r.right) / 2, y + th / 2 - (r.top + r.bottom) / 2) + coverCost(x, y);
+      if (!best || cost < best.cost) best = { x, y, cost };
+    };
+    xs.forEach((x) => ys.forEach((y) => tryAt(x, y)));
+    // every spot on the 32 px rows hides some control's centre (a list of short rows, each a control,
+    // leaves free bands narrower than the step): try the rows just below and just above each control's
+    // centre too, so a band between two centres is found before the card lands on one
+    if (best && best.cost >= 100000) {
+      const bands = [];
+      for (const o of others) {
+        const oy = (o.v.top + o.v.bottom) / 2;
+        bands.push(oy + 1, oy - th - 1);
+      }
+      xs.forEach((x) => bands.forEach((y) => tryAt(x, y)));
+    }
     // A target that fills the window leaves no room around it: the text goes inside its upper
     // edge (a ticket's own buttons are at its lower edge).
-    if (!best) return [clampX(cx), clampY(r.top + g)];
-    side = best.name;
+    if (!best) { side = null; tip.dataset.why = 'room'; return [clampX(cx), clampY(r.top + g)]; }
+    side = anchor(r, best.x, best.y, tw, th, el);
+    side.limit = Math.max(500, coverCost(best.x, best.y) + 100);
+    lastLimit = side.limit;
+    tip.dataset.ax = side.ax;
+    tip.dataset.ay = side.ay;
     return [best.x, best.y];
   }
 
@@ -2941,11 +3127,16 @@ function startTour() {
     const key = `${step.n}|${step.text}`;
     if (key !== shownKey) {
       shownKey = key;
-      side = '';
-      stepEl.textContent = `${step.n}. solis no 3`;
+      side = null;
+      tip.dataset.why = 'step';
+      stepEl.textContent = `${step.n} no 3`;
       sayEl.textContent = step.text;
       live.textContent = `${step.n}. solis no 3. ${step.text}`;
       doneEl.hidden = !step.last;
+      // the card fades in on a step change only; never while it follows a scroll
+      tip.classList.remove('is-new');
+      void tip.offsetWidth;
+      tip.classList.add('is-new');
       // A button below the fold (the phone frame is taller than a small window) is brought up once.
       if (!step.stay) step.el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: calm ? 'auto' : 'smooth' });
     }
@@ -2967,29 +3158,81 @@ function startTour() {
     tip.style.display = 'flex';
     const tw = tip.offsetWidth;
     const th = tip.offsetHeight;
-    // Redrawn when the target moves, and a few times a second in case the page around it changed.
+    // Redrawn when the target's window rect changes (its own movement, or any scroll: every control
+    // on this page scrolls with the page or with the phone's list), and a few times a second in
+    // case the page around it changed.
     const sig = [key, [r.top, r.left, r.right, r.bottom].map(Math.round).join(' '),
       tw, th, window.innerWidth, window.innerHeight, Math.floor(performance.now() / 400)].join(',');
     if (sig === drawn) return;
     drawn = sig;
-    const [left, top] = place(r, step.el, tw, th);
+    // The frame passed to another control within the same step (the dish list scrolled on): the
+    // card keeps its place in the window if it still qualifies there, instead of jumping to the
+    // same offset from the new control.
+    if (step.el !== lastEl) {
+      if (lastEl && lastR && side) {
+        // the kitchen rebuilds its screen every 20 s: the old ticket element is then detached and has no
+        // screen any more, so the new element stands in for it (critic round 3 P1-4)
+        const [cx, cy] = unanchor(lastR, side, lastEl.isConnected ? lastEl : step.el);
+        side = anchor(r, cx, cy, tw, th, step.el);
+        if (side) side.limit = lastLimit;
+      }
+      lastEl = step.el;
+    }
+    lastR = r;
+    const spot = place(r, step.el, tw, th);
     ring.style.display = 'block';
-    ring.style.top = `${Math.round(r.top - 4)}px`;
-    ring.style.left = `${Math.round(r.left - 4)}px`;
-    ring.style.width = `${Math.round(r.right - r.left + 8)}px`;
-    ring.style.height = `${Math.round(r.bottom - r.top + 8)}px`;
-    tip.style.top = `${Math.round(top)}px`;
-    tip.style.left = `${Math.round(left)}px`;
+    // Both are placed by their offset from the layer at the page's origin (position: absolute), so
+    // a window scroll moves them with the page on the compositor; the per-frame write only follows
+    // the control's own movement.
+    const lb = layer.getBoundingClientRect();
+    const sx = -lb.left;
+    const sy = -lb.top;
+    // the frame's outer edge sits 5 px outside the control
+    ring.style.top = `${Math.round(r.top - 5 + sy)}px`;
+    ring.style.left = `${Math.round(r.left - 5 + sx)}px`;
+    ring.style.width = `${Math.round(r.right - r.left + 10)}px`;
+    ring.style.height = `${Math.round(r.bottom - r.top + 10)}px`;
+    if (!spot) {
+      // waiting out a scroll: the frame stays, the card is out of sight, and the next frame asks again
+      tip.style.display = 'none';
+      drawn = '';
+      wasHidden = true;
+      return;
+    }
+    const [left, top] = spot;
+    if (wasHidden) {
+      // back after a scroll: it fades in, as on a step change
+      wasHidden = false;
+      tip.classList.remove('is-new');
+      void tip.offsetWidth;
+      tip.classList.add('is-new');
+    }
+    tip.style.top = `${Math.round(top + sy)}px`;
+    tip.style.left = `${Math.round(left + sx)}px`;
+    // the card's small arrow points at the frame from whichever edge faces it, only when the card
+    // sits right beside the frame (at most 24 px away) and the frame's centre is within the card's
+    // span; none otherwise (a far spot, or the fallback inside the frame)
+    const g = 12;
+    const near = g + 12;
+    const mx = (r.left + r.right) / 2;
+    const my = (r.top + r.bottom) / 2;
+    let sideName = 'none';
+    if (top >= r.bottom + g - 1 && top - r.bottom <= near && mx > left && mx < left + tw) sideName = 'top';
+    else if (top + th <= r.top - g + 1 && r.top - (top + th) <= near && mx > left && mx < left + tw) sideName = 'bottom';
+    else if (left >= r.right + g - 1 && left - r.right <= near && my > top && my < top + th) sideName = 'left';
+    else if (left + tw <= r.left - g + 1 && r.left - (left + tw) <= near && my > top && my < top + th) sideName = 'right';
+    tip.dataset.side = sideName;
+    tip.style.setProperty('--ax', `${Math.round(Math.max(12, Math.min(tw - 22, mx - left - 5)))}px`);
+    tip.style.setProperty('--ay', `${Math.round(Math.max(12, Math.min(th - 22, my - top - 5)))}px`);
   }
 
   // Ends for good: on Izlaist, Sapratu, Escape, or by itself once the ticket has been seen.
   function end() {
     active = false;
     const hadFocus = tip.contains(document.activeElement);
-    live.remove();
-    ring.remove();
-    tip.remove();
+    layer.remove();
     document.removeEventListener('keydown', onKey, true);
+    document.removeEventListener('scroll', onScroll, true);
     // the keyboard goes on from the page's first control, not from nowhere
     if (hadFocus) [...document.querySelectorAll('.stage button, .stage [role="button"]')].find(shown)?.focus({ preventScroll: true });
     try { localStorage.setItem(KEY, '1'); } catch { /* it shows again next visit */ }
