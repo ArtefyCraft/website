@@ -530,6 +530,10 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 @keyframes tour-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .tour-tip.is-new { animation: none; } }
 .tour-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.g-ghost { pointer-events: none; }
+.g-steps .is-arrived::before { animation: g-step-in 480ms cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes g-step-in { from { transform: scale(.6); background: var(--g-raise); border-color: var(--g-rule-2); } }
+@media (prefers-reduced-motion: reduce) { .g-steps .is-arrived::before { animation: none; } }
 </style>
 <main class="stage" data-show="guest">
   <header class="stage-head">
@@ -552,6 +556,89 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
   <details class="stage-credits"><summary>Foto un fonti</summary><p>Foto: CC0. Fonti: Cormorant Garamond, Onest (<a href="../fonti/OFL.txt">SIL Open Font License 1.1</a>). <a href="../privatums/">Privātuma politika</a>.</p></details>
 </main>
 <script>
+globalThis.DEMO_MOTION = (() => {
+  // Three moments only (2026-11-15): sheets, the kitchen ticket's move, the guest's reached step.
+  const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sheetKey = (s) => (s ? (s.classList.contains('g-sheet-tall') ? 'cart' : `item:${s.getAttribute('aria-label')}`) : null);
+  const reachedCount = (root) => (root.querySelector('.g-steps') ? root.querySelectorAll('.g-steps .is-past, .g-steps .is-now').length : null);
+  function ghostOf(node) {
+    const copy = node.cloneNode(true);
+    copy.inert = true;
+    copy.setAttribute('aria-hidden', 'true');
+    copy.classList.add('g-ghost');
+    for (const n of [copy, ...copy.querySelectorAll('[data-action], [id], [name]')]) {
+      n.removeAttribute('data-action'); n.removeAttribute('id'); n.removeAttribute('name');
+    }
+    return copy;
+  }
+  function beforeGuest(root) {
+    const sheet = root.querySelector('.g-sheet');
+    const b = { key: sheetKey(sheet), steps: reachedCount(root), ghosts: null, top: 0 };
+    if (sheet && !calm()) {
+      b.ghosts = [root.querySelector('.g-backdrop'), sheet].map((n) => (n ? ghostOf(n) : null));
+      b.top = sheet.querySelector('.g-sheet-body')?.scrollTop ?? 0;
+    }
+    return b;
+  }
+  function afterGuest(root, b) {
+    if (!b) return;
+    const sheet = root.querySelector('.g-sheet');
+    const key = sheetKey(sheet);
+    const app = root.querySelector('.g-app');
+    if (!calm()) {
+      if (sheet && key !== b.key) {
+        sheet.animate([{ transform: 'translateY(100%)' }, { transform: 'none' }], { duration: 300, easing: EASE });
+        const backdrop = root.querySelector('.g-backdrop');
+        if (backdrop && !b.key) backdrop.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: EASE });
+      } else if (!sheet && b.key && b.ghosts && app) {
+        const [backdrop, ghost] = b.ghosts;
+        if (backdrop) app.appendChild(backdrop);
+        app.appendChild(ghost);
+        const body = ghost.querySelector('.g-sheet-body');
+        if (body) body.scrollTop = b.top;
+        const out = ghost.animate([{ transform: 'none' }, { transform: 'translateY(100%)' }], { duration: 220, easing: EASE, fill: 'forwards' });
+        if (backdrop) backdrop.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: EASE, fill: 'forwards' });
+        const clear = () => { ghost.remove(); backdrop?.remove(); };
+        out.finished.then(clear, clear);
+        setTimeout(clear, 600);
+      }
+    }
+    const now = root.querySelector('.g-steps .is-now');
+    const count = reachedCount(root);
+    if (now && b.steps != null && count > b.steps) now.classList.add('is-arrived');
+  }
+  // Only a ticket that changes column glides; neighbours that shift inside a column stay still.
+  const columnOf = (root, t) => [...root.querySelectorAll('.k-col')].indexOf(t.closest('.k-col'));
+  function beforeKitchen(root) {
+    if (calm()) return null;
+    const boxes = new Map();
+    for (const t of root.querySelectorAll('.k-ticket[data-order]')) {
+      // a redraw during a glide replaces the ticket: its remaining time is carried over from where it is now
+      const glide = t.getAnimations().find((a) => a.id === 'k-glide' && a.playState === 'running');
+      const left = glide ? 420 - (glide.currentTime ?? 0) : 0;
+      boxes.set(t.dataset.order, { box: t.getBoundingClientRect(), col: columnOf(root, t), left });
+    }
+    return boxes;
+  }
+  function afterKitchen(root, boxes) {
+    if (!boxes || !boxes.size) return;
+    for (const t of root.querySelectorAll('.k-ticket[data-order]')) {
+      const before = boxes.get(t.dataset.order);
+      if (!before || (before.col === columnOf(root, t) && before.left <= 0)) continue;
+      const was = before.box;
+      const now = t.getBoundingClientRect();
+      if (!was.width || !now.width) continue;
+      const scale = t.offsetWidth ? now.width / t.offsetWidth : 1;
+      const dx = (was.left - now.left) / scale;
+      const dy = (was.top - now.top) / scale;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) continue;
+      const duration = before.left > 0 ? Math.max(before.left, 120) : 420;
+      t.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { id: 'k-glide', duration, easing: EASE });
+    }
+  }
+  return { beforeGuest, afterGuest, beforeKitchen, afterKitchen };
+})();
 globalThis.DEMO_MENU = {
   "hero": "hero",
   "ambient": "hero",
@@ -1719,6 +1806,7 @@ function mountGuest(root, api, route, { lang } = {}) {
   // ---- rendering -----------------------------------------------------------
 
   function render() {
+    const motion = globalThis.DEMO_MOTION?.beforeGuest(root);
     const top = root.querySelector('.g-scroll')?.scrollTop ?? 0;
     const tabsLeft = root.querySelector('.g-tabs')?.scrollLeft ?? 0;
     const sheetTop = root.querySelector('.g-sheet-body')?.scrollTop ?? 0;
@@ -1731,6 +1819,7 @@ function mountGuest(root, api, route, { lang } = {}) {
     const sheet = root.querySelector('.g-sheet-body');
     if (sheet) sheet.scrollTop = sheetTop;
     syncTabs();
+    globalThis.DEMO_MOTION?.afterGuest(root, motion);
   }
 
   function shell() {
@@ -2366,6 +2455,7 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
   }
 
   function render() {
+    const motion = globalThis.DEMO_MOTION?.beforeKitchen(root);
     const focused = document.activeElement?.id;
     const position = document.activeElement?.selectionStart;
     if (!state.authed) {
@@ -2398,6 +2488,7 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
       el?.focus();
       if (position != null && el?.setSelectionRange) el.setSelectionRange(position, position);
     }
+    globalThis.DEMO_MOTION?.afterKitchen(root, motion);
   }
 
   async function reload() {
@@ -3177,7 +3268,17 @@ function startTour() {
       void tip.offsetWidth;
       tip.classList.add('is-new');
       // A button below the fold (the phone frame is taller than a small window) is brought up once.
-      if (!step.stay) step.el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: calm ? 'auto' : 'smooth' });
+      if (!step.stay) {
+        const rising = step.el.closest('.g-sheet')?.getAnimations().find((a) => a.playState === 'running');
+        const at = rising ? rising.currentTime : null;
+        const seek = rising && at != null;
+        if (seek) rising.currentTime = rising.effect.getTiming().duration;
+        try {
+          step.el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: calm ? 'auto' : 'smooth' });
+        } finally {
+          if (seek) rising.currentTime = at;
+        }
+      }
     }
     const r = visibleRect(step.el);
     if (!r) {
@@ -3280,7 +3381,7 @@ function startTour() {
   // app handles that one itself when the focus is inside the phone.
   function onKey(event) {
     if (event.key !== 'Escape') return;
-    if (phone.contains(event.target) && phone.querySelector('.g-sheet')) return;
+    if (phone.contains(event.target) && phone.querySelector('.g-sheet:not(.g-ghost)')) return;
     end();
   }
   tip.querySelector('.tour-skip').addEventListener('click', end);
