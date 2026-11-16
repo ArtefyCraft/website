@@ -504,6 +504,95 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 .g-steps .is-arrived::before { animation: g-step-in 480ms cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes g-step-in { from { transform: scale(.6); background: var(--g-raise); border-color: var(--g-rule-2); } }
 @media (prefers-reduced-motion: reduce) { .g-steps .is-arrived::before { animation: none; } }
+/* iPhone-like menu (2026-11-16): glass over the scroll, less text in the list, bars that follow the scroll */
+#phone-screen .g-app { --spring-pop: linear(0, 0.0401, 0.142, 0.2806, 0.4349, 0.5888, 0.7308, 0.8533, 0.9526, 1.0276, 1.0794, 1.1106, 1.1246, 1.1252, 1.1161, 1.1007, 1.082, 1.0623, 1.0434, 1.0265, 1.0124, 1.0012, 0.9932, 0.9879, 0.985, 0.984, 0.9846, 0.9862, 0.9883, 0.9908, 0.9933, 0.9955, 0.9975, 0.9991, 1.0004, 1.0012, 1.0017, 1.002, 1.002, 1.0019, 1); --spring-slide: linear(0, 0.0274, 0.0961, 0.1891, 0.2938, 0.4011, 0.5045, 0.6001, 0.6854, 0.7593, 0.8218, 0.8732, 0.9146, 0.947, 0.9717, 0.9898, 1.0027, 1.0112, 1.0164, 1.0191, 1.0199, 1.0195, 1.0181, 1.0163, 1.0142, 1.0121, 1.01, 1.0081, 1.0064, 1.0049, 1.0036, 1.0026, 1.0018, 1.0011, 1.0006, 1.0002, 1, 0.9998, 0.9997, 0.9996, 1); }
+#phone-screen .g-menu { padding-top: 52px; }
+#phone-screen .g-tabs { position: relative; top: auto; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+#phone-screen .g-cat { scroll-margin-top: 108px; }
+#phone-screen .g-head { padding-top: 4px; }
+#phone-screen .g-head strong { font-size: 34px; line-height: 1.1; }
+/* one frosted slab behind the top bar; it grows down to hold the compact categories, as an iPhone bar holds its segments */
+.g-nav { position: absolute; z-index: 4; top: 0; left: 0; right: 0; height: 52px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 0 10px 0 16px; }
+/* the slab is always 104 px; a clip uncovers its lower half (no height animation, so no layout per frame); the
+   uncovered slab takes taps, so a tap on the bar or beside the categories never opens the dish under the glass */
+.g-nav::before { content: ''; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 104px; background: rgba(23,26,33,0); clip-path: inset(0 0 52px 0); transition: clip-path .5s var(--spring-slide), background-color .25s ease, -webkit-backdrop-filter .25s ease, backdrop-filter .25s ease; }
+.g-nav.is-glass::before { background: rgba(23,26,33,.78); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+.g-nav.has-mini::before { clip-path: inset(0); }
+/* the hairline under the bar rides down with the slab's lower edge (a transform) */
+.g-nav::after { content: ''; position: absolute; left: 0; right: 0; top: 51px; height: 1px; pointer-events: none; background: rgba(255,255,255,.08); opacity: 0; transition: opacity .25s ease, transform .5s var(--spring-slide); }
+.g-nav.is-glass::after { opacity: 1; }
+.g-nav.has-mini::after { transform: translateY(52px); }
+.g-nav .g-table-no { justify-self: start; }
+.g-nav-title { justify-self: center; font: 600 16px/1.2 var(--body); color: var(--g-txt); white-space: nowrap; opacity: 0; transform: translateY(8px); transition: opacity .2s ease, transform .45s var(--spring-slide); }
+.g-nav.has-title .g-nav-title { opacity: 1; transform: none; }
+/* the language button rides on the frosted bar: a solid fill (glass on glass leaves the letters unreadable) */
+.g-glass { background: #2C323D; border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 6px 18px rgba(0,0,0,.28); transition: transform .5s var(--spring-pop), filter .25s ease; }
+.g-glass:active { transform: scale(1.1); filter: brightness(1.25); transition: transform .12s ease-out, filter .12s ease-out; }
+.g-lang-btn { justify-self: end; width: 44px; height: 44px; border-radius: 50%; color: var(--g-txt); font: 600 13px/1 var(--body); }
+.g-pop-scrim { position: absolute; z-index: 6; inset: 0; }
+.g-lang-pop { position: absolute; z-index: 7; top: 50px; right: 10px; min-width: 176px; display: grid; padding: 6px; border-radius: 20px; transform-origin: 92% 0; background: rgba(36,41,51,.86); -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%); border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 10px 28px rgba(0,0,0,.4); }
+.g-lang-pop button { min-height: 44px; padding: 0 14px; border: 0; border-radius: 14px; background: none; color: var(--g-txt); font: 500 15px/1 var(--body); text-align: left; }
+.g-lang-pop button[aria-pressed="true"] { color: var(--g-oak); font-weight: 700; }
+.g-lang-pop button:active { background: rgba(255,255,255,.08); }
+/* the compact categories: 44 px buttons; names wider than the bar scroll sideways inside it, never cut */
+.g-mini { position: absolute; z-index: 5; top: 54px; left: 10px; right: 10px; height: 48px; display: flex; padding: 2px; border-radius: 999px; background: rgba(255,255,255,.06); overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity .18s ease, transform .5s var(--spring-slide); }
+.g-mini::-webkit-scrollbar { display: none; }
+.g-mini.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.g-mini button { position: relative; z-index: 1; flex: 1 0 auto; min-height: 44px; padding: 0 10px; border: 0; border-radius: 999px; background: none; color: var(--g-txt-2); font: 500 13px/1 var(--body); white-space: nowrap; transition: color .2s ease, transform .5s var(--spring-pop); }
+/* the current name on the lens: a lighter gold (5.3:1 on the lens; the oak gold gave 4.05:1) */
+.g-mini button[aria-current="true"] { color: #E8CC8E; font-weight: 600; }
+.g-mini button:active { transform: scale(1.08); transition: transform .12s ease-out; }
+.g-lens { position: absolute; z-index: 0; top: 2px; bottom: 2px; left: 0; right: 0; border-radius: 999px; background: rgba(255,255,255,.18); box-shadow: inset 0 1px 0 rgba(255,255,255,.16); clip-path: inset(0 100% 0 0 round 999px); transition: clip-path .5s var(--spring-slide); }
+/* an engine without the frosted blur gets a solid bar, so the list never reads through it */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .g-nav.is-glass::before { background: rgba(23,26,33,.97); }
+  .g-lang-pop { background: #2A2F3A; }
+}
+#phone-screen .g-item { min-height: 76px; padding: 10px 0; }
+#phone-screen .g-item-pic .g-visual { width: 56px; height: 56px; }
+#phone-screen .g-item b { margin-top: 2px; }
+.g-item-go { order: 2; flex: none; width: 9px; height: 9px; margin-right: 6px; border-top: 2px solid var(--g-txt-2); border-right: 2px solid var(--g-txt-2); transform: rotate(45deg); opacity: .55; }
+/* the shadow sits on the bar so it follows the capsule's clipped outline (a clip would cut a box-shadow off) */
+/* the bar never takes a tap itself (in motion its box is wider than the capsule seen); the capsule does */
+/* the capsule never leaves the screen: the bar keeps 14 px from both edges (max-width), the words give way first */
+#phone-screen .g-bar { left: auto; right: 14px; max-width: calc(100% - 28px); filter: drop-shadow(0 8px 18px rgba(0,0,0,.35)); pointer-events: none; }
+#phone-screen .g-fab { pointer-events: auto; position: relative; width: auto; max-width: 100%; justify-content: flex-start; gap: 8px; min-height: 56px; padding: 0 20px 0 18px; background: var(--g-oak); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); clip-path: inset(0 round 999px); transition: clip-path .5s var(--spring-slide), transform .5s var(--spring-pop), filter .25s ease; }
+#phone-screen .g-fab:active { transform: scale(1.08); filter: brightness(1.12); transition: clip-path .5s var(--spring-slide), transform .12s ease-out, filter .12s ease-out; }
+#phone-screen .g-fab .g-cta-label { order: 0; flex: none; display: block; width: 22px; height: 22px; transition: transform .5s var(--spring-slide); }
+#phone-screen .g-fab .g-cta-label::before { width: 22px; height: 22px; }
+#phone-screen .g-fab .g-cta-count { order: 1; flex: none; font-size: 17px; font-weight: 700; transition: transform .5s var(--spring-slide); }
+#phone-screen .g-fab .g-cta-count::before, #phone-screen .g-fab .g-cta-count::after { content: none; }
+/* the words come back once the bag has slid past them, and leave at once on the way down */
+#phone-screen .g-fab-more { order: 2; display: inline-flex; align-items: center; gap: 12px; min-width: 0; white-space: nowrap; transition: opacity .25s ease .12s; }
+#phone-screen .g-fab-more span:first-child { font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#phone-screen .g-fab-more span:last-child { flex: none; }
+#phone-screen .g-fab-more span.is-gone { display: none; }
+/* a narrow phone screen (a laptop window or a 360 px phone) has no room for the words: bag, count and total stay */
+@container (max-width: 330px) { #phone-screen .g-fab-more span:first-child { display: none; } }
+#phone-screen .g-fab-more span:last-child { font-size: 17px; font-weight: 700; }
+#phone-screen .g-bar.is-compact .g-fab { clip-path: inset(0 0 0 var(--fab-cut, 0px) round 999px); }
+#phone-screen .g-bar.is-compact .g-fab .g-cta-label, #phone-screen .g-bar.is-compact .g-fab .g-cta-count { transform: translateX(var(--fab-shift, 0px)); }
+#phone-screen .g-bar.is-compact .g-fab-more { opacity: 0; transition: opacity .15s ease; }
+/* at rest the small capsule's box is the capsule itself: no clip offset, no slide, the words out of the layout */
+#phone-screen .g-bar.is-tight .g-fab { padding: 0 18px; clip-path: inset(0 round 999px); }
+#phone-screen .g-bar.is-tight .g-fab .g-cta-label, #phone-screen .g-bar.is-tight .g-fab .g-cta-count { transform: none; }
+#phone-screen .g-bar.is-tight .g-fab-more { display: none; }
+#phone-screen .g-fab.is-still, #phone-screen .g-fab.is-still * { transition: none !important; }
+#phone-screen .g-close { background: rgba(23,26,33,.55); -webkit-backdrop-filter: blur(14px) saturate(170%); backdrop-filter: blur(14px) saturate(170%); border-color: rgba(255,255,255,.16); transition: transform .5s var(--spring-pop); }
+#phone-screen .g-close:active { transform: scale(1.12); transition: transform .12s ease-out; }
+/* the press is shown by the control itself; the browser's blue tap flash is off, the keyboard ring stays (gold) */
+.g-glass, .g-mini button, .g-lang-pop button, #phone-screen .g-fab, #phone-screen .g-close, #phone-screen .g-item { -webkit-tap-highlight-color: transparent; }
+.g-glass:focus-visible, .g-lang-pop button:focus-visible { outline: 2px solid var(--g-oak); outline-offset: 2px; }
+/* the compact bar clips what lies outside it, so a category's ring is drawn inside the button */
+.g-mini button:focus-visible { outline: 2px solid var(--g-oak); outline-offset: -3px; }
+/* one press size per control: the page's general press (scale .97) does not stack on these */
+.g-glass:active, .g-mini button:active, #phone-screen .g-fab:active, #phone-screen .g-close:active { scale: none; }
+/* the capsule's clip would cut a ring drawn outside it, so its ring sits inside, dark on the gold */
+#phone-screen .g-fab:focus-visible { outline: 2px solid var(--g-oak-ink); outline-offset: -5px; }
+@media (prefers-reduced-motion: reduce) {
+  .g-nav, .g-nav::before, .g-nav::after, .g-nav-title, .g-glass, .g-mini, .g-mini button, .g-lens, #phone-screen .g-fab, #phone-screen .g-fab .g-cta-label, #phone-screen .g-fab .g-cta-count, #phone-screen .g-fab-more, #phone-screen .g-close { transition: none !important; }
+  .g-glass:active, .g-mini button:active, #phone-screen .g-fab:active, #phone-screen .g-close:active { transform: none; }
+}
 </style>
 <main class="stage" data-show="guest">
   <header class="stage-head">
@@ -608,6 +697,185 @@ globalThis.DEMO_MOTION = (() => {
     }
   }
   return { beforeGuest, afterGuest, beforeKitchen, afterKitchen };
+})();
+globalThis.DEMO_IOS = (() => {
+  // iPhone-like menu (2026-11-16): bar states follow the scroll; springs only where something pops or slides.
+  // the spring needs linear() easing (Safari 17.2+); an engine without it throws inside animate(), so it gets a curve
+  const POP = globalThis.CSS?.supports?.('transition-timing-function', 'linear(0, 1)') ? 'linear(0, 0.0401, 0.142, 0.2806, 0.4349, 0.5888, 0.7308, 0.8533, 0.9526, 1.0276, 1.0794, 1.1106, 1.1246, 1.1252, 1.1161, 1.1007, 1.082, 1.0623, 1.0434, 1.0265, 1.0124, 1.0012, 0.9932, 0.9879, 0.985, 0.984, 0.9846, 0.9862, 0.9883, 0.9908, 0.9933, 0.9955, 0.9975, 0.9991, 1.0004, 1.0012, 1.0017, 1.002, 1.002, 1.0019, 1)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+  const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ui = new WeakMap();
+  const get = (root) => {
+    let s = ui.get(root);
+    if (!s) { s = { glass: false, title: false, mini: false, compact: false, last: 0, count: 0, gen: 0 }; ui.set(root, s); }
+    return s;
+  };
+  const flag = (root, key) => get(root)[key];
+  // the lowest edge of what covers the top of the list (top bar, compact categories, large categories)
+  function topEdge(root) {
+    let edge = null;
+    for (const el of root.querySelectorAll('.g-nav, .g-mini.is-on, .g-tabs')) {
+      const b = el.getBoundingClientRect().bottom;
+      edge = edge == null ? b : Math.max(edge, b);
+    }
+    return edge;
+  }
+  // the cart capsule. At rest its box is exactly what is seen, so taps, the focus ring and screen readers all land on
+  // it. Between the two sizes the box stays wide and a rounded clip plus a slide of the bag and the count carry the
+  // motion (clip and transform only, no layout per frame); when the motion ends the box itself goes small, and nothing
+  // visible changes at that moment.
+  const PAD = 18;
+  // the capsule's words leave whole when the capsule cannot hold them (a narrow screen, a longer language): bag, count
+  // and total stay, and a word is never cut; read only while the capsule is full size (its words are in the layout)
+  function fitWords(fab) {
+    const words = fab.querySelector('.g-fab-more span:first-child');
+    if (!words) return;
+    words.classList.remove('is-gone');
+    words.classList.toggle('is-gone', words.scrollWidth > words.clientWidth + 1);
+  }
+  function measure(fab) {
+    fitWords(fab);
+    const bag = fab.querySelector('.g-cta-label');
+    const count = fab.querySelector('.g-cta-count');
+    if (!bag || !count) return;
+    const vis = count.offsetLeft + count.offsetWidth - bag.offsetLeft + 2 * PAD;
+    const cut = Math.max(0, fab.offsetWidth - vis);
+    fab.style.setProperty('--fab-cut', `${cut}px`);
+    fab.style.setProperty('--fab-shift', `${cut + PAD - bag.offsetLeft}px`);
+  }
+  // a change whose two sides look the same, so it must not animate
+  function still(fab, change) {
+    fab.classList.add('is-still');
+    change();
+    void fab.offsetWidth;
+    fab.classList.remove('is-still');
+  }
+  function capsule(root, small) {
+    const bar = root.querySelector('.g-bar');
+    const fab = bar?.querySelector('.g-fab');
+    if (!fab || bar.classList.contains('is-compact') === small) return;
+    const s = get(root);
+    const gen = ++s.gen;
+    if (small) {
+      measure(fab);
+      bar.classList.add('is-compact');
+      const settle = () => { if (s.gen === gen && bar.isConnected) still(fab, () => bar.classList.add('is-tight')); };
+      if (calm()) settle(); else setTimeout(settle, 560);
+    } else {
+      if (bar.classList.contains('is-tight')) still(fab, () => { bar.classList.remove('is-tight'); measure(fab); });
+      bar.classList.remove('is-compact');
+    }
+  }
+  function apply(root) {
+    const s = get(root);
+    const nav = root.querySelector('.g-nav');
+    nav?.classList.toggle('is-glass', s.glass);
+    nav?.classList.toggle('has-title', s.title);
+    nav?.classList.toggle('has-mini', s.mini);
+    const mini = root.querySelector('.g-mini');
+    if (mini) { mini.classList.toggle('is-on', s.mini); mini.inert = !s.mini; }
+    capsule(root, s.compact);
+  }
+  function update(root, scroller, settle) {
+    const s = get(root);
+    const y = scroller.scrollTop;
+    const nav = root.querySelector('.g-nav');
+    const navBottom = nav ? nav.getBoundingClientRect().bottom : scroller.getBoundingClientRect().top;
+    const title = root.querySelector('.g-head strong');
+    const tabs = root.querySelector('.g-tabs');
+    s.glass = y > 4;
+    s.title = title ? title.getBoundingClientRect().bottom < navBottom + 4 : y > 60;
+    s.mini = tabs ? tabs.getBoundingClientRect().bottom < navBottom + 8 : false;
+    if (!settle) {
+      const dy = y - s.last;
+      const atEnd = y + scroller.clientHeight >= scroller.scrollHeight - 4;
+      if (y < 40 || atEnd) s.compact = false;
+      else if (dy > 6) s.compact = true;
+      else if (dy < -6) s.compact = false;
+      if (Math.abs(dy) > 6 || y < 40) s.last = y;
+    }
+    apply(root);
+  }
+  function lens(root, instant) {
+    const bar = root.querySelector('.g-mini');
+    const glass = bar?.querySelector('.g-lens');
+    const on = bar?.querySelector('button[aria-current="true"]');
+    if (!glass || !on) return;
+    const still = instant || calm();
+    if (still) glass.style.transition = 'none';
+    // the lens spans the whole row (also the part scrolled aside when the names are wider than the bar) and a rounded
+    // clip shows only the current button's span (no width animation)
+    glass.style.width = `${bar.scrollWidth}px`;
+    const right = glass.offsetWidth - on.offsetLeft - on.offsetWidth;
+    glass.style.clipPath = `inset(0 ${right}px 0 ${on.offsetLeft}px round 999px)`;
+    if (still) { void glass.offsetWidth; glass.style.transition = ''; }
+    // a fresh bar starts scrolled to its start: the current name is brought into view as the list's tabs do
+    if (instant && bar.scrollWidth > bar.clientWidth + 1) bar.scrollLeft = Math.max(0, on.offsetLeft - 16);
+  }
+  function scroll(root, scroller) {
+    update(root, scroller, false);
+  }
+  // a render replaces every button, so the focus would fall to the page. Only the language list, new in this menu, hands
+  // it on (other renders keep the live page's behaviour): the control the focus went to when it left the list is found
+  // again by its id, or by its data attributes inside the same bar or list
+  const ZONES = ['g-mini', 'g-tabs', 'g-lang-pop', 'g-sheet', 'g-nav', 'g-bar'];
+  function keyOf(el) {
+    if (el.id) return `#${CSS.escape(el.id)}`;
+    const data = el.getAttributeNames().filter((n) => n.startsWith('data-') && n !== 'data-count' && n !== 'data-lang-now');
+    if (!data.length) return null;
+    const zone = el.closest(ZONES.map((z) => `.${z}`).join(', '));
+    const pre = zone ? `.${ZONES.find((z) => zone.classList.contains(z))} ` : '';
+    return pre + el.tagName.toLowerCase() + data.map((n) => `[${n}="${CSS.escape(el.getAttribute(n))}"]`).join('');
+  }
+  function before(root) {
+    const a = document.activeElement;
+    const inside = !!a && a !== root && root.contains(a);
+    const pop = !!root.querySelector('.g-lang-pop');
+    let key = null;
+    if (pop && inside) { try { key = keyOf(a); } catch { key = null; } }
+    return { pop, langFocus: inside && !!a.closest('.g-lang-btn, .g-lang-pop'), key };
+  }
+  function after(root, b) {
+    const s = get(root);
+    const full = root.querySelector('.g-bar:not(.is-compact) .g-fab');
+    if (full) fitWords(full);
+    // a window that changes size (a phone turned, a laptop window dragged) fits the words and the lens again, and so
+    // does the page's font once it has loaded (the words were measured in the fallback font before)
+    const refit = () => { const f = root.querySelector('.g-bar:not(.is-compact) .g-fab'); if (f) fitWords(f); lens(root, true); };
+    if (!s.ro && globalThis.ResizeObserver) {
+      // a width change only: a phone's toolbar showing or hiding mid-scroll changes the height and must not move the bar
+      s.ro = new ResizeObserver(() => { const w = root.clientWidth; if (w === s.w) return; s.w = w; refit(); });
+      s.ro.observe(root);
+    }
+    if (!s.fonts && document.fonts?.ready) {
+      s.fonts = true;
+      document.fonts.ready.then(refit);
+    }
+    const scroller = root.querySelector('.g-menu');
+    if (scroller) update(root, scroller, true);
+    lens(root, true);
+    const fab = root.querySelector('.g-fab');
+    const n = fab ? Number(fab.dataset.count) : null;
+    const was = s.count;
+    if (n != null) s.count = n;
+    else if (!root.querySelector('.g-sheet-tall')) s.count = 0;
+    // the language list's focus: opened from its button it takes the focus on the current language; closed from inside
+    // it gives the focus back to its button; closed because the focus left it (Tab) the focus stays where it went
+    const pop = root.querySelector('.g-lang-pop');
+    let to = null;
+    if (b && pop && !b.pop && b.langFocus) to = pop.querySelector('[aria-pressed="true"]');
+    else if (b && !pop && b.pop && !root.contains(document.activeElement)) {
+      if (b.langFocus) to = root.querySelector('.g-lang-btn');
+      else if (b.key) { try { to = root.querySelector(b.key); } catch { to = null; } }
+    }
+    to?.focus({ preventScroll: true });
+    if (calm() || !b) return;
+    if (fab && n > was) {
+      if (was) fab.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.1)', offset: 0.3 }, { transform: 'scale(1)' }], { duration: 460, easing: 'ease-out' });
+      else fab.animate([{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: 560, easing: POP });
+    }
+    if (pop && !b.pop) pop.animate([{ transform: 'scale(.55)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: POP });
+  }
+  return { flag, topEdge, lens, scroll, before, after };
 })();
 globalThis.DEMO_MENU = {
   "hero": "hero",
@@ -1629,7 +1897,7 @@ const money = (cents) => `${(cents / 100).toFixed(2).replace('.', ',')} €`;
 
 const STRINGS = {
   lv: {
-    table: 'Galds', from: 'no', tableCheck: 'Numuram jāsakrīt ar numuru uz Jūsu galda.', cart: 'Pasūtījums', add: 'Pievienot', addFor: 'Pievienot', soldOut: 'Beidzies', required: 'Izvēlieties vienu',
+    table: 'Galds', from: 'no', tableCheck: 'Numuram jāsakrīt ar numuru uz Jūsu galda.', cart: 'Pasūtījums', viewCart: 'Skatīt pasūtījumu', add: 'Pievienot', addFor: 'Pievienot', soldOut: 'Beidzies', required: 'Izvēlieties vienu',
     optional: 'Pēc izvēles', allergens: 'Alergēni', yourOrder: 'Jūsu pasūtījums', maybeAlso: 'Pie šī labi der', total: 'Kopā',
     pay: 'Apmaksāt', payHint: 'Apple Pay, Google Pay vai karte', empty: 'Pasūtījums ir tukšs.', backToMenu: 'Atpakaļ uz ēdienkarti',
     note: 'Piezīme virtuvei', notePlaceholder: 'Piemēram, bez ķiplokiem', removed: 'Šis tikko beidzās un ir izņemts no pasūtījuma:',
@@ -1641,7 +1909,7 @@ const STRINGS = {
     gluten: 'glutēns', milk: 'piens', egg: 'olas', nuts: 'rieksti', fish: 'zivs', crustaceans: 'vēžveidīgie', sesame: 'sezams', soy: 'soja', sulphites: 'sulfīti', mustard: 'sinepes', celery: 'selerija', none: 'nav', venue: 'Restorāns',
   },
   en: {
-    table: 'Table', from: 'from', tableCheck: 'This must match the number on your table.', cart: 'Cart', add: 'Add', addFor: 'Add', soldOut: 'Sold out', required: 'Choose one',
+    table: 'Table', from: 'from', tableCheck: 'This must match the number on your table.', cart: 'Cart', viewCart: 'View cart', add: 'Add', addFor: 'Add', soldOut: 'Sold out', required: 'Choose one',
     optional: 'Optional', allergens: 'Allergens', yourOrder: 'Your order', maybeAlso: 'Goes well with this', total: 'Total',
     pay: 'Pay', payHint: 'Apple Pay, Google Pay or card', empty: 'Your cart is empty.', backToMenu: 'Back to the menu',
     note: 'Note for the kitchen', notePlaceholder: 'For example, no garlic', removed: 'This just sold out and was removed from your cart:',
@@ -1653,7 +1921,7 @@ const STRINGS = {
     gluten: 'gluten', milk: 'milk', egg: 'egg', nuts: 'nuts', fish: 'fish', crustaceans: 'crustaceans', sesame: 'sesame', soy: 'soy', sulphites: 'sulphites', mustard: 'mustard', celery: 'celery', none: 'none', venue: 'Restaurant',
   },
   ru: {
-    table: 'Стол', from: 'от', tableCheck: 'Номер должен совпадать с номером на вашем столе.', cart: 'Корзина', add: 'Добавить', addFor: 'Добавить', soldOut: 'Закончилось', required: 'Выберите один',
+    table: 'Стол', from: 'от', tableCheck: 'Номер должен совпадать с номером на вашем столе.', cart: 'Корзина', viewCart: 'Открыть корзину', add: 'Добавить', addFor: 'Добавить', soldOut: 'Закончилось', required: 'Выберите один',
     optional: 'По желанию', allergens: 'Аллергены', yourOrder: 'Ваш заказ', maybeAlso: 'К этому подойдёт', total: 'Итого',
     pay: 'Оплатить', payHint: 'Apple Pay, Google Pay или карта', empty: 'Корзина пуста.', backToMenu: 'Назад к меню',
     note: 'Заметка для кухни', notePlaceholder: 'Например, без чеснока', removed: 'Это только что закончилось и убрано из корзины:',
@@ -1777,6 +2045,7 @@ function mountGuest(root, api, route, { lang } = {}) {
 
   function render() {
     const motion = globalThis.DEMO_MOTION?.beforeGuest(root);
+    const ios = globalThis.DEMO_IOS?.before(root);
     const top = root.querySelector('.g-scroll')?.scrollTop ?? 0;
     const tabsLeft = root.querySelector('.g-tabs')?.scrollLeft ?? 0;
     const sheetTop = root.querySelector('.g-sheet-body')?.scrollTop ?? 0;
@@ -1790,6 +2059,7 @@ function mountGuest(root, api, route, { lang } = {}) {
     if (sheet) sheet.scrollTop = sheetTop;
     syncTabs();
     globalThis.DEMO_MOTION?.afterGuest(root, motion);
+    globalThis.DEMO_IOS?.after(root, ios);
   }
 
   function shell() {
@@ -1798,7 +2068,7 @@ function mountGuest(root, api, route, { lang } = {}) {
     if (state.route.kind === 'pay') return payScreen();
     if (state.route.kind === 'order') return orderScreen();
     if (!state.data) return `<div class="g-center"><p>${esc(t.loading)}</p></div>`;
-    return `${menuScreen()}${cartBar()}${state.sheet === 'cart' ? cartSheet() : ''}${state.picker ? pickerSheet() : ''}`;
+    return `${menuScreen()}${navBar()}${miniTabs()}${cartBar()}${state.sheet === 'cart' ? cartSheet() : ''}${state.picker ? pickerSheet() : ''}`;
   }
 
   function header() {
@@ -1809,23 +2079,53 @@ function mountGuest(root, api, route, { lang } = {}) {
     return `
       <header class="g-head ${hero ? 'has-photo' : ''}">
         ${hero ? `<div class="g-hero-photo">${itemVisual({ photo: hero })}</div>` : ''}
-        <div class="g-head-top">
-          <span class="g-table-no">${esc(t.table)} <b>${esc(table)}</b></span>
-          <div class="g-langs" role="group" aria-label="Language">
-            ${LANGS.map(([code, text]) => `<button type="button" data-action="lang" data-lang="${code}" aria-pressed="${code === state.lang}">${text}</button>`).join('')}
-          </div>
-        </div>
-        <div class="g-name"><span class="g-eyebrow">${esc(t.venue)}</span><strong>${esc(name)}</strong></div>
+        <div class="g-name"><strong>${esc(name)}</strong></div>
       </header>`;
+  }
+
+  // the top bar over the menu: the table at the left, the language button at the right, the small title at the
+  // centre once the large one has scrolled under it (DEMO_IOS keeps the states while the list scrolls)
+  function navBar() {
+    const t = tr();
+    const ios = globalThis.DEMO_IOS;
+    const name = state.data?.restaurant?.name ?? '';
+    const table = state.data?.table?.label ?? '';
+    const names = { lv: 'Latviešu', en: 'English', ru: 'Русский' };
+    const langWord = { lv: 'Valoda', en: 'Language', ru: 'Язык' }[state.lang] ?? 'Valoda';
+    return `
+      <div class="g-nav ${ios?.flag(root, 'glass') ? 'is-glass' : ''} ${ios?.flag(root, 'title') ? 'has-title' : ''} ${ios?.flag(root, 'mini') ? 'has-mini' : ''}">
+        <span class="g-table-no">${esc(t.table)} <b>${esc(table)}</b></span>
+        <span class="g-nav-title" aria-hidden="true">${esc(name)}</span>
+        <button type="button" class="g-lang-btn g-glass" data-action="lang-menu" data-lang-now="${state.lang}" aria-expanded="${!!state.langOpen}" aria-label="${langWord}: ${esc(state.lang.toUpperCase())}">${esc(state.lang.toUpperCase())}</button>
+      </div>
+      ${state.langOpen ? `<div class="g-pop-scrim" data-action="lang-menu"></div>
+      <div class="g-lang-pop" role="group" aria-label="${langWord}">
+        ${LANGS.map(([code]) => `<button type="button" data-action="lang" data-lang="${code}" aria-pressed="${code === state.lang}">${names[code]}</button>`).join('')}
+      </div>` : ''}`;
+  }
+
+  // what a screen reader calls both rows of categories (the large row was named after the cart before 2026-11-16)
+  // (a function, hoisted: a const here could be read by a render that runs before this line)
+  function catWord() {
+    return { lv: 'Kategorijas', en: 'Categories', ru: 'Категории' }[state.lang] ?? 'Kategorijas';
+  }
+
+  // the compact categories that drop in once the large circles have scrolled away; a glass lens marks the current one
+  function miniTabs() {
+    const cats = state.data.categories;
+    if (!cats?.length) return '';
+    const current = state.activeCategory ?? cats[0].id;
+    const on = globalThis.DEMO_IOS?.flag(root, 'mini');
+    return `<nav class="g-mini ${on ? 'is-on' : ''}" aria-label="${catWord()}" ${on ? '' : 'inert'}><span class="g-lens" aria-hidden="true"></span>${cats.map((c) => `<button type="button" data-action="jump" data-cat="${c.id}" aria-current="${c.id === current}">${esc(label(c.name))}</button>`).join('')}</nav>`;
   }
 
   function menuScreen() {
     const t = tr();
     const cats = state.data.categories;
     return `
-      <main class="g-scroll">
+      <main class="g-scroll g-menu">
         ${header()}
-        <nav class="g-tabs" aria-label="${esc(t.cart)}">
+        <nav class="g-tabs" aria-label="${catWord()}">
           ${cats.map((c) => `<button type="button" data-action="jump" data-cat="${c.id}" aria-current="${c.id === (state.activeCategory ?? cats[0].id)}">${esc(label(c.name))}</button>`).join('')}
         </nav>
         ${state.notice ? `<p class="g-notice" role="status">${esc(state.notice)}</p>` : ''}
@@ -1847,13 +2147,12 @@ function mountGuest(root, api, route, { lang } = {}) {
       <article class="g-item ${item.available ? '' : 'is-out'} ${inCart ? 'has-qty' : ''}" data-action="open" data-item="${item.id}" ${item.available ? 'role="button" tabindex="0"' : ''}>
         <div class="g-item-text">
           <h3>${esc(label(item.name))}</h3>
-          <p>${esc(label(item.description))}</p>
           <b>${startsAt ? `${esc(t.from)} ` : ''}${money(item.priceCents)}</b>
           ${item.available ? '' : `<div class="g-item-foot"><span class="g-chip">${esc(t.soldOut)}</span></div>`}
         </div>
         <div class="g-item-pic">
           ${visual ? `<div class="g-visual">${visual}</div>` : ''}
-          ${item.available ? `<span class="g-item-add">${inCart || '+'}</span>` : ''}
+          ${item.available ? (inCart ? `<span class="g-item-add">${inCart}</span>` : '<span class="g-item-go" aria-hidden="true"></span>') : ''}
         </div>
       </article>`;
   }
@@ -1861,7 +2160,7 @@ function mountGuest(root, api, route, { lang } = {}) {
   function cartBar() {
     const t = tr();
     if (!cartCount() || state.sheet) return '';
-    return `<div class="g-bar"><button type="button" class="g-cta" data-action="open-cart" id="open-cart"><span class="g-cta-count">${cartCount()}</span><span class="g-cta-label">${esc(t.cart)}</span><span>${money(cartTotal())}</span></button></div>`;
+    return `<div class="g-bar ${globalThis.DEMO_IOS?.flag(root, 'compact') ? 'is-compact is-tight' : ''}"><button type="button" class="g-cta g-fab" data-action="open-cart" id="open-cart" data-count="${cartCount()}" aria-label="${esc(t.viewCart)}, ${cartCount()}, ${money(cartTotal())}"><span class="g-cta-label" aria-hidden="true"></span><span class="g-cta-count">${cartCount()}</span><span class="g-fab-more"><span>${esc(t.viewCart)}</span><span>${money(cartTotal())}</span></span></button></div>`;
   }
 
   function allergenText(item) {
@@ -2141,12 +2440,22 @@ function mountGuest(root, api, route, { lang } = {}) {
     const el = event.target.closest('[data-action]');
     if (!el) return;
     const { action } = el.dataset;
-    if (action === 'lang') {
+    if (action === 'lang-menu') {
+      state.langOpen = !state.langOpen;
+      render();
+    } else if (action === 'lang') {
+      state.langOpen = false;
       state.lang = el.dataset.lang;
       langStore.set(state.lang);
       render();
     } else if (action === 'jump') {
-      root.querySelector(`#cat-${el.dataset.cat}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      state.pinCat = el.dataset.cat;
+      // only the phone's list scrolls (scrollIntoView also moved the whole page on a phone)
+      const sec = root.querySelector(`#cat-${el.dataset.cat}`);
+      const list = root.querySelector('.g-scroll');
+      if (sec && list) list.scrollTo({ top: list.scrollTop + sec.getBoundingClientRect().top - list.getBoundingClientRect().top - (parseFloat(getComputedStyle(sec).scrollMarginTop) || 0), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      syncTabs();
+      globalThis.DEMO_IOS?.lens(root);
     } else if (action === 'open') {
       const item = findItem(el.dataset.item);
       if (!item?.available) return;
@@ -2206,13 +2515,14 @@ function mountGuest(root, api, route, { lang } = {}) {
   function syncTabs() {
     const scroller = root.querySelector('.g-scroll');
     if (!scroller?.querySelector('.g-cat')) return;
-    const limit = root.querySelector('.g-tabs').getBoundingClientRect().bottom + 24;
+    const limit = (globalThis.DEMO_IOS?.topEdge(root) ?? root.querySelector('.g-tabs').getBoundingClientRect().bottom) + 24;
     const sections = [...scroller.querySelectorAll('.g-cat')];
     const current = sections.filter((s) => s.getBoundingClientRect().top <= limit).at(-1);
-    const id = (current ?? sections[0]).id.replace('cat-', '');
+    const atEnd = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 4;
+    const id = state.pinCat ?? (atEnd ? sections.at(-1) : (current ?? sections[0])).id.replace('cat-', '');
     const changed = id !== state.activeCategory;
     state.activeCategory = id;
-    for (const pill of root.querySelectorAll('.g-tabs button')) {
+    for (const pill of root.querySelectorAll('.g-tabs button, .g-mini button')) {
       const on = pill.dataset.cat === id;
       pill.setAttribute('aria-current', String(on));
       if (on && changed) pill.parentElement.scrollTo({ left: pill.offsetLeft - 16, behavior: 'smooth' });
@@ -2220,8 +2530,52 @@ function mountGuest(root, api, route, { lang } = {}) {
   }
 
   root.addEventListener('scroll', (event) => {
-    if (event.target.matches?.('.g-scroll')) syncTabs();
+    if (event.target.matches?.('.g-scroll')) {
+      globalThis.DEMO_IOS?.scroll(root, event.target);
+      syncTabs();
+      globalThis.DEMO_IOS?.lens(root);
+    }
   }, true);
+  for (const type of ['touchstart', 'wheel']) root.addEventListener(type, () => { state.pinCat = null; }, { passive: true });
+  // a keyboard scroll lets go of the tapped category too (a key that activates a button pins it again on its click)
+  root.addEventListener('keydown', (event) => { if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) state.pinCat = null; });
+  // the keyboard: a compact category that gets the focus is brought into its bar (Chromium left the last one cut at
+  // the bar's edge), and the focus leaving the language list closes it, so its scrim never covers the focused control;
+  // only for the keyboard (:focus-visible): a mouse press focuses a button too, and a bar scrolled under that press
+  // would send its release, and the click, elsewhere
+  root.addEventListener('focusin', (event) => {
+    let keyboard = false;
+    try { keyboard = event.target.matches(':focus-visible'); } catch { keyboard = false; }
+    if (!keyboard) return;
+    const pill = event.target.closest?.('.g-mini button');
+    const bar = pill?.parentElement;
+    if (bar && (pill.offsetLeft < bar.scrollLeft + 2 || pill.offsetLeft + pill.offsetWidth > bar.scrollLeft + bar.clientWidth - 2)) bar.scrollLeft = Math.max(0, pill.offsetLeft - 16);
+    // a dish reached by the keyboard, once the browser has brought it into view, is moved clear of the bars: in the
+    // list away from the glass bar above and the capsule below, then the page just far enough for its ring
+    // (Chromium's bring-into-view stops at the phone's list). Not a CSS scroll-padding: WebKit ignores it on focus,
+    // and a tap's bring-into-view would honour it, scrolling the list under a touch and shrinking the capsule
+    const row = event.target.closest?.('.g-item');
+    if (row) requestAnimationFrame(() => requestAnimationFrame(() => {
+      let keys = false;
+      try { keys = row.matches(':focus-visible'); } catch { keys = false; }
+      const list = row.closest('.g-scroll');
+      if (!keys || !row.isConnected || !list || document.activeElement !== row) return;
+      let r = row.getBoundingClientRect();
+      const v = list.getBoundingClientRect();
+      if (r.bottom <= v.top || r.top >= v.bottom) return;
+      const nav = root.querySelector('.g-nav');
+      const mini = root.querySelector('.g-mini.is-on');
+      const fab = root.querySelector('.g-fab');
+      const above = Math.max(v.top, nav ? nav.getBoundingClientRect().bottom : v.top, mini ? mini.getBoundingClientRect().bottom : v.top);
+      const below = fab ? fab.getBoundingClientRect().top : v.bottom;
+      if (r.bottom + 8 > below) list.scrollTop += r.bottom + 8 - below;
+      else if (r.top - 8 < above) list.scrollTop -= above - (r.top - 8);
+      r = row.getBoundingClientRect();
+      if (r.bottom + 8 > innerHeight) scrollBy(0, r.bottom + 8 - innerHeight);
+      else if (r.top < 8) scrollBy(0, r.top - 8);
+    }));
+    if (state.langOpen && !event.target.closest?.('.g-lang-btn, .g-lang-pop')) queueMicrotask(() => { if (state.langOpen) { state.langOpen = false; render(); } });
+  });
 
   root.addEventListener('input', (event) => {
     if (event.target.id === 'g-note' && state.picker) state.picker.note = event.target.value;
@@ -2232,7 +2586,8 @@ function mountGuest(root, api, route, { lang } = {}) {
       event.preventDefault();
       event.target.click();
     }
-    if (event.key === 'Escape' && (state.sheet || state.picker)) {
+    if (event.key === 'Escape' && (state.sheet || state.picker || state.langOpen)) {
+      state.langOpen = false;
       state.sheet = null;
       state.picker = null;
       render();
@@ -2918,7 +3273,7 @@ function startStage() {
   let lang = (() => { try { return JSON.parse(localStorage.getItem('kebab-lang')); } catch { return null; } })() ?? 'lv';
 
   function show(route) {
-    lang = phone.querySelector('.g-langs [aria-pressed="true"]')?.dataset.lang ?? lang;
+    lang = phone.querySelector('[data-lang-now]')?.dataset.langNow ?? phone.querySelector('.g-langs [aria-pressed="true"]')?.dataset.lang ?? (() => { try { return JSON.parse(localStorage.getItem('kebab-lang')); } catch { return null; } })() ?? lang;
     unmount();
     const host = document.createElement('div');
     host.className = 'stage-mount';
