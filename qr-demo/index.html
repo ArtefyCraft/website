@@ -395,6 +395,8 @@ body:has(.k-app), body:has(.a-app) { background: var(--screen); }
 .a-price input { min-height: 40px; padding: 0 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--raise); text-align: right; font-variant-numeric: tabular-nums; }
 .a-price > span { color: var(--ink-2); }
 .a-price button { min-height: 40px; padding: 0 12px; border: 1px solid var(--line); background: var(--raise); border-radius: 999px; font-size: 13px; }
+/* iOS zooms the page into a focused field written under 16 px (owner, 2026-11-17): every text field is 16 px or more */
+input, textarea, select, #phone-screen .g-note-input, .a-price input { font-size: max(16px, 1em); }
 .a-qr { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 .a-qr-card { display: grid; justify-items: center; gap: 4px; padding: 12px; background: #fff; color: #111; border: 1px solid var(--line); border-radius: 16px; break-inside: avoid; }
 .a-qr-code { width: 100%; max-width: 180px; }
