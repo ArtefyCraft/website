@@ -540,8 +540,11 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 #phone-screen .g-app { --spring-pop: linear(0, 0.0401, 0.142, 0.2806, 0.4349, 0.5888, 0.7308, 0.8533, 0.9526, 1.0276, 1.0794, 1.1106, 1.1246, 1.1252, 1.1161, 1.1007, 1.082, 1.0623, 1.0434, 1.0265, 1.0124, 1.0012, 0.9932, 0.9879, 0.985, 0.984, 0.9846, 0.9862, 0.9883, 0.9908, 0.9933, 0.9955, 0.9975, 0.9991, 1.0004, 1.0012, 1.0017, 1.002, 1.002, 1.0019, 1); --spring-slide: linear(0, 0.0274, 0.0961, 0.1891, 0.2938, 0.4011, 0.5045, 0.6001, 0.6854, 0.7593, 0.8218, 0.8732, 0.9146, 0.947, 0.9717, 0.9898, 1.0027, 1.0112, 1.0164, 1.0191, 1.0199, 1.0195, 1.0181, 1.0163, 1.0142, 1.0121, 1.01, 1.0081, 1.0064, 1.0049, 1.0036, 1.0026, 1.0018, 1.0011, 1.0006, 1.0002, 1, 0.9998, 0.9997, 0.9996, 1); }
 #phone-screen .g-menu { padding-top: 52px; }
 /* one category bar (2026-11-16): the icon bar stays at the top under the bar, in the bar's frosted glass */
-#phone-screen .g-tabs { position: sticky; top: 0; z-index: 3; background: rgba(23,26,33,.78); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
-#phone-screen .g-tabs.is-stuck { box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+#phone-screen .g-tabs { position: sticky; top: 0; z-index: 3; background: var(--g-bg); -webkit-backdrop-filter: none; backdrop-filter: none; padding-top: 4px; padding-bottom: 6px; transition: transform .45s var(--spring-slide); }
+#phone-screen .g-tabs.is-stuck { transform: translateY(-52px); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+#phone-screen .g-tabs button { gap: 4px; }
+#phone-screen .g-tabs button::before { width: 36px; height: 36px; }
+#phone-screen .g-tabs button::after { top: 8px; width: 20px; height: 20px; margin-left: -10px; }
 #phone-screen .g-cat { scroll-margin-top: var(--cat-top, 148px); }
 #phone-screen .g-head { padding-top: 4px; }
 #phone-screen .g-head strong { font-size: 34px; line-height: 1.1; }
@@ -550,7 +553,10 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 /* the slab is always 104 px; a clip uncovers its lower half (no height animation, so no layout per frame); the
    uncovered slab takes taps, so a tap on the bar or beside the categories never opens the dish under the glass */
 .g-nav::before { content: ''; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 104px; background: rgba(23,26,33,0); clip-path: inset(0 0 52px 0); transition: clip-path .5s var(--spring-slide), background-color .25s ease, -webkit-backdrop-filter .25s ease, backdrop-filter .25s ease; }
-.g-nav.is-glass::before { background: rgba(23,26,33,.78); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+.g-nav.is-glass::before { background: var(--g-bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+#phone-screen .g-nav { transition: transform .45s var(--spring-slide), opacity 0s linear 0s, visibility 0s linear 0s; }
+#phone-screen .g-nav.has-mini { transform: translateY(-52px); opacity: 0; visibility: hidden; transition: transform .45s var(--spring-slide), opacity 0s linear .45s, visibility 0s linear .45s; }
+@media (prefers-reduced-motion: reduce) { #phone-screen .g-nav, #phone-screen .g-tabs { transition: none; } }
 .g-nav.has-mini::before { clip-path: inset(0 0 52px 0); }
 /* the hairline under the bar rides down with the slab's lower edge (a transform) */
 .g-nav::after { content: ''; position: absolute; left: 0; right: 0; top: 51px; height: 1px; pointer-events: none; background: rgba(255,255,255,.08); opacity: 0; transition: opacity .25s ease, transform .5s var(--spring-slide); }
@@ -579,7 +585,7 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 .g-lens { position: absolute; z-index: 0; top: 2px; bottom: 2px; left: 0; right: 0; border-radius: 999px; background: rgba(255,255,255,.18); box-shadow: inset 0 1px 0 rgba(255,255,255,.16); clip-path: inset(0 100% 0 0 round 999px); transition: clip-path .5s var(--spring-slide); }
 /* an engine without the frosted blur gets a solid bar, so the list never reads through it */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .g-nav.is-glass::before { background: rgba(23,26,33,.97); }
+  .g-nav.is-glass::before { background: var(--g-bg); }
   .g-lang-pop { background: #2A2F3A; }
 }
 #phone-screen .g-item { min-height: 76px; padding: 10px 0; }
@@ -864,8 +870,11 @@ globalThis.DEMO_IOS = (() => {
   // the lowest edge of what covers the top of the list (top bar, compact categories, large categories)
   function topEdge(root) {
     let edge = null;
-    for (const el of root.querySelectorAll('.g-nav, .g-mini.is-on, .g-tabs')) {
-      const b = el.getBoundingClientRect().bottom;
+    for (const el of root.querySelectorAll('.g-nav:not(.has-mini), .g-mini.is-on, .g-tabs')) {
+      const r = el.getBoundingClientRect();
+      const k = r.height / (el.offsetHeight || 1) || 1;
+      const now = new DOMMatrixReadOnly(getComputedStyle(el).transform).m42;
+      const b = r.bottom + ((el.classList.contains('is-stuck') ? -52 : 0) - now) * k;   // -52: the lift in the CSS
       edge = edge == null ? b : Math.max(edge, b);
     }
     return edge;
@@ -931,14 +940,20 @@ globalThis.DEMO_IOS = (() => {
     const s = get(root);
     const y = scroller.scrollTop;
     const nav = root.querySelector('.g-nav');
-    const navBottom = nav ? nav.getBoundingClientRect().bottom : scroller.getBoundingClientRect().top;
+    const k = scroller.getBoundingClientRect().height / (scroller.offsetHeight || 1) || 1;
+    const navBottom = nav?.offsetParent
+      ? nav.offsetParent.getBoundingClientRect().top + (nav.offsetTop + nav.offsetHeight) * k
+      : scroller.getBoundingClientRect().top;
     const title = root.querySelector('.g-head strong');
     const tabs = root.querySelector('.g-tabs');
     s.glass = y > 4;
     s.title = title ? title.getBoundingClientRect().bottom < navBottom + 4 : y > 60;
     // one category bar (2026-11-16): the icon bar sticks under the top bar; "mini" is that state, and the top
     // bar's hairline then moves under the icon bar
-    s.mini = !!tabs && y > 4 && tabs.getBoundingClientRect().top <= navBottom + 1;
+    const lead = tabs?.previousElementSibling;
+    s.mini = !!tabs && y > 4 && (lead
+      ? lead.getBoundingClientRect().bottom <= navBottom + 1
+      : tabs.getBoundingClientRect().top <= navBottom + 1);
     if (!settle) {
       const dy = y - s.last;
       const atEnd = y + scroller.clientHeight >= scroller.scrollHeight - 4;
@@ -1003,8 +1018,7 @@ globalThis.DEMO_IOS = (() => {
     const list = root.querySelector('.g-menu');
     const tabs = list?.querySelector('.g-tabs');
     if (!tabs || !tabs.offsetHeight) return;
-    const nav = root.querySelector('.g-nav');
-    list.style.setProperty('--cat-top', `${(nav ? nav.offsetHeight : 52) + tabs.offsetHeight + 8}px`);
+    list.style.setProperty('--cat-top', `${tabs.offsetHeight + 8}px`);
   }
   function before(root) {
     const a = document.activeElement;
@@ -1064,7 +1078,7 @@ globalThis.DEMO_SLIDE = (() => {
   // CSS under "Sliding highlight" for the resting look.
   const SWITCHES = [
     { name: 'stage', sel: '.stage-tabs', on: '[aria-pressed="true"]' },
-    { name: 'cats', sel: '#phone-screen .g-tabs', on: '[aria-current="true"]', dot: 44 },
+    { name: 'cats', sel: '#phone-screen .g-tabs', on: '[aria-current="true"]', dot: 36 },
     { name: 'kitchen', sel: '.k-top nav', on: '[aria-pressed="true"]' },
     { name: 'owner', sel: '.a-head .a-seg', on: '[aria-pressed="true"]' },
     { name: 'range', sel: '.a-controls .a-seg', on: '[aria-pressed="true"]' },
