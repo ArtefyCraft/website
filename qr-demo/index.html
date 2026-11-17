@@ -544,6 +544,8 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 /* one category bar (2026-11-16): the icon bar stays at the top under the bar, in the bar's frosted glass */
 #phone-screen .g-tabs { position: sticky; top: 0; z-index: 3; background: var(--g-bg); -webkit-backdrop-filter: none; backdrop-filter: none; padding-top: 4px; padding-bottom: 6px; transition: transform .45s var(--spring-slide); }
 #phone-screen .g-tabs.is-stuck { transform: translateY(-52px); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+/* the lifted bar and the list's clip can land on different device pixels when the phone is drawn scaled (owner, 2026-11-17: a slit of list text above the bar): a background strip across the edge */
+#phone-screen .g-tabs.is-stuck::before { content: ""; position: absolute; left: 0; right: 0; top: -4px; height: 8px; background: var(--g-bg); z-index: -1; pointer-events: none; }
 #phone-screen .g-tabs button { gap: 4px; }
 #phone-screen .g-tabs button::before { width: 36px; height: 36px; }
 #phone-screen .g-tabs button::after { top: 8px; width: 20px; height: 20px; margin-left: -10px; }
@@ -3736,7 +3738,7 @@ function createDemoWorld(restaurantName) {
 
   // Example history so the owner's report is not empty. A fixed seed keeps it stable: the same numbers on every load.
   // 89 days, so "90 dienas" holds clearly more orders than "30 dienas". A follow-up (a paid order at the same table within
-  // FOLLOW_UP_WINDOW_MS) is placed on purpose, about 15 % of all orders; an ordinary order goes to a table that has had
+  // FOLLOW_UP_WINDOW_MS) is placed on purpose, about 8 % of all orders; an ordinary order goes to a table that has had
   // no order for longer than that window, so none becomes a follow-up by accident. Cost grows in step with the order count.
   function* seedHistorySteps() {
     let seed = 20261101;
@@ -3745,8 +3747,8 @@ function createDemoWorld(restaurantName) {
     const wrapLine = () => { const id = pick(['steak', 'fish', 'risotto', 'pasta', 'salmon', 'steak']); return id === 'steak' ? { itemId: id, qty: 1, options: { done: pick(['rare', 'medium', 'medium', 'well']) } } : { itemId: id, qty: 1, options: {} }; };
     const addOn = (source) => ({ itemId: pick(['soup', 'salad', 'cake', 'cheesecake', 'gin', 'latte']), qty: 1, source });
     const DAY = 86400000;
-    const FOLLOW_UP_SHARE = 0.1765;
-    const SUGGESTION_RATE = 0.2;
+    const FOLLOW_UP_SHARE = 0.087;
+    const SUGGESTION_RATE = 0.1;
     const today = Date.now() - (Date.now() % DAY);
     const place = (at, lines, token) => {
       frozenClock = at;
@@ -3765,8 +3767,8 @@ function createDemoWorld(restaurantName) {
     let followDebt = 0;
     let suggestDebt = 0;
     for (let day = 89; day >= 1; day -= 1) {
-      // QR orders only, a small share of a restaurant's day, rather too few than too many (owner 2026-11-17)
-      const count = 2 + Math.floor(random() * 5);
+      // QR orders only, a small share of a restaurant's day, rather too few than too many (owner 2026-11-17, twice)
+      const count = 1 + Math.floor(random() * 3);
       const times = Array.from({ length: count }, () => today - day * DAY + (9 + Math.floor(random() * 10)) * 3600000 + Math.floor(random() * 3600000)).sort((a, b) => a - b);
       const plan = [];
       for (const at of times) {
