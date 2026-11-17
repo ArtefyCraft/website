@@ -288,36 +288,38 @@ body:has(.k-app), body:has(.a-app) { background: var(--screen); }
 .k-dot::before { display: none; }
 .k-dot.is-off { color: var(--accent); }
 .k-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
-.k-col h2 { font-size: 15px; font-weight: 600; color: var(--ink-2); padding: 8px 0 12px; margin-bottom: 8px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; }
-.k-col h2 span { font-size: 18px; font-weight: 700; color: var(--ink); }
+.k-col h2 { font-size: 15px; font-weight: 600; color: var(--ink-2); padding: 8px 0 12px; margin-bottom: 8px; border-bottom: 1px solid var(--line); display: flex; justify-content: flex-start; gap: 8px; align-items: baseline; }
+.k-col h2 span { font-size: 15px; font-weight: 600; color: var(--ink); }
 .k-empty { color: var(--ink-2); padding: 16px 4px; }
-.k-ticket { background: var(--card); color: var(--ink); border: 1px solid var(--gold-line); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.k-ticket { background: var(--card); color: var(--ink); border: 1px solid var(--gold-line); border-radius: 12px; padding: 10px 12px 12px 14px; margin-bottom: 8px; font: 400 14px/1.35 var(--body); }
 .k-ticket.is-new { animation: k-in .2s ease-out; }
 .k-ticket.is-late { border-top: 2px solid var(--accent); }
-.k-ticket header { display: flex; justify-content: space-between; align-items: flex-end; }
-.k-table { font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
-.k-table small { display: block; font: 500 13px/1 var(--body); color: var(--ink-2); margin-bottom: 8px; }
-.k-meta { display: grid; justify-items: end; font: 500 12px/1.3 var(--body); color: var(--ink-2); }
-.k-meta span:last-child { font: 700 20px var(--body); color: var(--ink); }
-.k-ticket.is-late .k-meta span:last-child { color: var(--accent); }
-.k-flag { display: block; margin-top: 8px; font: 500 13px/1.3 var(--body); padding: 0; border-radius: 0; background: none; border: 0; color: var(--ink-2); }   /* a status as plain text */
+.k-ticket header { display: flex; align-items: center; gap: 8px; }
+.k-table { font-size: 16px; font-weight: 600; line-height: 1.25; }
+.k-meta { margin-left: auto; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
+/* the ticket's other actions: a 44 px target drawn as three dots, pulled into the header's own height */
+.k-more { flex: none; display: grid; place-items: center; width: 44px; height: 44px; margin: -10px -10px -10px -4px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--ink-2); }
+.k-more svg { width: 18px; height: 18px; }
+.k-more[aria-expanded="true"] { color: var(--ink); background: var(--raise); }
+.k-ticket.is-late .k-meta { color: var(--accent); font-weight: 600; }
+.k-flag { display: block; margin-top: 4px; font: 500 14px/1.35 var(--body); padding: 0; border-radius: 0; background: none; border: 0; color: var(--ink-2); }   /* a status as plain text */
 .k-flag-bad { display: block; color: var(--accent); font-weight: 600; }
-.k-ticket ul { list-style: none; margin: 12px 0; padding: 0; }
-.k-ticket li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.3; }
-.k-ticket li b { font-size: 16px; font-weight: 700; color: var(--accent); margin-right: 4px; }
-.k-ticket li small { display: block; color: var(--ink-2); font-size: 13px; font-weight: 400; }
-.k-ticket li em { display: block; font-style: normal; font-weight: 700; color: var(--ink); font-size: 14px; }
-.k-go { width: 100%; min-height: 46px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 15px; }
-.k-quiet-row { display: flex; justify-content: center; gap: 16px; }
-.k-remove { display: block; margin-top: 8px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink-2); font-size: 13px; font-weight: 500; }
-.k-quiet { margin-top: 4px; min-height: 44px; border: 0; background: none; color: var(--ink-2); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
-.k-confirm { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px; }
+.k-ticket ul { list-style: none; margin: 8px 0 12px; padding: 0; display: grid; gap: 4px; }
+.k-ticket li { font-size: 16px; line-height: 1.3; }
+.k-ticket li b { font-weight: 600; color: var(--ink); margin-right: 4px; }
+.k-ticket li small { display: block; color: var(--ink-2); font-size: 14px; font-weight: 400; }
+.k-ticket li em { display: block; font-style: normal; font-weight: 600; color: var(--ink); font-size: 14px; }
+.k-go { width: 100%; min-height: 44px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 14px; }
+.k-quiet-row { display: flex; flex-wrap: wrap; justify-content: flex-start; column-gap: 20px; row-gap: 0; margin-top: 4px; }
+.k-remove { display: block; margin-top: 8px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink-2); font-size: 14px; font-weight: 500; }
+.k-quiet { margin-top: 0; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink-2); white-space: nowrap; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+.k-confirm { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px; }
 .k-confirm span { grid-column: 1 / -1; font-weight: 500; }
-.k-confirm button { min-height: 42px; border-radius: 999px; border: 1px solid var(--line); background: var(--raise); color: var(--ink); }
+.k-confirm button { min-height: 44px; border-radius: 999px; border: 1px solid var(--line); background: var(--raise); color: var(--ink); }
 .k-confirm button:first-of-type { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
 .k-receipt { display: grid; gap: 8px; }
 .k-till { display: flex; justify-content: space-between; align-items: baseline; background: none; border: 0; border-top: 1px solid var(--gold-line); padding: 12px 0 0; border-radius: 0; font-weight: 500; }
-.k-till b { font-size: 22px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.k-till b { font-size: 16px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
 .k-alert { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 12px; margin-bottom: 12px; border-radius: 12px; background: var(--accent-tint); border: 1px solid var(--accent); font-weight: 500; }
 .k-alert button { min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; }
 .k-error { color: var(--accent); font-weight: 500; }
@@ -748,7 +750,6 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
     <span class="stage-eyebrow">ArtefyCraft</span>
     <h1>Galda kods</h1>
     <span class="stage-rule"></span>
-    <p>Klients noskenē kodu uz galda, pasūta un samaksā telefonā. Virtuve redz pasūtījumu uzreiz.</p>
   </header>
   <div class="stage-tabs" role="group" aria-label="Skats">
     <button type="button" data-pane="guest">Klients</button>
@@ -2276,7 +2277,7 @@ const STRINGS = {
     note: 'Piezīme', notePlaceholder: 'Piemēram, bez ķiplokiem', removed: 'Šis tikko beidzās un ir izņemts no pasūtījuma:',
     payingTitle: 'Demo maksājums', payingBody: 'Šeit klients redzētu Apple Pay, Google Pay vai kartes logu. Demo versijā naudu no kartes nenoņem. Īstajā sistēmā nauda ienāk restorāna kontā.', payConfirm: 'Apstiprināt demo maksājumu',
     orderNo: 'Pasūtījums', paid: 'Apmaksāts', confirming: 'Apstiprinām maksājumu…', stepPaid: 'Saņemts', stepCooking: 'Gatavojam', stepReady: 'Gatavs', stepDone: 'Izsniegts', stepServed: 'Atnests',
-    readyHint: 'Jūsu ēdiens ir gatavs. Lūdzu, paņemiet to pie letes.', readyCarry: 'Jūsu ēdiens ir gatavs. Nesam to uz {n}. galdu.', waitHint: 'Varat palikt pie galda. Šis ekrāns atjaunojas pats.', orderMore: 'Pasūtīt vēl', enjoy: 'Labu apetīti!',
+    readyHint: 'Jūsu ēdiens ir gatavs. Lūdzu, paņemiet to pie letes.', readyCarry: 'Jūsu ēdiens ir gatavs. Tūlīt to atnesīsim.', waitHint: 'Varat palikt pie galda. Šis ekrāns atjaunojas pats.', orderMore: 'Pasūtīt vēl', enjoy: 'Labu apetīti!',
     lineRemoved: 'Šī pozīcija ir izņemta, nauda tiks atmaksāta.', cancelled: 'Pasūtījums atcelts. Nauda tiks atmaksāta uz Jūsu karti.', expired: 'Šis pasūtījums netika apmaksāts.', allergensAsk: 'jautājiet darbiniekam',
     error: 'Neizdevās. Pārbaudiet internetu un mēģiniet vēlreiz.', tableMissing: 'Šis QR kods nav derīgs. Lūdzu, pajautājiet darbiniekam.', loading: 'Ielādējam…', receiptHint: 'Čeku izsniegsim kopā ar ēdienu.',
     gluten: 'glutēns', milk: 'piens', egg: 'olas', nuts: 'rieksti', fish: 'zivis', crustaceans: 'vēžveidīgie', sesame: 'sezama sēklas', soy: 'sojas pupas', sulphites: 'sulfīti', mustard: 'sinepes', celery: 'selerijas', none: 'nav', venue: 'Restorāns',
@@ -2288,7 +2289,7 @@ const STRINGS = {
     note: 'Note', notePlaceholder: 'For example, no garlic', removed: 'This just sold out and was removed from your order:',
     payingTitle: 'Demo payment', payingBody: 'A customer would see Apple Pay, Google Pay or a card form here. The demo takes no money from your card. In the real system the money reaches the restaurant\'s account.', payConfirm: 'Confirm demo payment',
     orderNo: 'Order', paid: 'Paid', confirming: 'Confirming your payment…', stepPaid: 'Received', stepCooking: 'Cooking', stepReady: 'Ready', stepDone: 'Handed over', stepServed: 'Served',
-    readyHint: 'Your food is ready. Please collect it at the till.', readyCarry: 'Your food is ready. We are bringing it to table {n}.', waitHint: 'Stay at your table. This screen updates by itself.', orderMore: 'Order more', enjoy: 'Enjoy your meal!',
+    readyHint: 'Your food is ready. Please collect it at the till.', readyCarry: 'Your food is ready. We are bringing it to you now.', waitHint: 'Stay at your table. This screen updates by itself.', orderMore: 'Order more', enjoy: 'Enjoy your meal!',
     lineRemoved: 'This item was removed and will be refunded.', cancelled: 'Order cancelled. The money will return to your card.', expired: 'This order was not paid.', allergensAsk: 'ask a member of staff',
     error: 'That did not work. Check your connection and try again.', tableMissing: 'This QR code is not valid. Please ask a member of staff.', loading: 'Loading…', receiptHint: 'Your receipt comes with your food.',
     gluten: 'gluten', milk: 'milk', egg: 'egg', nuts: 'nuts', fish: 'fish', crustaceans: 'crustaceans', sesame: 'sesame', soy: 'soy', sulphites: 'sulphites', mustard: 'mustard', celery: 'celery', none: 'none', venue: 'Restaurant',
@@ -2300,7 +2301,7 @@ const STRINGS = {
     note: 'Комментарий', notePlaceholder: 'Например, без чеснока', removed: 'Это только что закончилось и убрано из заказа:',
     payingTitle: 'Демо-оплата', payingBody: 'Здесь клиент увидел бы Apple Pay, Google Pay или форму карты. В демо деньги не списываются. В реальной системе деньги поступают на счёт ресторана.', payConfirm: 'Подтвердить демо-оплату',
     orderNo: 'Заказ', paid: 'Оплачено', confirming: 'Подтверждаем оплату…', stepPaid: 'Принят', stepCooking: 'Готовим', stepReady: 'Готов', stepDone: 'Выдан', stepServed: 'Подан',
-    readyHint: 'Ваш заказ готов. Заберите его у кассы.', readyCarry: 'Ваш заказ готов. Несём его к столу {n}.', waitHint: 'Можете спокойно оставаться за столом. Экран обновляется сам.', orderMore: 'Заказать ещё', enjoy: 'Приятного аппетита!',
+    readyHint: 'Ваш заказ готов. Заберите его у кассы.', readyCarry: 'Ваш заказ готов. Сейчас принесём.', waitHint: 'Можете спокойно оставаться за столом. Экран обновляется сам.', orderMore: 'Заказать ещё', enjoy: 'Приятного аппетита!',
     lineRemoved: 'Эта позиция убрана, деньги будут возвращены.', cancelled: 'Заказ отменён. Деньги вернутся на вашу карту.', expired: 'Этот заказ не был оплачен.', allergensAsk: 'спросите у сотрудника',
     error: 'Не получилось. Проверьте интернет и попробуйте снова.', tableMissing: 'Этот QR-код недействителен. Пожалуйста, обратитесь к сотруднику.', loading: 'Загрузка…', receiptHint: 'Чек выдадим вместе с едой.',
     gluten: 'глютен', milk: 'молоко', egg: 'яйца', nuts: 'орехи', fish: 'рыба', crustaceans: 'ракообразные', sesame: 'кунжут', soy: 'соя', sulphites: 'сульфиты', mustard: 'горчица', celery: 'сельдерей', none: 'нет', venue: 'Ресторан',
@@ -2590,7 +2591,6 @@ function mountGuest(root, api, route, { lang } = {}) {
   function header() {
     const t = tr();
     const name = state.data?.restaurant?.name ?? '';
-    const table = state.data?.table?.label ?? state.order?.tableLabel ?? '';
     const hero = state.data?.hero;
     return `
       <header class="g-head ${hero ? 'has-photo' : ''}">
@@ -2610,7 +2610,7 @@ function mountGuest(root, api, route, { lang } = {}) {
     const langWord = { lv: 'Valoda', en: 'Language', ru: 'Язык' }[state.lang] ?? 'Valoda';
     return `
       <div class="g-nav ${ios?.flag(root, 'glass') ? 'is-glass' : ''} ${ios?.flag(root, 'title') ? 'has-title' : ''} ${ios?.flag(root, 'mini') ? 'has-mini' : ''}">
-        <span class="g-table-no">${esc(t.table)} <b>${esc(table)}</b></span>
+        <span aria-hidden="true"></span>
         <span class="g-nav-title" aria-hidden="true">${esc(name)}</span>
         <button type="button" class="g-lang-btn g-glass" data-action="lang-menu" data-lang-now="${state.lang}" aria-expanded="${!!state.langOpen}" aria-label="${langWord}: ${esc(state.lang.toUpperCase())}">${esc(state.lang.toUpperCase())}</button>
       </div>
@@ -2738,7 +2738,6 @@ function mountGuest(root, api, route, { lang } = {}) {
           <div id="g-suggest-slot">${suggestBlock()}</div>
         </div>
         <div class="g-sheet-foot">
-          <div class="g-cart-table"><b>${esc(t.table)} ${esc(state.data.table.label)}</b><span>${esc(t.tableCheck)}</span></div>
           ${state.error ? `<p class="g-error" role="alert">${esc(state.error)}</p>` : ''}
           <button type="button" class="g-cta" id="pay" data-action="checkout" ${state.busy || !state.cart.length ? 'disabled' : ''}><span>${esc(t.pay)}</span><span>${money(cartTotal())}</span></button>
           <p class="g-hint">${esc(t.payHint)}</p>
@@ -2789,7 +2788,6 @@ function mountGuest(root, api, route, { lang } = {}) {
       ${brandBar()}
       <button type="button" class="g-close" data-action="pay-back" aria-label="${esc(t.backToMenu)}">×</button>
       <div class="g-pay">
-        <span class="g-pay-table">${esc(t.table)} ${esc(order.tableLabel)}</span>
         <h1>${esc(t.payingTitle)}</h1>
         <p>${esc(t.payingBody)}</p>
         <div class="g-pay-total">${money(order.totalCents)}</div>
@@ -2809,7 +2807,7 @@ function mountGuest(root, api, route, { lang } = {}) {
     const message = confirming ? t.confirming
       : order.status === 'cancelled' ? t.cancelled
       : order.status === 'expired' ? t.expired
-      : order.status === 'ready' ? (carried ? t.readyCarry.replace('{n}', order.tableLabel) : t.readyHint)
+      : order.status === 'ready' ? (carried ? t.readyCarry : t.readyHint)
       : order.status === 'done' ? t.enjoy : t.waitHint;
     return `
       ${brandBar()}
@@ -2817,7 +2815,6 @@ function mountGuest(root, api, route, { lang } = {}) {
         <section class="g-status ${order.status === 'ready' ? 'is-ready' : ''}">
           <div class="g-status-top">
             ${reached >= 0 ? `<h1>${esc(stepNames[order.status])}</h1>` : ''}
-            <div class="g-ticket-no"><small>${esc(t.table)}</small>${esc(order.tableLabel)}</div>
           </div>
           ${reached >= 0 ? `<ol class="g-steps">${STEPS.map((s, i) => `<li class="${i < reached ? 'is-past' : i === reached ? 'is-now' : ''}">${esc(stepNames[s])}</li>`).join('')}</ol>` : ''}
           <p class="g-message ${order.status === 'ready' ? 'is-ready' : ''}" role="status">${esc(message)}</p>
@@ -3155,6 +3152,9 @@ const COLUMNS = [
 const onBoard = (order) => COLUMNS.some((c) => c.status === order.status);
 
 const LATE_AFTER_MIN = 10;
+// how long an order has waited, in words a cook reads at a glance (the owner did not read "#2" and "5 min", 2026-11-17)
+const waitWords = (min) => (min < 1 ? 'Tikko' : `Gaida ${min} min`);
+const DOTS = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="19" cy="12" r="1.9" fill="currentColor"/></svg>';
 const POLL_MS = 20000;
 const SOUND_KEY = 'kebab-kitchen-sound';
 
@@ -3176,7 +3176,7 @@ const timeOf = (ms) => new Intl.DateTimeFormat('lv', { timeZone: STAFF_TIME_ZONE
 function mountKitchen(root, api, { requireLogin = true, embedded = false } = {}) {
   const seen = new Set();
   const sound = !embedded && savedSound();
-  const state = { authed: !requireLogin, data: null, tab: 'orders', connected: true, offlineSince: null, loginError: '', confirmCancel: null, editing: null, error: '', sound, soundLocked: sound, known: null };
+  const state = { authed: !requireLogin, data: null, tab: 'orders', connected: true, offlineSince: null, loginError: '', confirmCancel: null, editing: null, more: null, error: '', sound, soundLocked: sound, known: null };
   let stopWatching = () => {};
   let audio = null;
   const clock = setInterval(() => {
@@ -3230,6 +3230,8 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
     const out = order.outOfStock ?? [];
     const lines = order.lines.map((line, index) => ({ line, index })).filter(({ line }) => !line.removed);
     const editing = state.editing === order.id;
+    // the other actions show only after the three dots, and stay while a removal or a cancel question is open
+    const open = state.more === order.id || editing || state.confirmCancel === order.id;
     const others = state.data.active.filter((o) => o.id !== order.id && o.tableLabel === order.tableLabel && onBoard(o)).length;
     // Only a ticket seen for the first time slides in; redraws stay still.
     const fresh = seen.size > 0 && !seen.has(order.id);
@@ -3237,8 +3239,9 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
     return `
       <article class="k-ticket ${late ? 'is-late' : ''} ${fresh ? 'is-new' : ''}" data-order="${order.id}">
         <header>
-          <div class="k-table"><small>Galds</small>${esc(order.tableLabel)}</div>
-          <div class="k-meta"><span>#${order.number}</span><span>${minutes} min</span></div>
+          <div class="k-table">Galds ${esc(order.tableLabel)}</div>
+          <div class="k-meta">${waitWords(minutes)}</div>
+          <button type="button" class="k-more" id="more-${order.id}" data-action="more" data-id="${order.id}" aria-expanded="${open}" aria-label="Mainīt pasūtījumu, galds ${esc(order.tableLabel)}">${DOTS}</button>
         </header>
         ${order.followUp ? '<div class="k-flag">Papildpasūtījums</div>' : ''}
         ${others ? `<div class="k-flag">Šim galdam vēl ${ordersWord(others)}</div>` : ''}
@@ -3247,7 +3250,7 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
           ${lines.map(({ line: l, index }) => `<li><b>${l.qty} ×</b> ${esc(l.name.lv)}${l.options.length ? `<small>${esc(optionLine(l, 'lv'))}</small>` : ''}${l.note ? `<em>${esc(l.note)}</em>` : ''}${editing && lines.length > 1 ? `<button type="button" class="k-remove" data-action="remove-line" data-id="${order.id}" data-index="${index}">Izņemt un atmaksāt ${money(l.lineCents)}</button>` : ''}</li>`).join('')}
         </ul>
         ${column.status === 'ready' ? serveForm(order) : `<button type="button" class="k-go" data-action="advance" data-id="${order.id}" data-next="${column.next}">${column.action}</button>`}
-        ${state.confirmCancel === order.id
+        ${!open ? '' : state.confirmCancel === order.id
           ? `<div class="k-confirm"><span>Atcelt un atmaksāt ${money(order.totalCents)}?</span><button type="button" data-action="cancel" data-id="${order.id}">Jā, atcelt</button><button type="button" data-action="cancel-no">Nē</button></div>`
           : `<div class="k-quiet-row">${lines.length > 1 ? `<button type="button" class="k-quiet" data-action="edit" data-id="${order.id}">${editing ? 'Beigt labot' : 'Izņemt pozīciju'}</button>` : ''}<button type="button" class="k-quiet" data-action="cancel-ask" data-id="${order.id}">Atcelt pasūtījumu</button></div>`}
       </article>`;
@@ -3265,7 +3268,7 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
     const active = state.data.active.filter((o) => o.status !== 'cancelled');
     const refunds = state.data.active.filter((o) => owed(o) > 0);
     return `
-      ${refunds.map((o) => `<div class="k-alert"><span>Atmaksa neizdevās: galds ${esc(o.tableLabel)}, #${o.number}, ${money(owed(o))}</span><button type="button" data-action="retry-refund" data-id="${o.id}">Mēģināt vēlreiz</button></div>`).join('')}
+      ${refunds.map((o) => `<div class="k-alert"><span>Atmaksa neizdevās: galds ${esc(o.tableLabel)}, pasūtījums Nr. ${o.number}, ${money(owed(o))}</span><button type="button" data-action="retry-refund" data-id="${o.id}">Mēģināt vēlreiz</button></div>`).join('')}
       <div class="k-board">
         ${COLUMNS.map((col) => {
           const list = active.filter((o) => o.status === col.status);
@@ -3283,7 +3286,7 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
           const column = COLUMNS.findLast((c) => orders.some((o) => o.status === c.status));
           const waited = minutesSince(orders[0].paidAt ?? orders[0].createdAt);
           const late = orders.some((o) => o.status !== 'ready' && minutesSince(o.paidAt ?? o.createdAt) >= LATE_AFTER_MIN);
-          return `<div class="k-tile is-${column.status} ${late ? 'is-late' : ''}"><b>${esc(label)}</b><span>${columnTitle(column)}</span><small>${orders.length > 1 ? `${ordersWord(orders.length)}, ` : ''}${waited} min</small></div>`;
+          return `<div class="k-tile is-${column.status} ${late ? 'is-late' : ''}"><b>${esc(label)}</b><span>${columnTitle(column)}</span><small>${orders.length > 1 ? `${ordersWord(orders.length)}, ` : ''}${waitWords(waited).toLowerCase()}</small></div>`;
         }).join('')}
       </div>`;
   }
@@ -3317,6 +3320,7 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
     const motion = globalThis.DEMO_MOTION?.beforeKitchen(root);
     const focused = document.activeElement?.id;
     const position = document.activeElement?.selectionStart;
+    const focusedTicket = root.contains(document.activeElement) ? document.activeElement.closest('[data-order]')?.dataset.order : null;
     if (!state.authed) {
       root.innerHTML = `<div class="k-app">${loginView()}</div>`;
     } else if (!state.data) {
@@ -3342,10 +3346,12 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
           ${state.tab === 'orders' ? ordersView() : state.tab === 'tables' ? tablesView() : stopView()}
         </div>`;
     }
-    if (focused) {
-      const el = root.querySelector(`#${CSS.escape(focused)}`);
-      el?.focus();
-      if (position != null && el?.setSelectionRange) el.setSelectionRange(position, position);
+    const back = focused ? root.querySelector(`#${CSS.escape(focused)}`) : null;
+    if (back) {
+      back.focus();
+      if (position != null && back.setSelectionRange) back.setSelectionRange(position, position);
+    } else if (focusedTicket) {
+      root.querySelector(`#${CSS.escape(`more-${focusedTicket}`)}`)?.focus({ preventScroll: true });
     }
     globalThis.DEMO_MOTION?.afterKitchen(root, motion);
   }
@@ -3436,7 +3442,18 @@ function mountKitchen(root, api, { requireLogin = true, embedded = false } = {})
       state.tab = el.dataset.tab;
       render();
     } else if (action === 'advance') {
+      // a ticket moving on closes its own actions and questions (critic 2026-11-17, P2)
+      if (state.more === id) state.more = null;
+      if (state.editing === id) state.editing = null;
+      if (state.confirmCancel === id) state.confirmCancel = null;
       run(() => api.setStatus(id, el.dataset.next));
+    } else if (action === 'more') {
+      // one ticket's actions at a time: opening these closes another ticket's removal or cancel question
+      const closing = state.more === id || state.editing === id || state.confirmCancel === id;
+      state.more = closing ? null : id;
+      state.editing = null;
+      state.confirmCancel = null;
+      render();
     } else if (action === 'edit') {
       state.editing = state.editing === id ? null : id;
       render();
@@ -3713,7 +3730,7 @@ function createDemoWorld(restaurantName) {
     const addOn = (source) => ({ itemId: pick(['soup', 'salad', 'cake', 'cheesecake', 'gin', 'latte']), qty: 1, source });
     const DAY = 86400000;
     const FOLLOW_UP_SHARE = 0.1765;
-    const SUGGESTION_RATE = 0.45;
+    const SUGGESTION_RATE = 0.2;
     const today = Date.now() - (Date.now() % DAY);
     const place = (at, lines, token) => {
       frozenClock = at;
@@ -3732,7 +3749,8 @@ function createDemoWorld(restaurantName) {
     let followDebt = 0;
     let suggestDebt = 0;
     for (let day = 89; day >= 1; day -= 1) {
-      const count = 10 + Math.floor(random() * 10);
+      // QR orders only, a small share of a restaurant's day, rather too few than too many (owner 2026-11-17)
+      const count = 2 + Math.floor(random() * 5);
       const times = Array.from({ length: count }, () => today - day * DAY + (9 + Math.floor(random() * 10)) * 3600000 + Math.floor(random() * 3600000)).sort((a, b) => a - b);
       const plan = [];
       for (const at of times) {
@@ -3756,7 +3774,7 @@ function createDemoWorld(restaurantName) {
       frozenClock = null;
       yield;
     }
-    const running = place(Date.now() - 240000, [{ ...wrapLine(), qty: 2 }, { itemId: 'gin', qty: 2, source: 'suggestion' }], 'demo-galds-3');
+    const running = place(Date.now() - 240000, [{ ...wrapLine(), qty: 2 }, { itemId: 'gin', qty: 2 }], 'demo-galds-3');
     place(Date.now() - 60000, [{ itemId: 'soup', qty: 1 }, { itemId: 'salad', qty: 1 }], 'demo-galds-9');
     frozenClock = null;
     engine.setStatus(running.id, 'preparing');
