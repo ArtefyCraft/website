@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex, nofollow">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-b19RryGZ+yaGGSZK6sji0mhTj8WR85nh6gdhPHZwMCQ=' 'sha256-H9xbKPs+6GqctsWBT7fHJi2YNaZ1xFNQmWUExeQFsFk=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60=' 'sha256-ayENdSnS4j5ZmiYTf+4Xe9YghiWb+cly4b1fT9jA/rY='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://zcbwdbcfalwhapwgzswj.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-b19RryGZ+yaGGSZK6sji0mhTj8WR85nh6gdhPHZwMCQ=' 'sha256-H9xbKPs+6GqctsWBT7fHJi2YNaZ1xFNQmWUExeQFsFk=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60=' 'sha256-PTnhQgesQ47UXP/QFFgaRqgzbZyDnzF2aLBTPJ3uq/U='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://zcbwdbcfalwhapwgzswj.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preload" href="/fonti/hanken-grotesk-768af2923e.woff2" as="font" type="font/woff2" crossorigin>
@@ -1624,22 +1624,22 @@ dialog.dlg{border-radius:var(--r)}
 
 
 /* ===== kandidāts 2026-11-17: scrollcraft paņēmieni ===== */
-.vh-lamp{display:none}
-.vh{min-height:calc(100svh - 2.5rem);display:grid;align-content:center;padding-top:calc(var(--navh,64px) + clamp(1.5rem,5vh,3rem));padding-bottom:clamp(4rem,10vh,6.5rem)}
+.vh{min-height:min(calc(100svh - 2.5rem),52rem);display:grid;align-content:center;padding-top:calc(var(--navh,64px) + clamp(1.5rem,5vh,3rem));padding-bottom:clamp(4rem,10vh,6.5rem)}
 .vh>.wrap{width:100%}
-.vh-say,.vh-go{will-change:transform,opacity}
+html.sc-stick .sc-cover>.vh{position:sticky;top:var(--sc-top,0px);z-index:0}
+html.sc-stick .sc-cover>:not(.vh){position:relative;z-index:1}
+.sc-pad{display:block}
 .vtools{position:relative;z-index:1;margin-top:-1.5rem;background:var(--paper);border-radius:20px 20px 0 0;box-shadow:0 -22px 40px -26px rgba(0,0,0,.55)}
-.vlogo{background:var(--raised);border:1px solid var(--hair);animation:none;transform:none}
-.vlogo svg,.vlogo.dark svg{fill:var(--ink)}
+.vlogo{animation:none;transform:none}
 .vnet-row::after,.vd-go::before{display:none;animation:none}
-.vdemo{animation:none;background:linear-gradient(#1F2622,#1F2622) padding-box,linear-gradient(rgba(229,180,74,.55),rgba(229,180,74,.55)) border-box}
-.vdemo-code{background:none}
+.vdemo{animation:none}
 html.sc .sc-in{opacity:0;transform:translateY(14px);transition:opacity 620ms var(--ease),transform 620ms var(--ease)}
 html.sc .sc-in.sc-seen{opacity:1;transform:none}
 html.sc .sc-in.sc-done{transition:none}
 html.sc-pin .sc-track{position:relative;height:calc(100svh - var(--navh,64px) + 135svh);margin-top:clamp(1.8rem,4vh,2.6rem)}
 html.sc-pin .sc-stage{position:sticky;top:var(--navh,64px);height:calc(100svh - var(--navh,64px));display:grid;align-items:center}
-.sc-rail{position:absolute;left:0;bottom:clamp(1.5rem,8vh,4rem);display:flex;gap:8px}
+.sc-rail{display:none}
+html.sc-pin .sc-rail{position:absolute;left:0;bottom:clamp(1.5rem,8vh,4rem);display:flex;gap:8px}
 .sc-rail i{display:block;width:24px;height:2px;background:var(--ink);opacity:.15;transition:opacity .4s var(--ease)}
 .sc-rail i.on{opacity:.65}
 @media (min-width:761px){
@@ -2681,13 +2681,60 @@ html.sc-pin .vd[data-s="3"] .vd-out{opacity:1;transform:none}
 <script>
 (function(){
   var d=document,root=d.documentElement,w=window;
-  var nav=d.querySelector('.nav');
+  var nav=d.querySelector('.nav'),lastNav=-1;
   function navH(){return nav?nav.offsetHeight:0;}
-  function setNav(){root.style.setProperty('--navh',navH()+'px');}
+  function setNav(){var h=navH();if(h!==lastNav){lastNav=h;root.style.setProperty('--navh',h+'px');}}
   setNav();w.addEventListener('resize',setNav);
   if(w.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   root.classList.add('sc');
-  var hero=d.getElementById('sakums'),say=hero&&hero.querySelector('.vh-say'),go=hero&&hero.querySelector('.vh-go');
+  var hero=d.getElementById('sakums'),sheet=d.querySelector('.vtools');
+  var first=d.getElementById('ko-daram'),cover=null,pad=null;
+  if(hero&&sheet&&first&&hero.parentNode===sheet.parentNode&&first.parentNode===hero.parentNode){
+    cover=d.createElement('div');cover.className='sc-cover';
+    hero.parentNode.insertBefore(cover,hero);cover.appendChild(hero);cover.appendChild(sheet);cover.appendChild(first);
+    pad=d.createElement('div');pad.className='sc-pad';pad.setAttribute('aria-hidden','true');first.appendChild(pad);
+    root.classList.add('sc-stick');
+  }
+  /* the small screen height (iPhone toolbar shown): the fit reads it, so the toolbar hiding on scroll changes nothing */
+  var probe=d.createElement('div');probe.setAttribute('aria-hidden','true');
+  probe.style.cssText='position:fixed;left:0;top:0;width:1px;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
+  d.body.appendChild(probe);
+  function svh(){return probe.offsetHeight||w.innerHeight;}
+  /* a hero taller than the screen scrolls until its bottom shows, then stays (negative sticky top), so no part of it is
+     ever out of reach; the content below is made at least one screen of hero tall, so the hero is covered whole
+     before it leaves */
+  function fitHero(){
+    if(!cover)return;
+    pad.style.height='0px';
+    var v=svh(),H=hero.offsetHeight,top=Math.min(0,v-H),run=cover.offsetHeight-H;
+    var sheetAt=sheet.getBoundingClientRect().top-cover.getBoundingClientRect().top;
+    hero.style.setProperty('--sc-top',top+'px');
+    /* the hero leaves when the cover's end reaches its bottom (scroll run - top); the sheet's top must be at or above
+       the screen's top by then */
+    pad.style.height=Math.max(0,Math.ceil(sheetAt+top-run))+'px';
+  }
+  if(cover){
+    /* a key press into the hero while the sheet covers it brings the focused part back in sight */
+    hero.addEventListener('focusin',function(e){
+      var el=e.target;
+      w.setTimeout(function(){
+        var r=el.getBoundingClientRect(),top=d.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+        if(r.top>=navH()&&r.bottom<=w.innerHeight&&top&&(top===el||el.contains(top)))return;
+        var o=r.top-hero.getBoundingClientRect().top;
+        w.scrollTo(0,Math.max(0,Math.min(hero.offsetHeight-svh(),o-navH()-16)));
+      },0);
+    });
+    /* the menu's "Sākums" link: the anchor alone would stop at the stuck hero; the first screen is the page's top, so
+       the link scrolls there itself (the menu closes in the link's own handler, which runs first) */
+    d.addEventListener('click',function(e){
+      if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+      var a=e.target&&e.target.closest?e.target.closest('a[href="#sakums"]'):null;
+      if(!a)return;
+      e.preventDefault();
+      if(location.hash!=='#sakums'&&history.pushState)history.pushState(null,'','#sakums');
+      w.scrollTo(0,0);
+    });
+  }
   var list=d.querySelector('#piemeri .vd-list'),track=null,stage=null,items=[];
   if(list&&'IntersectionObserver' in w){
     track=d.createElement('div');track.className='sc-track';
@@ -2696,21 +2743,37 @@ html.sc-pin .vd[data-s="3"] .vd-out{opacity:1;transform:none}
     items=[].slice.call(list.children).filter(function(e){return e.classList.contains('vd');});
     var rail=d.createElement('div');rail.className='sc-rail';rail.setAttribute('aria-hidden','true');
     items.forEach(function(){rail.appendChild(d.createElement('i'));});stage.appendChild(rail);
-    list.removeAttribute('tabindex');
+  }
+  /* the stage holds only where every example fits it; on a short screen the examples stay as on the live page */
+  function fitStage(){
+    if(!track)return;
     root.classList.add('sc-pin');
+    var room=svh()-navH()-48,tall=0;
+    items.forEach(function(it){tall=Math.max(tall,it.offsetHeight);});
+    var ok=tall<=room;
+    root.classList.toggle('sc-pin',ok);
+    if(ok)list.removeAttribute('tabindex');else list.setAttribute('tabindex','0');
+  }
+  /* re-measured when the width or the small screen height changes (the iPhone toolbar changes neither, so its resizes
+     cost nothing), when the page, its fonts or the hero's own size settle, and once more after a turn of the phone */
+  var lastW=-1,lastV=-1;
+  function fit(force){
+    var W=w.innerWidth,V=svh();
+    if(force!==true&&W===lastW&&V===lastV)return;
+    lastW=W;lastV=V;fitStage();fitHero();
+  }
+  function refit(){fit(true);}
+  refit();w.addEventListener('resize',fit);w.addEventListener('load',refit);
+  w.addEventListener('orientationchange',function(){w.setTimeout(refit,350);});
+  if(d.fonts&&d.fonts.ready)d.fonts.ready.then(refit);
+  if(cover&&'ResizeObserver' in w){
+    /* the parts whose size the fit reads, not the spacer it sets, so a fit never wakes itself */
+    var ro=new ResizeObserver(function(){refit();});
+    [hero,sheet].concat([].slice.call(first.children)).forEach(function(el){if(el!==pad)ro.observe(el);});
   }
   var ticking=false;
   function frame(){
     ticking=false;
-    var y=w.scrollY||0;
-    if(hero){
-      var hh=hero.offsetHeight||1;
-      if(y<hh+80){
-        var p=Math.min(1,Math.max(0,y/hh)),t='translate3d(0,'+(y*0.35).toFixed(1)+'px,0)';
-        if(say){say.style.transform=t;say.style.opacity=(1-p*0.7).toFixed(3);}
-        if(go){go.style.transform=t;go.style.opacity=(1-p*0.9).toFixed(3);}
-      }
-    }
     if(track&&items.length){
       var r=track.getBoundingClientRect(),run=r.height-stage.offsetHeight;
       var q=run>0?Math.min(1,Math.max(0,(navH()-r.top)/run)):0;
