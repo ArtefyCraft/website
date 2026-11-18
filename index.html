@@ -937,6 +937,12 @@ dialog.dlg::backdrop{background:rgba(8,6,12,.65)}
 .bk-err a{color:inherit;text-underline-offset:3px}
 .bk-pp a,.privacy a{color:inherit;text-underline-offset:3px}
 .vlegal{margin-top:.4rem}
+/* the legal address under a closed fold */
+.vreq{margin-top:.2rem;font-size:.8125rem;line-height:1.8;color:var(--muted)}
+.vreq summary{display:inline-block;padding:.2rem 0;cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px}
+.vreq summary::-webkit-details-marker{display:none}
+.vreq summary:hover{color:var(--accent-text)}
+.vreq p{max-width:56em}
 
 
 footer{padding:3rem 0 6.5rem}
@@ -1990,7 +1996,8 @@ dialog.dlg{border-radius:var(--r)}
       <div><p class="vfoot-h">Kontakti</p><a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a><a href="https://wa.me/37122000657" target="_blank" rel="noopener">WhatsApp +371 22 000 657</a></div>
     </div>
     <p class="privacy">Šajā lapā nav sīkdatņu un izsekošanas. Pieteikuma forma nosūta Jūsu ierakstīto (vārdu, kontaktu, izvēlēto laiku) uz mūsu sistēmu Eiropas Savienībā; šos datus lietojam vienīgi, lai atbildētu. <a href="privatums/">Privātuma politika</a>.</p>
-    <p class="privacy vlegal">SIA ArtefyCraft, reģ. Nr. 40203723377, PVN reģ. Nr. LV40203723377, juridiskā adrese: Cēsu nov., Priekuļu pag., Dukuri, "Zemturi", LV-4126, <a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a>. © 2026 SIA ArtefyCraft. Visas tiesības aizsargātas.</p>
+    <p class="privacy vlegal">SIA ArtefyCraft, reģ. Nr. 40203723377, <a href="mailto:arturs@artefycraft.com">arturs@artefycraft.com</a>. © 2026 SIA ArtefyCraft. Visas tiesības aizsargātas.</p>
+    <details class="vreq"><summary>Rekvizīti</summary><p>SIA ArtefyCraft, reģ. Nr. 40203723377, PVN reģ. Nr. LV40203723377, juridiskā adrese: Cēsu nov., Priekuļu pag., Dukuri, "Zemturi", LV-4126.</p></details>
     <p class="vcredit">Rīku logo: <a href="https://simpleicons.org" rel="noopener" target="_blank">Simple Icons</a> (CC0), preču zīmes pieder to īpašniekiem. Ikonas: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (ISC licence). Fonti: Hanken Grotesk, Newsreader, IBM Plex Mono (<a href="fonti/OFL.txt">SIL Open Font License 1.1</a>).</p>
   </div>
 </footer>
