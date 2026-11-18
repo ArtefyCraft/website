@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-b19RryGZ+yaGGSZK6sji0mhTj8WR85nh6gdhPHZwMCQ=' 'sha256-Pll10CRqPHHXCFxfWOgmKqzm3GuoRAq/LGNNpB7VQdo=' 'sha256-H9xbKPs+6GqctsWBT7fHJi2YNaZ1xFNQmWUExeQFsFk=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://zcbwdbcfalwhapwgzswj.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-b19RryGZ+yaGGSZK6sji0mhTj8WR85nh6gdhPHZwMCQ=' 'sha256-414rfn9bfcMghvXMYr8SoNPh9rSCIQMHLTSvlwN71jg=' 'sha256-H9xbKPs+6GqctsWBT7fHJi2YNaZ1xFNQmWUExeQFsFk=' 'sha256-HbOfpXusccifRSdH68o9YBhZXxMxSIZ6NOgyAUP1u60='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://zcbwdbcfalwhapwgzswj.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preload" href="fonti/hanken-grotesk-768af2923e.woff2" as="font" type="font/woff2" crossorigin>
@@ -1749,7 +1749,7 @@ dialog.dlg{border-radius:var(--r)}
     var sx=sc.map(function(q){var b=q.s.getBoundingClientRect();if(!b.width)return null;var k=b.width/112,o=b.left-r.left;
       var f=[18,28,78,94].map(function(v){return o+v*k});f.forEach(function(x,i){if(x>0&&x<W)ld.push([x,i==1||i==2?.25:.35])});return{k:k,f:f}});
     sup.sort(function(a,b){return a-b});
-    function dip(x){var s0=0,s1=W,d=0;for(var i=1;i<sup.length;i++)if(x<=sup[i]){s0=sup[i-1];s1=sup[i];break}
+    function dip(x){if(!(x>0&&x<W))return 0;var s0=0,s1=W,d=0;for(var i=1;i<sup.length;i++)if(x<=sup[i]){s0=sup[i-1];s1=sup[i];break}
       var L=s1-s0;if(L<=0)return 0;
       ld.forEach(function(q){if(q[0]>s0&&q[0]<s1){var u=x-s0,v=q[0]-s0;d+=q[1]*D*4*(u<=v?u*(L-v):v*(L-u))/(L*L)}});
       return d<6?d:6+3*(1-Math.exp((6-d)/3))}
@@ -1758,7 +1758,7 @@ dialog.dlg{border-radius:var(--r)}
     path.setAttribute('d',dd);
     men.forEach(function(m,i){var x=mx[i],o=1;m.style.translate='0 '+(x>0&&x<W?dip(x):0).toFixed(2)+'px';
       sx.forEach(function(z){if(z){var e=Math.max(z.f[0]-6-x,x-z.f[3]-6,0);o=Math.min(o,.22+.78*cl(e/14))}});m.style.opacity=o<1?o.toFixed(2):''});
-    var t=still.matches?.37:(now%T)/T;
+    var t=still.matches?0.37:(now%T)/T;
     sc.forEach(function(q,i){var z=sx[i];if(!z)return;var f=z.f,k=z.k,a=dip(f[1])/k,c=dip(f[2])/k;
       q.p.setAttribute('transform','translate(0 '+(dip(f[0])/k).toFixed(2)+')');
       q.t.setAttribute('transform','translate(0 '+(dip(f[3])/k).toFixed(2)+')');
@@ -1766,14 +1766,16 @@ dialog.dlg{border-radius:var(--r)}
       q.b.setAttribute('transform','translate(0 '+((a+c)/2).toFixed(2)+') rotate('+g.toFixed(2)+' 53 40)');
       act(q,t)});
   }
-  var vis=true,raf=0;
-  function on(){return vis&&!document.hidden&&!still.matches}
-  function tick(now){raf=0;frame(now);if(on())raf=requestAnimationFrame(tick)}
-  function go(){if(still.matches){frame(0);return}if(on()&&!raf)raf=requestAnimationFrame(tick)}
+  var vis=true,raf=0,dead=false;
+  function on(){return vis&&!dead&&!document.hidden&&!still.matches}
+  function safe(now){try{frame(now)}catch(e){dead=true;net.classList.remove('has-thread');svg.style.display='none'}}
+  function tick(now){raf=0;safe(now);if(on())raf=requestAnimationFrame(tick)}
+  function go(){if(dead)return;if(still.matches){safe(0);return}if(on()&&!raf)raf=requestAnimationFrame(tick)}
   if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[e.length-1].isIntersecting;go()}).observe(net);
-  function re(){if(still.matches)frame(0)}
+  function re(){if(still.matches&&!dead)safe(0)}
   document.addEventListener('visibilitychange',go);window.addEventListener('resize',re);window.addEventListener('load',re);
   if(window.ResizeObserver)new ResizeObserver(re).observe(net);
+  if(still.addEventListener)still.addEventListener('change',go);else if(still.addListener)still.addListener(go);
   go();
 })();
 </script>
