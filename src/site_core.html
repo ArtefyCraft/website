@@ -1294,6 +1294,18 @@ a,button,.btn,.vb2,.vpath-btn{transition:color .4s ease,background-color .4s eas
 .vnum{font-size:clamp(2.4rem,1.8rem + 1.6vw,3.2rem);font-weight:500;letter-spacing:-.03em;line-height:1;margin-bottom:.9rem}
 .vstats b{font-weight:500;font-size:1.05rem}
 .vstats li>span:last-child{color:var(--muted);font-size:var(--fs-small)}
+/* menu line and steps thread */
+.nav-links{position:relative}
+.nav-ind{position:absolute;left:0;bottom:-.55rem;width:1px;height:2px;background:var(--accent);transform-origin:0 0;opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.3,.7,.2,1),opacity .25s ease}
+.mmenu-list a[aria-current]{color:var(--accent-text);text-decoration-line:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:.4em}
+@media (forced-colors:active){.nav-ind{forced-color-adjust:none;background:CanvasText}}
+.vproc .wrap{position:relative}
+.vsthread{position:absolute;left:0;top:0;z-index:1;max-width:none;overflow:visible;pointer-events:none}
+.vsthread path{fill:none;stroke:rgba(36,36,34,.18);stroke-width:1}/* the tools row thread: its --hair inside .vtools */
+@media (max-width:520px){.vstats li{grid-template-columns:2.4rem minmax(0,1fr);column-gap:1.1rem;row-gap:.3rem}
+.vstats .vnum{grid-row:1 / span 2;text-align:center;margin-bottom:0}
+.vstats li>b,.vstats li>span:last-child{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.nav-ind{transition:none}.vsthread path{transition:none!important}}
 
 
 .vabout{background:var(--recessed);padding-block:0}
@@ -2614,5 +2626,86 @@ dialog.dlg{border-radius:var(--r)}
       });
     });
   }
+})();
+</script>
+<script>
+(function(){
+  var d=document,reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  /* menu: a green line under the link of the section in view; the phone menu marks it with colour */
+  (function(){
+    var box=d.querySelector('.nav-links'),nav=d.querySelector('.nav'),ind=null,dead=false;
+    if(!box||!nav)return;
+    function die(){dead=true;if(ind&&ind.parentNode)ind.parentNode.removeChild(ind)}
+    try{
+      var links=[].slice.call(d.querySelectorAll('.nav-links a[href^="#"],.mmenu-list a[href^="#"]'));
+      var secs=[];
+      [['sakums','sakums'],['ko-daram','ko-daram'],['piemeri','ko-daram'],['par','par'],['process','process'],['buj','buj'],['rezervacija','rezervacija']].forEach(function(o){
+        var e=d.getElementById(o[0]);if(e)secs.push([e,o[1]])});
+      ind=d.createElement('span');ind.className='nav-ind';ind.setAttribute('aria-hidden','true');box.appendChild(ind);
+      var cur=null,shown=false,queued=false;
+      var place=function(force){
+        queued=false;if(dead)return;
+        try{
+          var line=nav.getBoundingClientRect().bottom+innerHeight*.3,id='';
+          for(var i=0;i<secs.length;i++){if(secs[i][0].getBoundingClientRect().top<=line)id=secs[i][1]}
+          if(id===cur&&!force)return;cur=id;
+          links.forEach(function(a){if(a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+          var a=box.querySelector('a[href="#'+id+'"]');
+          if(!a||!a.offsetWidth){ind.style.opacity='0';shown=false;return}
+          var tf='translateX('+a.offsetLeft+'px) scaleX('+a.offsetWidth+')';
+          if(!shown){ind.style.transition='opacity .25s ease';ind.style.transform=tf;ind.getBoundingClientRect();ind.style.transition='';shown=true}
+          else ind.style.transform=tf;
+          ind.style.opacity='1';
+        }catch(e){die()}
+      };
+      addEventListener('scroll',function(){if(!queued){queued=true;requestAnimationFrame(function(){place(false)})}},{passive:true});
+      addEventListener('resize',function(){place(true)});
+      if(d.fonts&&d.fonts.ready)d.fonts.ready.then(function(){place(true)});
+      place(true);
+    }catch(e){die()}
+  })();
+  /* steps: the tools row thread drawn through the four numbers, once, when the list comes into view */
+  (function(){
+    var ol=d.querySelector('.vproc .vstats'),host=ol&&ol.parentNode,NS='http://www.w3.org/2000/svg',svg=null,ps=[],drawn=reduce.matches,dead=false;
+    if(!ol)return;
+    function die(){dead=true;if(svg&&svg.parentNode)svg.parentNode.removeChild(svg)}
+    function glyph(n){var r=d.createRange();r.selectNodeContents(n);return r.getBoundingClientRect()}
+    function layout(){
+      if(dead)return;
+      try{
+        var b=host.getBoundingClientRect(),G=10,segs=[],ok=true;
+        var g=[].slice.call(ol.querySelectorAll('.vnum')).map(function(n){var r=glyph(n);
+          return {l:r.left-b.left,r:r.right-b.left,t:r.top-b.top,b:r.bottom-b.top,x:(r.left+r.right)/2-b.left,y:(r.top+r.bottom)/2-b.top}});
+        for(var i=0;i+1<g.length;i++){var p=g[i],q=g[i+1];
+          if(Math.abs(p.y-q.y)<1.5&&q.l-p.r>3*G)segs.push([p.r+G,p.y,q.l-G,q.y]);
+          else if(Math.abs(p.x-q.x)<1.5&&q.t-p.b>3*G)segs.push([p.x,p.b+G,q.x,q.t-G]);
+          else ok=false}
+        svg.style.display=ok&&segs.length===3?'':'none';
+        svg.setAttribute('width',b.width.toFixed(1));svg.setAttribute('height',b.height.toFixed(1));
+        segs.forEach(function(s,i){var p=ps[i];if(!p)return;
+          var L=Math.hypot(s[2]-s[0],s[3]-s[1]);
+          p.setAttribute('d','M'+s[0].toFixed(1)+' '+s[1].toFixed(1)+'L'+s[2].toFixed(1)+' '+s[3].toFixed(1));
+          p.style.strokeDasharray=L.toFixed(1)+' '+L.toFixed(1);p.style.strokeDashoffset=drawn?'0':L.toFixed(1)});
+      }catch(e){die()}
+    }
+    function draw(){
+      if(dead||drawn)return;drawn=true;
+      try{svg.getBoundingClientRect();
+        ps.forEach(function(p,i){p.style.transition='stroke-dashoffset .5s cubic-bezier(.45,0,.25,1) '+(i*.5)+'s';p.style.strokeDashoffset='0'});
+      }catch(e){die()}
+    }
+    try{
+      svg=d.createElementNS(NS,'svg');svg.setAttribute('class','vsthread');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+      for(var k=0;k<3;k++){var pk=d.createElementNS(NS,'path');svg.appendChild(pk);ps.push(pk)}
+      host.appendChild(svg);layout();
+      if(!drawn){
+        if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[es.length-1].isIntersecting){io.disconnect();draw()}},{rootMargin:'0px 0px -25% 0px'});io.observe(ol)}
+        else{drawn=true;layout()}
+      }
+      if(reduce.addEventListener)reduce.addEventListener('change',function(){if(reduce.matches&&!drawn){drawn=true;layout()}});
+      if('ResizeObserver' in window)new ResizeObserver(function(){layout()}).observe(host);else addEventListener('resize',layout);
+      if(d.fonts&&d.fonts.ready)d.fonts.ready.then(layout);
+    }catch(e){die()}
+  })();
 })();
 </script>
