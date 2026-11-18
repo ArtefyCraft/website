@@ -724,8 +724,14 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
 /* A10: the status screen is as wide as the phone: its cards take the width of the scroller, never more */
 .g-order { grid-template-columns: minmax(0, 1fr); overflow-x: hidden; }
 .g-order > * { min-width: 0; }
-.g-steps { gap: 4px; }
-.g-steps li { min-width: 0; overflow-wrap: anywhere; }
+/* a step's label is never cut inside a word (2026-11-17: "Gatavoja / m" on 320 to 375 px phones and the desktop's phone): each column is at least its label's width, otherwise an equal share */
+.g-steps { gap: 4px; grid-template-columns: repeat(4, minmax(max-content, 1fr)); }
+.g-steps li { min-width: 0; overflow-wrap: normal; }
+/* narrow screens and page zoom (critic P1.2, 2026-11-17: at 300 px and below the last label was pushed out of the card and cut): the labels shrink with the card from 12 px to 10 px and, in a narrow card, the row may use 12 px of its padding on each side; all four stay whole and inside the card down to a 277 px screen, and below that the steps wrap as they did before */
+.g-status { container-type: inline-size; }
+.g-steps li { font-size: clamp(10px, calc(6cqi + 0.72px), 12px); }
+@container (max-width: 210px) { .g-steps { margin-inline: -12px; } }
+@container (max-width: 148px) { .g-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } .g-steps li { overflow-wrap: anywhere; } }
 .g-ticket-line > span:first-child { min-width: 0; overflow-wrap: anywhere; }
 
 /* A11: an empty order shows no suggestions and no pay button (nothing to go with, nothing to pay) */
