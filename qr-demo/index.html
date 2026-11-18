@@ -771,7 +771,7 @@ button:active, summary:active, [role="button"]:active { scale: .97; }
     <section class="pane-kitchen" aria-label="Virtuves ekrāns"><div class="stage-label">Virtuves ekrāns</div><div class="stage-tablet"><div class="stage-kitchen" id="kitchen-screen"></div></div></section>
   </div>
   <section class="stage-owner pane-owner" aria-label="Atskaite īpašniekam"><div class="stage-label">Atskaite īpašniekam. Piemēra dati.</div><div id="owner-screen"></div></section>
-  <p class="stage-note">Restorāns „Liepa” un tā ēdienkarte ir paraugs. Jūsu sistēmā būs Jūsu ēdienkarte, cenas un restorāna noformējums.</p>
+  <p class="stage-note">Šī ēdienkarte ir paraugs. Īstajā sistēmā būs Jūsu ēdieni, cenas un noformējums.</p>
   <section class="stage-book" aria-label="Nākamais solis"><p>Gribat to savā restorānā?</p><a href="https://artefycraft.com/#rezervacija">Pieteikt 15 minūšu sarunu</a></section>
   <details class="stage-credits"><summary>Foto un fonti</summary><p>Foto: CC0. Fonti: Cormorant Garamond, Onest (<a href="../fonti/OFL.txt">SIL Open Font License 1.1</a>). <a href="../privatums/">Privātuma politika</a>.</p></details>
 </main>
@@ -2610,6 +2610,8 @@ function mountGuest(root, api, route, { lang } = {}) {
     const t = tr();
     const name = state.data?.restaurant?.name ?? '';
     const hero = state.data?.hero;
+    // without a name there is no large title, and no empty band where it stood
+    if (!name) return '';
     return `
       <header class="g-head ${hero ? 'has-photo' : ''}">
         ${hero ? `<div class="g-hero-photo">${itemVisual({ photo: hero })}</div>` : ''}
@@ -3919,7 +3921,8 @@ const demoSave = (() => {
 
 // Places the guest phone, kitchen and owner report on one page.
 function startStage() {
-  const { engine, api, seedHistory, seedHistoryInSlices, isSeeding } = createDemoWorld('Liepa');
+  // no restaurant name anywhere in the demo (owner, 2026-11-17: "nevajag kādu svešu nosaukumu")
+  const { engine, api, seedHistory, seedHistoryInSlices, isSeeding } = createDemoWorld('');
   const saved = demoSave.read();
   const phone = document.getElementById('phone-screen');
   let unmount = () => {};
